@@ -1,0 +1,24 @@
+schedule : {
+  items : [
+    item : {
+      title : 'Title1'
+      description : 'Description1'
+      timestamp : '3:30pm'
+    },
+    item : {
+      title : 'Title2'
+      description : 'Description2'
+      timestamp : '3:45pm'
+    },
+    item : {
+      title : 'Title3'
+      description : 'Description3'
+      timestamp : '4:15pm'
+    },
+    item : {
+      title : 'Title4'
+      description : 'Description4'
+      timestamp : '5:30pm'
+    }
+  ]
+}
