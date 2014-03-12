@@ -10,4 +10,16 @@ public class ScheduleItem implements IScheduleItem {
 		return null;
 	}
 
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
