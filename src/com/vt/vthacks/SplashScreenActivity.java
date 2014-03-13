@@ -1,17 +1,16 @@
 package com.vt.vthacks;
 
-import android.widget.Toast;
 import android.os.Bundle;
 import android.app.Activity;
 
 // -------------------------------------------------------------------------
 /**
- * This class handles the interaction/data for the Schedule page
+ * This class just displays a splash screen
  *
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class ScheduleActivity
+public class SplashScreenActivity
     extends Activity
 {
 

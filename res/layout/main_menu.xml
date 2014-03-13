@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/FirstRow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="75dp"
+    android:paddingTop="100dp"
     tools:context=".SocialActivity" >
+
+    <LinearLayout
+        android:id="@+id/Row_One"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/announcement_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/announcment_description"
+            android:src="@drawable/announcements_res" />
+
+        <ImageView
+            android:id="@+id/schedule_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/schedule_description"
+            android:paddingLeft="100dp"
+            android:src="@drawable/calender_res" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Row_Two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp" >
+
+        <ImageView
+            android:id="@+id/map_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/map_description"
+            android:src="@drawable/map_res" />
+
+        <ImageView
+            android:id="@+id/awards_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/awards_description"
+            android:paddingLeft="100dp"
+            android:src="@drawable/awards_res" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Row_Three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp" >
+
+        <ImageView
+            android:id="@+id/contacts_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contacts_description"
+            android:src="@drawable/contacts_res" />
+
+        <ImageView
+            android:id="@+id/chat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/chat_description"
+            android:paddingLeft="100dp"
+            android:src="@drawable/chat_res" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Row_Four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp" >
+
+        <ImageView
+            android:id="@+id/social_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/social_desciption"
+            android:paddingLeft="75dp"
+            android:src="@drawable/social_res" />
+
+    </LinearLayout>
 
 </LinearLayout>

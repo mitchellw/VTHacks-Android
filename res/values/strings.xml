@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">VTHacks</string>
     <string name="action_settings">Settings</string>
@@ -10,5 +10,12 @@
     <string name="label_chat">Chat</string>
     <string name="label_photos">Photos</string>
     <string name="label_awards">Awards</string>
+    <string android:id="@+id/announceDescrip" android:layout_width="wrap_content" android:layout_height="wrap_content" name="announcment_description">When clicked, the activity will go to the announcments page</string>
+<string android:layout_height="wrap_content" android:id="@+id/awards_desc" android:layout_width="wrap_content" name="awards_description">When clicked, awards activity will be called </string>
+<string android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/chatDescription" name="chat_description">When clicked, the chat activity will be called</string>
+<string android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/contactDescription" name="contacts_description">When clicked, the contacts activity will be called </string>
+<string android:id="@+id/map_description" android:layout_height="wrap_content" android:layout_width="wrap_content" name="map_description">When clicked, the map activity will be called </string>
+<string android:layout_height="wrap_content" android:id="@+id/schedule_description" android:layout_width="wrap_content" name="schedule_description">When clicked, the schedule activity will begin </string>
+<string android:id="@+id/social_descrip" android:layout_width="wrap_content" android:layout_height="wrap_content" name="social_desciption">When clicked, the social activity will begin </string>
 
 </resources>
