@@ -24,7 +24,7 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 	 */
 	private static final long serialVersionUID = -8332494709360701455L;
 	private static final String SCHEDULE_ITEMS = "items";
-	private static final String TAG = null;
+	private static final String TAG = "ScheduleList";
 	
 	public ScheduleList(JSONObject root) {
 		super();
@@ -44,7 +44,7 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 		}
 	}
 
-	public static IScheduleList fromFile(Context context, String string) {
+	public static IScheduleList fromAssets(Context context, String string) {
 		AssetManager assetManager = context.getAssets();
 		InputStream is;
 		String jsString = "";

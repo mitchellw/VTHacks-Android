@@ -1,7 +1,12 @@
 package com.vt.vthacks;
 
+import com.vt.vthacks.model.IAwardList;
+import com.vt.vthacks.model.impl.AwardList;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Toast;
 
 // -------------------------------------------------------------------------
 /**
@@ -13,6 +18,8 @@ import android.os.Bundle;
 public class AwardsActivity
     extends Activity
 {
+	
+	private IAwardList awardList;
 
     // ----------------------------------------------------------
     /**
@@ -27,6 +34,9 @@ public class AwardsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.awards);
 
-
+		awardList = AwardList.fromAssets(this, "awards.json");
+		
+		ListView listView = (ListView) findViewById(R.id.listView);
+		listView.setAdapter(new AwardAdapter(this, awardList));
     }
 }

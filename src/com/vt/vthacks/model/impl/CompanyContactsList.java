@@ -46,7 +46,7 @@ public class CompanyContactsList extends ArrayList<ICompany> implements ICompany
 		}
 	}
 
-	public static ICompanyContactsList fromFile(Context context, String string) {
+	public static ICompanyContactsList fromAssets(Context context, String string) {
 		AssetManager assetManager = context.getAssets();
 		InputStream is;
 		String jsString = "";

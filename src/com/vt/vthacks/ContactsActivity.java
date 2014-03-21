@@ -33,7 +33,7 @@ public class ContactsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacts);
 
-		companyContactsList = CompanyContactsList.fromFile(this, "contacts.json");
+		companyContactsList = CompanyContactsList.fromAssets(this, "contacts.json");
 		
 		ListView listView = (ListView) findViewById(R.id.listView);
 		listView.setAdapter(new CompanyContactsAdapter(this, companyContactsList));

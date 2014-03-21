@@ -33,7 +33,7 @@ extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
 
-		scheduleList = ScheduleList.fromFile(this, "schedule.json");
+		scheduleList = ScheduleList.fromAssets(this, "schedule.json");
 		
 		ListView listView = (ListView) findViewById(R.id.listView);
 		listView.setAdapter(new ScheduleAdapter(this, scheduleList));
