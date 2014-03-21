@@ -6,7 +6,6 @@ import com.vt.vthacks.model.impl.AwardList;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 
 // -------------------------------------------------------------------------
 /**
