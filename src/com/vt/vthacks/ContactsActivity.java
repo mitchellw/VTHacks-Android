@@ -1,6 +1,9 @@
 package com.vt.vthacks;
 
-import android.widget.Toast;
+import com.vt.vthacks.model.ICompanyContactsList;
+import com.vt.vthacks.model.impl.CompanyContactsList;
+
+import android.widget.ListView;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -15,6 +18,8 @@ public class ContactsActivity
     extends Activity
 {
 
+	private ICompanyContactsList companyContactsList;
+
     // ----------------------------------------------------------
     /**
      * Sets up the chat page
@@ -22,11 +27,15 @@ public class ContactsActivity
      * @param savedInstanceState
      *            is data that was most recently supplied
      */
-    protected void OnCreate(Bundle savedInstanceState)
+	@Override
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat);
+        setContentView(R.layout.contacts);
 
-
+		companyContactsList = CompanyContactsList.fromFile(this, "contacts.json");
+		
+		ListView listView = (ListView) findViewById(R.id.listView);
+		listView.setAdapter(new CompanyContactsAdapter(this, companyContactsList));
     }
 }

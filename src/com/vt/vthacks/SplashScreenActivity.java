@@ -21,7 +21,8 @@ public class SplashScreenActivity
      * @param savedInstanceState
      *            is data that was most recently supplied
      */
-    protected void OnCreate(Bundle savedInstanceState)
+	@Override
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);

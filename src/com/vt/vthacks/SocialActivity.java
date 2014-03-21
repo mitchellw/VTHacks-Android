@@ -1,8 +1,7 @@
 package com.vt.vthacks;
 
-import android.widget.Toast;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 
 // -------------------------------------------------------------------------
 /**
@@ -22,7 +21,8 @@ public class SocialActivity
      * @param savedInstanceState
      *            is data that was most recently supplied
      */
-    protected void OnCreate(Bundle savedInstanceState)
+	@Override
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.social);
