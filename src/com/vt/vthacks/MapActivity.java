@@ -2,6 +2,7 @@ package com.vt.vthacks;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 
 // -------------------------------------------------------------------------
 /**
@@ -21,7 +22,7 @@ public class MapActivity
      * @param savedInstanceState
      *            is data that was most recently supplied
      */
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

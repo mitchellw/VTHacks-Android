@@ -14,19 +14,19 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
-import com.vt.vthacks.model.IScheduleItem;
-import com.vt.vthacks.model.IScheduleList;
+import com.vt.vthacks.model.IAward;
+import com.vt.vthacks.model.IAwardList;
 
-public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleList {
+public class AwardList extends ArrayList<IAward> implements IAwardList {
 
 	/**
 	 * For serialization.
 	 */
-	private static final long serialVersionUID = -8332494709360701455L;
-	private static final String SCHEDULE_ITEMS = "items";
+	private static final long serialVersionUID = -8382756371448521991L;
+	private static final String AWARDS = "awards";
 	private static final String TAG = "ScheduleList";
 	
-	public ScheduleList(JSONObject root) {
+	public AwardList(JSONObject root) {
 		super();
 		if (root == null) {
 			return;
@@ -34,17 +34,17 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 
 		
 		// Add all the schedule items, fail if they do not exist.
-		JSONArray items = root.optJSONArray(SCHEDULE_ITEMS);
+		JSONArray items = root.optJSONArray(AWARDS);
 		if (items == null) {
 			return;
 		}
 
 		for (int i = 0; i < items.length(); i++) {
-			this.add(new ScheduleItem(items.optJSONObject(i)));
+			this.add(new Award(items.optJSONObject(i)));
 		}
 	}
 
-	public static IScheduleList fromAssets(Context context, String string) {
+	public static IAwardList fromAssets(Context context, String string) {
 		AssetManager assetManager = context.getAssets();
 		InputStream is;
 		String jsString = "";
@@ -64,7 +64,7 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 
 		try {
 			JSONObject root = new JSONObject(jsString);
-			return new ScheduleList(root);
+			return new AwardList(root);
 		}
 		catch (JSONException e) {
 			Log.d(TAG, "jse");
