@@ -2,6 +2,12 @@ package com.vt.vthacks;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
 import com.vt.vthacks.model.IScheduleItem;
 
 import android.content.Context;
@@ -10,19 +16,32 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+// -------------------------------------------------------------------------
+/**
+ *  This is the class that handles the ArrayAdapter for
+ *
+ *  @author Brandon Potts , Willson Mitchell
+ *  @version Mar 22, 2014
+ */
 public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
-	
+
 	private Context context;
 
+	// ----------------------------------------------------------
+	/**
+	 * Create a new ScheduleAdapter object.
+	 * @param context
+	 * @param listItems
+	 */
 	public ScheduleAdapter(Context context, List<IScheduleItem> listItems) {
 		super(context, 0, listItems);
 		this.context = context;
 	}
-	
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final IScheduleItem item = getItem(position);
-        
+
         TextView tv = new TextView(context);
         tv.setText(item.getTime());
 
@@ -81,5 +100,15 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 //            Button addAsFriendButton = (Button)rootView.findViewById(R.id.addAsFriendButton);
 //            return new FriendViewHolder(rootView, nameTextView, addAsFriendButton);
 //        }
+    }
+
+    /**
+     * This is the function that parses JSON files
+     */
+    public static String parseJSONFiles()
+    {
+
+
+        return null;
     }
 }
