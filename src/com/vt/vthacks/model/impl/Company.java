@@ -42,12 +42,12 @@ public class Company implements ICompany {
 		}
 	}
 
-	@Override
+
 	public String getName() {
 		return name;
 	}
 
-	@Override
+
 	public List<IContact> getContacts() {
 		return contacts;
 	}

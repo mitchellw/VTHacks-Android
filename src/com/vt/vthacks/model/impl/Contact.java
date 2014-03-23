@@ -67,17 +67,16 @@ public class Contact implements IContact {
 		}
 	}
 
-	@Override
 	public List<IContactMethod> getContactMethods() {
 		return contactMethods;
 	}
 
-	@Override
+
 	public String getName() {
 		return name;
 	}
 
-	@Override
+
 	public List<String> getSkills() {
 		return skills;
 	}

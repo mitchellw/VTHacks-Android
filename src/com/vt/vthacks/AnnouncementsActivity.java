@@ -1,9 +1,11 @@
 package com.vt.vthacks;
 
 
-import android.widget.Toast;
-import android.os.Bundle;
+import android.widget.ListView;
+import java.util.ArrayList;
+import android.widget.ArrayAdapter;
 import android.app.Activity;
+import android.os.Bundle;
 
 // -------------------------------------------------------------------------
 /**
@@ -17,6 +19,11 @@ public class AnnouncementsActivity
     extends Activity
 {
 
+    /**
+     * Holds the List View in the announcement activity
+     */
+    ListView announceList;
+
 
     // ----------------------------------------------------------
     /**
@@ -24,9 +31,29 @@ public class AnnouncementsActivity
      *
      * @param savedInstanceState is data that was most recently supplied
      */
-    protected void OnCreate(Bundle savedInstanceState)
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcements);
+
+
+        //tests a basic ArrayAdaptor
+        announceList = (ListView) findViewById(R.id.announce_list);
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+
+        ArrayAdapter<Integer> adapter =
+            new ArrayAdapter<Integer>(this , android.R.layout.simple_list_item_1 , list);
+
+        announceList.setAdapter(adapter);
+
+
     }
 }

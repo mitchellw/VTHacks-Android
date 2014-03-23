@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 
 // -------------------------------------------------------------------------
 /**
@@ -26,7 +25,6 @@ public class MainMenuActivity
     private ImageView mAwardsImage;
     private ImageView mContactsImage;
     private ImageView mSocialImage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
