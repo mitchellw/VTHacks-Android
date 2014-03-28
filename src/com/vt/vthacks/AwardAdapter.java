@@ -1,5 +1,7 @@
 package com.vt.vthacks;
 
+import android.widget.RelativeLayout;
+import android.view.LayoutInflater;
 import java.util.List;
 
 import com.vt.vthacks.model.IAward;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 public class AwardAdapter extends ArrayAdapter<IAward> {
 
 	private Context context;
+	private LayoutInflater mInflater;
 
 	// ----------------------------------------------------------
 	/**
@@ -30,69 +33,81 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
 	public AwardAdapter(Context context, List<IAward> listItems) {
 		super(context, 0, listItems);
 		this.context = context;
+		this.mInflater = LayoutInflater.from(this.context);
 	}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         final IAward item = getItem(position);
+        AwardItemViewHolder holder;
 
-        TextView tv = new TextView(context);
-        tv.setText(item.getTitle());
 
-		return tv;
-//        final ListItem item = getItem(position);
-//
-//        // Don't use instanceof because it actually could be a slight performance hit here.
-//        if (item.getClass() == FriendListItem.class) {
-//            final FriendListItem friendItem = (FriendListItem)item;
-//            final FriendViewHolder friendViewHolder;
-//            if (convertView == null) {
-//                View view;
-//                if (friendItem.isFriend()) {
-//                    view = mInflater.inflate(R.layout.friend_list_item, parent, false);
-//                }
-//                else {
-//                    view = mInflater.inflate(R.layout.added_you_list_item, parent, false);
-//                }
-//                friendViewHolder = FriendViewHolder.create((RelativeLayout) view);
-//                view.setTag(friendViewHolder);
-//            }
-//            else {
-//                friendViewHolder = (FriendViewHolder)convertView.getTag();
-//            }
-//
-//            friendViewHolder.nameTextView.setText(friendItem.getName());
-//            if (!friendItem.isFriend()) {
-//                friendViewHolder.addAsFriendButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        addFriendListener.onListItemButtonClicked(friendItem);
-//                    }
-//                });
-//            }
-//
-//            return friendViewHolder.rootView;
-//        }
-//        else {
-//            return null;
-//        }
+        if(convertView == null)
+        {
+            RelativeLayout container =
+                (RelativeLayout)mInflater.inflate(R.layout.awards_list_row, parent , false);
+             holder = AwardItemViewHolder.create(container);
+             container.setTag(holder);
+        }
+        else
+        {
+            holder = (AwardItemViewHolder)convertView.getTag();
+        }
+        holder.titleTextView.setText(item.getTitle());
+        holder.descripTextView.setText(item.getDescription());
+        holder.prizeTextView.setText(item.getPrize());
+
+
+		return holder.rootView;
+
     }
 
-    private static class ScheduleItemViewHolder {
-//        public final RelativeLayout rootView;
-//        public final TextView nameTextView;
-//        public final Button addAsFriendButton;
-//
-//        private FriendViewHolder(RelativeLayout rootView, TextView nameTextView, Button addAsFriendButton) {
-//            this.rootView = rootView;
-//            this.nameTextView = nameTextView;
-//            this.addAsFriendButton = addAsFriendButton;
-//        }
-//
-//        public static FriendViewHolder create(RelativeLayout rootView) {
-//            TextView nameTextView = (TextView)rootView.findViewById(R.id.nameTextView);
-//            Button addAsFriendButton = (Button)rootView.findViewById(R.id.addAsFriendButton);
-//            return new FriendViewHolder(rootView, nameTextView, addAsFriendButton);
-//        }
+    /**
+     * // -------------------------------------------------------------------------
+    /**
+     *
+     *  Class holds and creates views for the Award list
+     *
+     *  @author Brandon Potts
+     *  @version Mar 27, 2014
+     */
+    private static class AwardItemViewHolder {
+        public final RelativeLayout rootView;
+        public final TextView titleTextView;
+        public final TextView descripTextView;
+        public final TextView prizeTextView;
+
+
+        /**
+         *  Creates an AwardItemViewHolder object
+         *
+         *  @param rootView is the root
+         *  @param titleText is the title TextView
+         *  @param descripTextView is the description TextView
+         *  @param prizeTextView is the prize TextView
+         */
+        private AwardItemViewHolder(RelativeLayout rootView,
+            TextView titleTextView, TextView descripTextView ,
+            TextView prizeTextView) {
+            this.rootView = rootView;
+            this.titleTextView = titleTextView;
+            this.descripTextView = descripTextView;
+            this.prizeTextView = prizeTextView;
+        }
+
+        /**
+         * Returns new AwardItemViewHolder
+         *
+         * @param rootView is the root
+         * @return new AwardItemViewHolder object
+         *
+         */
+        public static AwardItemViewHolder create(RelativeLayout rootView) {
+            TextView titleTextView = (TextView)rootView.findViewById(R.id.award_title);
+            TextView prizeTextView = (TextView)rootView.findViewById(R.id.award_prize);
+            TextView descripTextView = (TextView)rootView.findViewById(R.id.award_description);
+            return new AwardItemViewHolder(rootView, titleTextView, prizeTextView, descripTextView);
+        }
     }
 }

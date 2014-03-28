@@ -31,8 +31,9 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 	public ScheduleAdapter(Context context, List<IScheduleItem> listItems) {
 		super(context, 0, listItems);
 		this.context = context;
-		this.mInflater = LayoutInflater.from(context);
+		this.mInflater = LayoutInflater.from(this.context);
 	}
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -43,7 +44,7 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
         if(convertView == null)
         {
             RelativeLayout container =
-                (RelativeLayout)mInflater.inflate(R.layout.listview_item_row, parent , false);
+                (RelativeLayout)mInflater.inflate(R.layout.schedule_list_row, parent , false);
              holder = ScheduleItemViewHolder.create(container);
              container.setTag(holder);
         }
@@ -58,12 +59,28 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 		return holder.rootView;
     }
 
+    /**
+     * // -------------------------------------------------------------------------
+    /**
+     *  Class creates and holds Views for the Schedule ArrayAdaptor
+     *
+     *  @author Brandon Potts
+     *  @version Mar 27, 2014
+     */
     private static class ScheduleItemViewHolder {
         public final RelativeLayout rootView;
         public final TextView titleTextView;
         public final TextView descripTextview;
         public final TextView timeTextView;
 
+        /**
+         * Creates ScheduleItemViewHolder object
+         *
+         * @param rootView is the root
+         * @param titleTextView is TextView for the title
+         * @param descripTextView is the TextView for the description
+         * @param timeTextView is the TextView for time
+         */
         private ScheduleItemViewHolder(RelativeLayout rootView,
             TextView titleTextView ,
             TextView descripTextView , TextView timeTextView) {
@@ -73,6 +90,13 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
             this.timeTextView = timeTextView;
         }
 
+        /**
+         * Creates a view for the Schedule list
+         *
+         * @param rootView is the root
+         *
+         * @return view for Schedule list
+         */
         public static ScheduleItemViewHolder create(RelativeLayout rootView) {
             TextView titleTextView = (TextView)rootView.findViewById(R.id.listview_item_row_title);
             TextView timeTextView = (TextView)rootView.findViewById(R.id.listview_item_row_timestamp);
