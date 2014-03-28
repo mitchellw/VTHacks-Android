@@ -4,29 +4,29 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/award_prize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/award_description"
-        android:layout_alignBottom="@+id/award_description"
-        android:layout_alignParentRight="true"
-        android:text="@string/EmptyTextView" />
-
-    <TextView
-        android:id="@+id/award_title"
+        android:id="@+id/contact_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/EmptyTextView" />
 
+    <LinearLayout
+        android:id="@+id/contact_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/contact_name"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/award_description"
+        android:id="@+id/contact_skills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/award_title"
-        android:layout_marginTop="58dp"
+        android:layout_below="@+id/contact_linear_layout"
         android:text="@string/EmptyTextView" />
 
 </RelativeLayout>

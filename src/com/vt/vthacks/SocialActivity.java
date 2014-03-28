@@ -83,7 +83,7 @@ extends Activity
 		protected void onPostExecute(List<IPhotoStreamItem> photoStream) {
 			super.onPostExecute(photoStream);
 
-			listView.setAdapter(new ArrayAdapter<IPhotoStreamItem>(SocialActivity.this, android.R.layout.simple_list_item_1, photoStream));
+			listView.setAdapter(new PhotoStreamAdapter(SocialActivity.this, photoStream));
 		}
 	}
 }
