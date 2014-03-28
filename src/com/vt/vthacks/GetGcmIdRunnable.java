@@ -35,11 +35,11 @@ public class GetGcmIdRunnable implements Runnable {
         catch (Exception e) {
             Log.d(TAG, "Registration Error: " + e + e.getMessage());
             e.printStackTrace();
-            retry();
+            retryGcm();
             return;
         }
         if (gcmID == null) {
-            retry();
+            retryGcm();
             return;
         }
 
@@ -47,9 +47,11 @@ public class GetGcmIdRunnable implements Runnable {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.PREFS_GCM_ID, gcmID);
         editor.commit();
+        
+        new Thread(new RegisterGcmIdRunnable(context, retryTime)).start();
     }
 
-    private void retry() {
+    private void retryGcm() {
         if (retryTime > MAX_RETRY_TIME) {
             return;
         }
