@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/award_prize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/award_description"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="126dp"
+        android:text="@string/EmptyTextView" />
+
+    <TextView
+        android:id="@+id/award_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/award_prize"
+        android:layout_alignLeft="@+id/award_title"
+        android:layout_marginBottom="113dp"
+        android:text="@string/EmptyTextView" />
+
+    <TextView
+        android:id="@+id/award_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="46dp"
+        android:text="@string/EmptyTextView" />
+
+</RelativeLayout>

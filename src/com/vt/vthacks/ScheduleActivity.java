@@ -1,11 +1,16 @@
 package com.vt.vthacks;
 
+
+import java.io.IOException;
+import org.json.JSONException;
+import android.os.Bundle;
 import com.vt.vthacks.model.IScheduleList;
 import com.vt.vthacks.model.impl.ScheduleList;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 // -------------------------------------------------------------------------
 /**
@@ -17,7 +22,7 @@ import android.widget.ListView;
 public class ScheduleActivity
 extends Activity
 {
-	
+
 	private IScheduleList scheduleList;
 
 	// ----------------------------------------------------------
@@ -34,8 +39,8 @@ extends Activity
 		setContentView(R.layout.schedule);
 
 		scheduleList = ScheduleList.fromAssets(this, "schedule.json");
-		
-		ListView listView = (ListView) findViewById(R.id.listView);
+
+		ListView listView = (ListView) findViewById(R.id.schedule_list_view);
 		listView.setAdapter(new ScheduleAdapter(this, scheduleList));
 	}
 }

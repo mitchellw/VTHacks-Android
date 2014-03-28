@@ -26,7 +26,6 @@ public class MainMenuActivity
     private ImageView mContactsImage;
     private ImageView mSocialImage;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

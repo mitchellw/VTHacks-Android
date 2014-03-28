@@ -37,17 +37,17 @@ public class ScheduleItem implements IScheduleItem {
 		time = root.optString(TIME, "");
 	}
 
-	@Override
+
 	public String getDescription() {
 		return description;
 	}
 
-	@Override
+
 	public String getTitle() {
 		return title;
 	}
 
-	@Override
+
 	public String getTime() {
 		return time;
 	}

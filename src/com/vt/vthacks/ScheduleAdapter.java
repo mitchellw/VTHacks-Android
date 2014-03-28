@@ -1,85 +1,108 @@
 package com.vt.vthacks;
 
+import android.widget.RelativeLayout;
+import android.view.LayoutInflater;
 import java.util.List;
-
 import com.vt.vthacks.model.IScheduleItem;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
-	
-	private Context context;
 
+// -------------------------------------------------------------------------
+/**
+ *  This is the class that handles the ArrayAdapter for
+ *
+ *  @author Brandon Potts , Willson Mitchell
+ *  @version Mar 22, 2014
+ */
+public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
+
+	private Context context;
+	private LayoutInflater mInflater;
+	// ----------------------------------------------------------
+	/**
+	 * Create a new ScheduleAdapter object.
+	 * @param context
+	 * @param listItems
+	 */
 	public ScheduleAdapter(Context context, List<IScheduleItem> listItems) {
 		super(context, 0, listItems);
 		this.context = context;
+		this.mInflater = LayoutInflater.from(this.context);
 	}
-	
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         final IScheduleItem item = getItem(position);
-        
-        TextView tv = new TextView(context);
-        tv.setText(item.getTime());
+        ScheduleItemViewHolder holder;
 
-		return tv;
-//        final ListItem item = getItem(position);
-//
-//        // Don't use instanceof because it actually could be a slight performance hit here.
-//        if (item.getClass() == FriendListItem.class) {
-//            final FriendListItem friendItem = (FriendListItem)item;
-//            final FriendViewHolder friendViewHolder;
-//            if (convertView == null) {
-//                View view;
-//                if (friendItem.isFriend()) {
-//                    view = mInflater.inflate(R.layout.friend_list_item, parent, false);
-//                }
-//                else {
-//                    view = mInflater.inflate(R.layout.added_you_list_item, parent, false);
-//                }
-//                friendViewHolder = FriendViewHolder.create((RelativeLayout) view);
-//                view.setTag(friendViewHolder);
-//            }
-//            else {
-//                friendViewHolder = (FriendViewHolder)convertView.getTag();
-//            }
-//
-//            friendViewHolder.nameTextView.setText(friendItem.getName());
-//            if (!friendItem.isFriend()) {
-//                friendViewHolder.addAsFriendButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        addFriendListener.onListItemButtonClicked(friendItem);
-//                    }
-//                });
-//            }
-//
-//            return friendViewHolder.rootView;
-//        }
-//        else {
-//            return null;
-//        }
+        if(convertView == null)
+        {
+            RelativeLayout container =
+                (RelativeLayout)mInflater.inflate(R.layout.schedule_list_row, parent , false);
+             holder = ScheduleItemViewHolder.create(container);
+             container.setTag(holder);
+        }
+        else
+        {
+            holder = (ScheduleItemViewHolder)convertView.getTag();
+        }
+        holder.titleTextView.setText(item.getTitle());
+        holder.timeTextView.setText(item.getTime());
+        holder.descripTextview.setText(item.getDescription());
+
+		return holder.rootView;
     }
 
+    /**
+     * // -------------------------------------------------------------------------
+    /**
+     *  Class creates and holds Views for the Schedule ArrayAdaptor
+     *
+     *  @author Brandon Potts
+     *  @version Mar 27, 2014
+     */
     private static class ScheduleItemViewHolder {
-//        public final RelativeLayout rootView;
-//        public final TextView nameTextView;
-//        public final Button addAsFriendButton;
-//
-//        private FriendViewHolder(RelativeLayout rootView, TextView nameTextView, Button addAsFriendButton) {
-//            this.rootView = rootView;
-//            this.nameTextView = nameTextView;
-//            this.addAsFriendButton = addAsFriendButton;
-//        }
-//
-//        public static FriendViewHolder create(RelativeLayout rootView) {
-//            TextView nameTextView = (TextView)rootView.findViewById(R.id.nameTextView);
-//            Button addAsFriendButton = (Button)rootView.findViewById(R.id.addAsFriendButton);
-//            return new FriendViewHolder(rootView, nameTextView, addAsFriendButton);
-//        }
+        public final RelativeLayout rootView;
+        public final TextView titleTextView;
+        public final TextView descripTextview;
+        public final TextView timeTextView;
+
+        /**
+         * Creates ScheduleItemViewHolder object
+         *
+         * @param rootView is the root
+         * @param titleTextView is TextView for the title
+         * @param descripTextView is the TextView for the description
+         * @param timeTextView is the TextView for time
+         */
+        private ScheduleItemViewHolder(RelativeLayout rootView,
+            TextView titleTextView ,
+            TextView descripTextView , TextView timeTextView) {
+            this.rootView = rootView;
+            this.titleTextView = titleTextView;
+            this.descripTextview = descripTextView;
+            this.timeTextView = timeTextView;
+        }
+
+        /**
+         * Creates a view for the Schedule list
+         *
+         * @param rootView is the root
+         *
+         * @return view for Schedule list
+         */
+        public static ScheduleItemViewHolder create(RelativeLayout rootView) {
+            TextView titleTextView = (TextView)rootView.findViewById(R.id.listview_item_row_title);
+            TextView timeTextView = (TextView)rootView.findViewById(R.id.listview_item_row_timestamp);
+            TextView descripTextView = (TextView)rootView.findViewById(R.id.listview_item_row_description);
+            return new ScheduleItemViewHolder(rootView, titleTextView, timeTextView, descripTextView);
+        }
     }
+
 }

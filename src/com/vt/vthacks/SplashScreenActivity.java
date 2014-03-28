@@ -21,7 +21,7 @@ public class SplashScreenActivity
      * @param savedInstanceState
      *            is data that was most recently supplied
      */
-	@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

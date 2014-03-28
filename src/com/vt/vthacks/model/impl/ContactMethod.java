@@ -12,12 +12,12 @@ public class ContactMethod implements IContactMethod {
 		this.type = type;
 	}
 
-	@Override
+
 	public ContactMethodType getType() {
 		return type;
 	}
 
-	@Override
+
 	public String getName() {
 		return name;
 	}

@@ -17,5 +17,6 @@
 <string android:id="@+id/map_description" android:layout_height="wrap_content" android:layout_width="wrap_content" name="map_description">When clicked, the map activity will be called </string>
 <string android:layout_height="wrap_content" android:id="@+id/schedule_description" android:layout_width="wrap_content" name="schedule_description">When clicked, the schedule activity will begin </string>
 <string android:id="@+id/social_descrip" android:layout_width="wrap_content" android:layout_height="wrap_content" name="social_desciption">When clicked, the social activity will begin </string>
+<string android:id="@+id/string1" android:layout_width="wrap_content" android:layout_height="wrap_content" name="EmptyTextView">EmptyTextView</string>
 
 </resources>

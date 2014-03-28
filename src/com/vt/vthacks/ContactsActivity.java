@@ -1,8 +1,8 @@
 package com.vt.vthacks;
 
+
 import com.vt.vthacks.model.ICompanyContactsList;
 import com.vt.vthacks.model.impl.CompanyContactsList;
-
 import android.widget.ListView;
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,8 +34,8 @@ public class ContactsActivity
         setContentView(R.layout.contacts);
 
 		companyContactsList = CompanyContactsList.fromAssets(this, "contacts.json");
-		
-		ListView listView = (ListView) findViewById(R.id.listView);
+
+		ListView listView = (ListView) findViewById(R.id.contacts_list_view);
 		listView.setAdapter(new CompanyContactsAdapter(this, companyContactsList));
     }
 }

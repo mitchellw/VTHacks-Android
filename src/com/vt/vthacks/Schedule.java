@@ -1,29 +1,93 @@
 package com.vt.vthacks;
 
-import android.os.Bundle;
-import android.app.Activity;
-
 // -------------------------------------------------------------------------
 /**
  *
- *  This class handles the interaction/data for the Schedule page
+ *  Class represents a Schedule object
  *
  *  @author Brandon Potts
- *  @version Mar 10, 2014
+ *  @version Mar 23, 2014
  */
 public class Schedule
-    extends Activity
 {
+
+    private String name;
+    private String description;
+    private String time;
+
 
     // ----------------------------------------------------------
     /**
-     * Sets up the Schedule page
-     *
-     * @param savedInstanceState is data that was most recently supplied
+     * Create a new Schedule object.
+     * @param nm
+     * @param descrip
+     * @param t
      */
-    protected void OnCreate(Bundle savedInstanceState)
+    public Schedule(String nm , String descrip , String t)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.schedule);
+        name = nm;
+        description = descrip;
+        time = t;
     }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @return the description
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @return the time
+     */
+    public String getTime()
+    {
+        return time;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time)
+    {
+        this.time = time;
+    }
+
 }
