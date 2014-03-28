@@ -1,20 +1,15 @@
 package com.vt.vthacks;
 
+import android.widget.RelativeLayout;
+import android.view.LayoutInflater;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-
 import com.vt.vthacks.model.IScheduleItem;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 
 // -------------------------------------------------------------------------
 /**
@@ -26,7 +21,7 @@ import android.widget.TextView;
 public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 
 	private Context context;
-
+	private LayoutInflater mInflater;
 	// ----------------------------------------------------------
 	/**
 	 * Create a new ScheduleAdapter object.
@@ -36,79 +31,54 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 	public ScheduleAdapter(Context context, List<IScheduleItem> listItems) {
 		super(context, 0, listItems);
 		this.context = context;
+		this.mInflater = LayoutInflater.from(context);
 	}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         final IScheduleItem item = getItem(position);
+        ScheduleItemViewHolder holder;
 
-        TextView tv = new TextView(context);
-        tv.setText(item.getTime());
+        if(convertView == null)
+        {
+            RelativeLayout container =
+                (RelativeLayout)mInflater.inflate(R.layout.listview_item_row, parent , false);
+             holder = ScheduleItemViewHolder.create(container);
+             container.setTag(holder);
+        }
+        else
+        {
+            holder = (ScheduleItemViewHolder)convertView.getTag();
+        }
+        holder.titleTextView.setText(item.getTitle());
+        holder.timeTextView.setText(item.getTime());
+        holder.descripTextview.setText(item.getDescription());
 
-		return tv;
-//        final ListItem item = getItem(position);
-//
-//        // Don't use instanceof because it actually could be a slight performance hit here.
-//        if (item.getClass() == FriendListItem.class) {
-//            final FriendListItem friendItem = (FriendListItem)item;
-//            final FriendViewHolder friendViewHolder;
-//            if (convertView == null) {
-//                View view;
-//                if (friendItem.isFriend()) {
-//                    view = mInflater.inflate(R.layout.friend_list_item, parent, false);
-//                }
-//                else {
-//                    view = mInflater.inflate(R.layout.added_you_list_item, parent, false);
-//                }
-//                friendViewHolder = FriendViewHolder.create((RelativeLayout) view);
-//                view.setTag(friendViewHolder);
-//            }
-//            else {
-//                friendViewHolder = (FriendViewHolder)convertView.getTag();
-//            }
-//
-//            friendViewHolder.nameTextView.setText(friendItem.getName());
-//            if (!friendItem.isFriend()) {
-//                friendViewHolder.addAsFriendButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        addFriendListener.onListItemButtonClicked(friendItem);
-//                    }
-//                });
-//            }
-//
-//            return friendViewHolder.rootView;
-//        }
-//        else {
-//            return null;
-//        }
+		return holder.rootView;
     }
 
     private static class ScheduleItemViewHolder {
-//        public final RelativeLayout rootView;
-//        public final TextView nameTextView;
-//        public final Button addAsFriendButton;
-//
-//        private FriendViewHolder(RelativeLayout rootView, TextView nameTextView, Button addAsFriendButton) {
-//            this.rootView = rootView;
-//            this.nameTextView = nameTextView;
-//            this.addAsFriendButton = addAsFriendButton;
-//        }
-//
-//        public static FriendViewHolder create(RelativeLayout rootView) {
-//            TextView nameTextView = (TextView)rootView.findViewById(R.id.nameTextView);
-//            Button addAsFriendButton = (Button)rootView.findViewById(R.id.addAsFriendButton);
-//            return new FriendViewHolder(rootView, nameTextView, addAsFriendButton);
-//        }
+        public final RelativeLayout rootView;
+        public final TextView titleTextView;
+        public final TextView descripTextview;
+        public final TextView timeTextView;
+
+        private ScheduleItemViewHolder(RelativeLayout rootView,
+            TextView titleTextView ,
+            TextView descripTextView , TextView timeTextView) {
+            this.rootView = rootView;
+            this.titleTextView = titleTextView;
+            this.descripTextview = descripTextView;
+            this.timeTextView = timeTextView;
+        }
+
+        public static ScheduleItemViewHolder create(RelativeLayout rootView) {
+            TextView titleTextView = (TextView)rootView.findViewById(R.id.listview_item_row_title);
+            TextView timeTextView = (TextView)rootView.findViewById(R.id.listview_item_row_timestamp);
+            TextView descripTextView = (TextView)rootView.findViewById(R.id.listview_item_row_description);
+            return new ScheduleItemViewHolder(rootView, titleTextView, timeTextView, descripTextView);
+        }
     }
 
-    /**
-     * This is the function that parses JSON files
-     */
-    public static String parseJSONFiles()
-    {
-
-
-        return null;
-    }
 }
