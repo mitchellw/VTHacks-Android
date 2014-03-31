@@ -6,6 +6,8 @@ import org.json.JSONException;
 import android.os.Bundle;
 import com.vt.vthacks.model.IScheduleList;
 import com.vt.vthacks.model.impl.ScheduleList;
+import com.vt.vthacks.view.ScheduleAdapter;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;

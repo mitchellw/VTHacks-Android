@@ -4,6 +4,8 @@ package com.vt.vthacks;
 import android.os.Bundle;
 import com.vt.vthacks.model.IAwardList;
 import com.vt.vthacks.model.impl.AwardList;
+import com.vt.vthacks.view.AwardAdapter;
+
 import android.app.Activity;
 import android.widget.ListView;
 

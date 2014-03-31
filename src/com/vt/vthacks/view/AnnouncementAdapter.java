@@ -1,4 +1,4 @@
-package com.vt.vthacks;
+package com.vt.vthacks.view;
 
 import java.util.ArrayList;
 import android.content.Context;

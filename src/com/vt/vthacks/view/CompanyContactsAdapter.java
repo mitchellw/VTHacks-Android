@@ -1,6 +1,11 @@
-package com.vt.vthacks;
+package com.vt.vthacks.view;
 
 import android.widget.ImageButton;
+
+import com.vt.vthacks.R;
+import com.vt.vthacks.R.drawable;
+import com.vt.vthacks.R.id;
+import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
 import android.view.LayoutInflater;

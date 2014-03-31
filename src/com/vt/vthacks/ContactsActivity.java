@@ -3,6 +3,8 @@ package com.vt.vthacks;
 
 import com.vt.vthacks.model.ICompanyContactsList;
 import com.vt.vthacks.model.impl.CompanyContactsList;
+import com.vt.vthacks.view.CompanyContactsAdapter;
+
 import android.widget.ListView;
 import android.os.Bundle;
 import android.app.Activity;

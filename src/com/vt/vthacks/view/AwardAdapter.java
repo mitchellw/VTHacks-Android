@@ -1,9 +1,12 @@
-package com.vt.vthacks;
+package com.vt.vthacks.view;
 
 import android.widget.RelativeLayout;
 import android.view.LayoutInflater;
 import java.util.List;
 
+import com.vt.vthacks.R;
+import com.vt.vthacks.R.id;
+import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IAward;
 
 import android.content.Context;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 import com.vt.vthacks.model.impl.TwitterPhotoStreamItem;
+import com.vt.vthacks.view.PhotoStreamAdapter;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -15,7 +16,6 @@ import twitter4j.conf.ConfigurationBuilder;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 // -------------------------------------------------------------------------
@@ -60,7 +60,7 @@ extends Activity
 
 		@Override
 		protected List<IPhotoStreamItem> doInBackground(Void... arg0) {
-			Query query = new Query("filter:images #ratchet");
+			Query query = new Query("filter:images +exclude:retweets #ratchet");
 			QueryResult result = null;
 			try {
 				result = twitter.search(query);
