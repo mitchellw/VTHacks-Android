@@ -24,7 +24,7 @@ public class Company implements ICompany {
 		
 		
 		// Set the name of this company, fail if it does not exist
-		name = root.optString(NAME);
+		name = root.optString(NAME, null);
 		if (name == null) {
 			return;
 		}

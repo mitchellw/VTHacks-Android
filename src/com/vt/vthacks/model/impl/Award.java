@@ -22,28 +22,28 @@ public class Award implements IAward {
 		}
 		
 		// Set the schedule item's description or fail if it doesn't exist.
-		description = root.optString(DESCRIPTION);
+		description = root.optString(DESCRIPTION, null);
 		if (description == null) {
 			return;
 		}
 		
 		
 		// Set the schedule item's title or fail if it doesn't exist.
-		title = root.optString(TITLE);
+		title = root.optString(TITLE, null);
 		if (title == null) {
 			return;
 		}
 		
 
 		// Set the schedule item's prize or fail if it doesn't exist.
-		prize = root.optString(PRIZE);
+		prize = root.optString(PRIZE, null);
 		if (prize == null) {
 			return;
 		}
 
 		
 		// Set the schedule item's url, but don't fail if it does not exist.
-		url = root.optString(URL, "");
+		url = root.optString(URL);
 	}
 
 	@Override

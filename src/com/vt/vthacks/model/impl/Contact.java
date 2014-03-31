@@ -29,7 +29,7 @@ public class Contact implements IContact {
 
 
 		// Set the name of this contact, fail if it does not exist.
-		name = root.optString(NAME);
+		name = root.optString(NAME, null);
 		if (name == null) {
 			return;
 		}
@@ -37,17 +37,17 @@ public class Contact implements IContact {
 
 		// Add any contact methods that exist, but do not fail if they don't.
 		contactMethods = new ArrayList<IContactMethod>();
-		String email = root.optString(EMAIL);
+		String email = root.optString(EMAIL, null);
 		if (email != null) {
 			contactMethods.add(new ContactMethod(ContactMethodType.EMAIL, email));
 		}
 
-		String twitter = root.optString(TWITTER);
+		String twitter = root.optString(TWITTER, null);
 		if (twitter != null) {
 			contactMethods.add(new ContactMethod(ContactMethodType.TWITTER, twitter));
 		}
 
-		String phone = root.optString(PHONE);
+		String phone = root.optString(PHONE, null);
 		if (phone != null) {
 			contactMethods.add(new ContactMethod(ContactMethodType.PHONE, phone));
 		}

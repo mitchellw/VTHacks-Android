@@ -3,9 +3,6 @@ package com.vt.vthacks.view;
 import android.widget.ImageButton;
 
 import com.vt.vthacks.R;
-import com.vt.vthacks.R.drawable;
-import com.vt.vthacks.R.id;
-import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
 import android.view.LayoutInflater;
@@ -64,6 +61,9 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
             holder = (ContactViewHolder)convertView.getTag();
         }
 
+        if (holder.rootView.getChildCount() > 1) {
+        	holder.rootView.removeViews(1, holder.rootView.getChildCount() - 1);
+        }
         for(IContact contact : item.getContacts()) {
             RelativeLayout ref = (RelativeLayout)mInflater.inflate(
                 R.layout.contact_list_row, holder.rootView , false);
@@ -94,53 +94,13 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
                 }
                cLay.addView(button);
-
-
             }
 
             holder.rootView.addView(ref);
-
-
         }
 
         holder.nameTextView.setText(item.getName());
         return holder.rootView;
-//        final ListItem item = getItem(position);
-//
-//        // Don't use instanceof because it actually could be a slight performance hit here.
-//        if (item.getClass() == FriendListItem.class) {
-//            final FriendListItem friendItem = (FriendListItem)item;
-//            final FriendViewHolder friendViewHolder;
-//            if (convertView == null) {
-//                View view;
-//                if (friendItem.isFriend()) {
-//                    view = mInflater.inflate(R.layout.friend_list_item, parent, false);
-//                }
-//                else {
-//                    view = mInflater.inflate(R.layout.added_you_list_item, parent, false);
-//                }
-//                friendViewHolder = FriendViewHolder.create((RelativeLayout) view);
-//                view.setTag(friendViewHolder);
-//            }
-//            else {
-//                friendViewHolder = (FriendViewHolder)convertView.getTag();
-//            }
-//
-//            friendViewHolder.nameTextView.setText(friendItem.getName());
-//            if (!friendItem.isFriend()) {
-//                friendViewHolder.addAsFriendButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        addFriendListener.onListItemButtonClicked(friendItem);
-//                    }
-//                });
-//            }
-//
-//            return friendViewHolder.rootView;
-//        }
-//        else {
-//            return null;
-//        }
     }
 
     /**

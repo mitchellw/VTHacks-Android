@@ -44,6 +44,50 @@
           "email" : "Email@test.com"
         }
       ]
+    },
+    {
+      "name" : "Company3",
+      "contacts" : [
+        {
+          "name" : "Name1",
+          "skills" : ["Skill1", "Skill2", "Skill3"],
+          "twitter" : "@Twitter",
+          "email" : "Email@test.com"
+        },
+        {
+          "name" : "Name2",
+          "skills" : ["Skill1", "Skill2", "Skill3"],
+          "twitter" : "@Twitter"
+        },
+        {
+          "name" : "Name3",
+          "skills" : ["Skill4", "Skill5", "Skill6"],
+          "email" : "Email@test.com",
+          "phone" : "555-555-5555"
+        }
+      ]
+    },
+    {
+      "name" : "Company4",
+      "contacts" : [
+        {
+          "name" : "Name1",
+          "skills" : ["Skill1", "Skill2", "Skill3"],
+          "twitter" : "@Twitter"
+        },
+        {
+          "name" : "Name2",
+          "skills" : ["Skill1", "Skill2", "Skill3"],
+          "twitter" : "@Twitter",
+          "email" : "Email@test.com"
+        },
+        {
+          "name" : "Name3",
+          "skills" : ["Skill4", "Skill5", "Skill6"],
+          "email" : "Email@test.com",
+          "phone" : "555-555-5555"
+        }
+      ]
     }
   ]
 }
