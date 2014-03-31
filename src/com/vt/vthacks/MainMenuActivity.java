@@ -2,7 +2,6 @@ package com.vt.vthacks;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -18,13 +17,13 @@ public class MainMenuActivity
 {
 
     // Creates ImageView variables that will hold the imageViews on the page
-    private ImageView mChatImage;
-    private ImageView mAnnounceImage;
-    private ImageView mScheduleImage;
-    private ImageView mMapImage;
-    private ImageView mAwardsImage;
-    private ImageView mContactsImage;
-    private ImageView mSocialImage;
+    private View mChatImage;
+    private View mAnnounceImage;
+    private View mScheduleImage;
+    private View mMapImage;
+    private View mAwardsImage;
+    private View mContactsImage;
+    private View mSocialImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,7 +32,7 @@ public class MainMenuActivity
         setContentView(R.layout.main_menu);
 
         //gets the chat button and sets the on click listener
-        mChatImage = (ImageView) findViewById(R.id.chat_button);
+        mChatImage = findViewById(R.id.chat_button);
         mChatImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -45,7 +44,7 @@ public class MainMenuActivity
 
 
         //initializes the Announce button and sets the on click listener
-        mAnnounceImage = (ImageView) findViewById(R.id.announcement_button);
+        mAnnounceImage = findViewById(R.id.announcement_button);
         mAnnounceImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -56,7 +55,7 @@ public class MainMenuActivity
         });
 
         //initializes the awards button and sets the on click listener
-        mAwardsImage = (ImageView) findViewById(R.id.awards_button);
+        mAwardsImage = findViewById(R.id.awards_button);
         mAwardsImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -68,7 +67,7 @@ public class MainMenuActivity
 
 
         //initializes the Contacts button and sets the on click listener
-        mContactsImage = (ImageView) findViewById(R.id.contacts_button);
+        mContactsImage = findViewById(R.id.contacts_button);
         mContactsImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -81,7 +80,7 @@ public class MainMenuActivity
 
 
         //initializes the Map button and sets the on click listener
-        mMapImage = (ImageView) findViewById(R.id.map_button);
+        mMapImage = findViewById(R.id.map_button);
         mMapImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -94,7 +93,7 @@ public class MainMenuActivity
 
 
         //initializes the Schedule button and sets the on click listener
-        mScheduleImage = (ImageView) findViewById(R.id.schedule_button);
+        mScheduleImage = findViewById(R.id.schedule_button);
         mScheduleImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)
@@ -106,7 +105,7 @@ public class MainMenuActivity
 
 
         //initializes the social button and sets the on click listener
-        mSocialImage = (ImageView) findViewById(R.id.social_button);
+        mSocialImage = findViewById(R.id.social_button);
         mSocialImage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)

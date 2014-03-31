@@ -4,10 +4,12 @@
     android:id="@+id/FirstRow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:clickable="true"
     android:orientation="vertical"
-    android:paddingLeft="75dp"
-    android:paddingTop="100dp"
     tools:context=".SocialActivity" >
 
     <LinearLayout
@@ -15,20 +17,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ImageView
+        <TextView
             android:id="@+id/announcement_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/announcment_description"
-            android:src="@drawable/announcements_res" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/announcements_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_announcements" />
 
-        <ImageView
+        <TextView
             android:id="@+id/schedule_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/schedule_description"
-            android:paddingLeft="100dp"
-            android:src="@drawable/calender_res" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/calender_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_schedule" />
 
     </LinearLayout>
 
@@ -38,21 +43,23 @@
         android:layout_height="wrap_content"
         android:paddingTop="50dp" >
 
-        <ImageView
+        <TextView
             android:id="@+id/map_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/map_description"
-            android:src="@drawable/map_res" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/map_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_map" />
 
-        <ImageView
+        <TextView
             android:id="@+id/awards_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/awards_description"
-            android:paddingLeft="100dp"
-            android:src="@drawable/awards_res" />
-
+            android:layout_weight="1"
+            android:drawableTop="@drawable/awards_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_awards" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,21 +68,23 @@
         android:layout_height="wrap_content"
         android:paddingTop="50dp" >
 
-        <ImageView
+        <TextView
             android:id="@+id/contacts_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/contacts_description"
-            android:src="@drawable/contacts_res" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/contacts_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_contacts" />
 
-        <ImageView
+        <TextView
             android:id="@+id/chat_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/chat_description"
-            android:paddingLeft="100dp"
-            android:src="@drawable/chat_res" />
-
+            android:layout_weight="1"
+            android:drawableTop="@drawable/chat_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_chat" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,13 +93,14 @@
         android:layout_height="wrap_content"
         android:paddingTop="50dp" >
 
-        <ImageView
+        <TextView
             android:id="@+id/social_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/social_desciption"
-            android:paddingLeft="75dp"
-            android:src="@drawable/social_res" />
+            android:layout_weight="1"
+            android:drawableTop="@drawable/social_res"
+            android:gravity="center_horizontal"
+            android:text="@string/label_photos" />
 
     </LinearLayout>
 
