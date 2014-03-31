@@ -3,21 +3,25 @@
     {
       "title" : "Title1",
       "description" : "Description1",
+      "day" : "Friday",
       "timestamp" : "3:30pm"
     },
     {
       "title" : "Title2",
       "description" : "Description2",
+      "day" : "Saturday",
       "timestamp" : "3:45pm"
     },
     {
       "title" : "Title3",
       "description" : "Description3",
+      "day" : "Sunday",
       "timestamp" : "4:15pm"
     },
     {
       "title" : "Title4",
       "description" : "Description4",
+      "day" : "Sunday",
       "timestamp" : "5:30pm"
     }
   ]

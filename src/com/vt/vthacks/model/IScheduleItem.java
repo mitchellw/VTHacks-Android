@@ -4,6 +4,7 @@ public interface IScheduleItem {
 
 	public String getTitle();
 	public String getDescription();
+	public String getDay();
 	public String getTime();
 
 }

@@ -57,6 +57,7 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
             holder = (ScheduleItemViewHolder)convertView.getTag();
         }
         holder.titleTextView.setText(item.getTitle());
+        holder.dayTextView.setText(item.getDay());
         holder.timeTextView.setText(item.getTime());
         holder.descripTextview.setText(item.getDescription());
 
@@ -75,6 +76,7 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
         public final RelativeLayout rootView;
         public final TextView titleTextView;
         public final TextView descripTextview;
+        public final TextView dayTextView;
         public final TextView timeTextView;
 
         /**
@@ -86,11 +88,12 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
          * @param timeTextView is the TextView for time
          */
         private ScheduleItemViewHolder(RelativeLayout rootView,
-            TextView titleTextView ,
-            TextView descripTextView , TextView timeTextView) {
+            TextView titleTextView, TextView descripTextView,
+            TextView dayTextView, TextView timeTextView) {
             this.rootView = rootView;
             this.titleTextView = titleTextView;
             this.descripTextview = descripTextView;
+            this.dayTextView = dayTextView;
             this.timeTextView = timeTextView;
         }
 
@@ -103,9 +106,10 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
          */
         public static ScheduleItemViewHolder create(RelativeLayout rootView) {
             TextView titleTextView = (TextView)rootView.findViewById(R.id.listview_item_row_title);
+            TextView dayTextView = (TextView)rootView.findViewById(R.id.listview_item_row_day);
             TextView timeTextView = (TextView)rootView.findViewById(R.id.listview_item_row_timestamp);
             TextView descripTextView = (TextView)rootView.findViewById(R.id.listview_item_row_description);
-            return new ScheduleItemViewHolder(rootView, titleTextView, timeTextView, descripTextView);
+            return new ScheduleItemViewHolder(rootView, titleTextView, descripTextView, dayTextView, timeTextView);
         }
     }
 
