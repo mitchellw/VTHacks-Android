@@ -8,7 +8,6 @@ public class ScheduleItem implements IScheduleItem {
 	
 	private static final String DESCRIPTION = "description";
 	private static final String TITLE = "title";
-	private static final String DAY = "day";
 	private static final String TIME = "timestamp";
 	
 	private String description;
@@ -16,8 +15,8 @@ public class ScheduleItem implements IScheduleItem {
 	private String time;
 	private String day;
 
-	public ScheduleItem(JSONObject root) {
-		if (root == null) {
+	public ScheduleItem(JSONObject root, String day) {
+		if (root == null || day == null) {
 			return;
 		}
 		
@@ -35,8 +34,8 @@ public class ScheduleItem implements IScheduleItem {
 		}
 		
 
-		// Set the schedule item's time, but don't fail if it does not exist.
-		day = root.optString(DAY);
+		// Set the schedule item's day
+		this.day = day;
 		
 		// Set the schedule item's time, but don't fail if it does not exist.
 		time = root.optString(TIME);

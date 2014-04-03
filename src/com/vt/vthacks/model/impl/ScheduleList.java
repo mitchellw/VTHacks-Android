@@ -23,7 +23,9 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 	 * For serialization.
 	 */
 	private static final long serialVersionUID = -8332494709360701455L;
-	private static final String SCHEDULE_ITEMS = "items";
+	private static final String FRIDAY = "Friday";
+	private static final String SATURDAY = "Saturday";
+	private static final String SUNDAY = "Sunday";
 	private static final String TAG = "ScheduleList";
 	
 	public ScheduleList(JSONObject root) {
@@ -34,13 +36,21 @@ public class ScheduleList extends ArrayList<IScheduleItem> implements IScheduleL
 
 		
 		// Add all the schedule items, fail if they do not exist.
-		JSONArray items = root.optJSONArray(SCHEDULE_ITEMS);
-		if (items == null) {
+		JSONArray fridayItems = root.optJSONArray(FRIDAY);
+		JSONArray saturdayItems = root.optJSONArray(SATURDAY);
+		JSONArray sundayItems = root.optJSONArray(SUNDAY);
+		if (fridayItems == null || saturdayItems == null || sundayItems == null) {
 			return;
 		}
 
-		for (int i = 0; i < items.length(); i++) {
-			this.add(new ScheduleItem(items.optJSONObject(i)));
+		for (int i = 0; i < fridayItems.length(); i++) {
+			this.add(new ScheduleItem(fridayItems.optJSONObject(i), FRIDAY));
+		}
+		for (int i = 0; i < saturdayItems.length(); i++) {
+			this.add(new ScheduleItem(saturdayItems.optJSONObject(i), SATURDAY));
+		}
+		for (int i = 0; i < sundayItems.length(); i++) {
+			this.add(new ScheduleItem(sundayItems.optJSONObject(i), SUNDAY));
 		}
 	}
 

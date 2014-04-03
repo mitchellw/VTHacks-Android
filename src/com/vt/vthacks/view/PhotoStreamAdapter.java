@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -23,10 +24,12 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 
 	private Context context;
 	private LayoutInflater mInflater;
+	private OnImageClickListener clickListener;
 
-	public PhotoStreamAdapter(Context context, List<IPhotoStreamItem> listItems) {
+	public PhotoStreamAdapter(Context context, List<IPhotoStreamItem> listItems, OnImageClickListener clickListener) {
 		super(context, 0, listItems);
 		this.context = context;
+		this.clickListener = clickListener;
 		mInflater = LayoutInflater.from(context);
 	}
 
@@ -51,6 +54,14 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 		photoStreamViewHolder.setTask(task);
 		task.execute();
 		photoStreamViewHolder.textView.setText(item.getText());
+		
+		photoStreamViewHolder.rootView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				clickListener.onImageClicked(item.getImage());
+			}
+		});
 
 		return photoStreamViewHolder.rootView;
 	}

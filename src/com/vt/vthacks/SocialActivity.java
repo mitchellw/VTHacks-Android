@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 import com.vt.vthacks.model.impl.TwitterPhotoStreamItem;
+import com.vt.vthacks.view.OnImageClickListener;
 import com.vt.vthacks.view.PhotoStreamAdapter;
 
 import twitter4j.Query;
@@ -14,8 +15,12 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 // -------------------------------------------------------------------------
@@ -32,6 +37,8 @@ extends Activity
 	private static final String TAG = "SocialActivity";
 	private ListView listView;
 	private Twitter twitter;
+	private View previewHolder;
+	private ImageView imageView;
 
 	// ----------------------------------------------------------
 	/**
@@ -47,6 +54,8 @@ extends Activity
 		setContentView(R.layout.social);
 
 		listView = (ListView) findViewById(R.id.listView);
+		previewHolder = findViewById(R.id.previewBox);
+		imageView = (ImageView) findViewById(R.id.fullImageView);
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true);
@@ -83,7 +92,20 @@ extends Activity
 		protected void onPostExecute(List<IPhotoStreamItem> photoStream) {
 			super.onPostExecute(photoStream);
 
-			listView.setAdapter(new PhotoStreamAdapter(SocialActivity.this, photoStream));
+			listView.setAdapter(new PhotoStreamAdapter(SocialActivity.this, photoStream, new OnImageClickListener() {
+				
+				@Override
+				public void onImageClicked(Bitmap bitmap) {
+					imageView.setImageBitmap(bitmap);
+					previewHolder.setVisibility(View.VISIBLE);
+					imageView.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							previewHolder.setVisibility(View.GONE);
+						}
+					});
+				}
+			}));
 		}
 	}
 }
