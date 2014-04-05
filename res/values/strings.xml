@@ -10,6 +10,8 @@
     <string name="label_chat">Chat</string>
     <string name="label_photos">Photos</string>
     <string name="label_awards">Awards</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
     <string android:id="@+id/announceDescrip" android:layout_width="wrap_content" android:layout_height="wrap_content" name="announcment_description">When clicked, the activity will go to the announcments page</string>
 <string android:layout_height="wrap_content" android:id="@+id/awards_desc" android:layout_width="wrap_content" name="awards_description">When clicked, awards activity will be called </string>
 <string android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/chatDescription" name="chat_description">When clicked, the chat activity will be called</string>
