@@ -1,6 +1,7 @@
 package com.vt.vthacks;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import com.vt.vthacks.model.IAwardList;
 import com.vt.vthacks.model.impl.AwardList;
@@ -21,6 +22,7 @@ public class AwardsActivity
 {
 
 	private IAwardList awardList;
+	private ListView listView;
 
     // ----------------------------------------------------------
     /**
@@ -35,9 +37,25 @@ public class AwardsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.awards);
 
-		awardList = AwardList.fromAssets(this, "awards.json");
-
-		ListView listView = (ListView) findViewById(R.id.awards_list_view);
-		listView.setAdapter(new AwardAdapter(this, awardList));
+		listView = (ListView) findViewById(R.id.awards_list_view);
+		
+		new AwardsTask().execute();
     }
+	
+	private class AwardsTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			awardList = AwardList.fromServer();
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			
+			listView.setAdapter(new AwardAdapter(AwardsActivity.this, awardList));
+		}
+		
+	}
 }

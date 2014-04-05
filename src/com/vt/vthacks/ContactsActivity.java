@@ -6,6 +6,7 @@ import com.vt.vthacks.model.impl.CompanyContactsList;
 import com.vt.vthacks.view.CompanyContactsAdapter;
 
 import android.widget.ListView;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -17,27 +18,44 @@ import android.app.Activity;
  * @version Mar 10, 2014
  */
 public class ContactsActivity
-    extends Activity
+extends Activity
 {
 
 	private ICompanyContactsList companyContactsList;
+	private ListView listView;
 
-    // ----------------------------------------------------------
-    /**
-     * Sets up the chat page
-     *
-     * @param savedInstanceState
-     *            is data that was most recently supplied
-     */
+	// ----------------------------------------------------------
+	/**
+	 * Sets up the chat page
+	 *
+	 * @param savedInstanceState
+	 *            is data that was most recently supplied
+	 */
 	@Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.contacts);
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contacts);
 
-		companyContactsList = CompanyContactsList.fromAssets(this, "contacts.json");
+		listView = (ListView) findViewById(R.id.contacts_list_view);
+		
+		new ContactsTask().execute();
+	}
 
-		ListView listView = (ListView) findViewById(R.id.contacts_list_view);
-		listView.setAdapter(new CompanyContactsAdapter(this, companyContactsList));
-    }
+	private class ContactsTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			companyContactsList = CompanyContactsList.fromServer();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+
+			listView.setAdapter(new CompanyContactsAdapter(ContactsActivity.this, companyContactsList));
+		}
+
+	}
 }

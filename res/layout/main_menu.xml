@@ -8,9 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:clickable="true"
     android:orientation="vertical"
-    tools:context=".SocialActivity" >
+    tools:context=".MainMenuActivity" >
 
     <LinearLayout
         android:id="@+id/Row_One"

@@ -3,6 +3,8 @@ package com.vt.vthacks;
 
 import java.io.IOException;
 import org.json.JSONException;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import com.vt.vthacks.model.IScheduleList;
 import com.vt.vthacks.model.impl.ScheduleList;
@@ -26,6 +28,7 @@ extends Activity
 {
 
 	private IScheduleList scheduleList;
+	private ListView listView;
 
 	// ----------------------------------------------------------
 	/**
@@ -40,9 +43,25 @@ extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
 
-		scheduleList = ScheduleList.fromAssets(this, "schedule.json");
+		listView = (ListView) findViewById(R.id.schedule_list_view);
+		
+		new ScheduleTask().execute();
+	}
 
-		ListView listView = (ListView) findViewById(R.id.schedule_list_view);
-		listView.setAdapter(new ScheduleAdapter(this, scheduleList));
+	private class ScheduleTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			scheduleList = ScheduleList.fromServer();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+
+			listView.setAdapter(new ScheduleAdapter(ScheduleActivity.this, scheduleList));
+		}
+
 	}
 }

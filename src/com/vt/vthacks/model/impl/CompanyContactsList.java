@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -26,6 +27,7 @@ public class CompanyContactsList extends ArrayList<ICompany> implements ICompany
 	 * For serialization.
 	 */
 	private static final long serialVersionUID = -5873618902852338862L;
+	private static final String CONTACTS_ENDPOINT = "http://vthacks-env-pmkrjpmqpu.elasticbeanstalk.com/get_contacts";
 
 
 	public CompanyContactsList(JSONObject root) {
@@ -48,10 +50,27 @@ public class CompanyContactsList extends ArrayList<ICompany> implements ICompany
 
 	public static ICompanyContactsList fromAssets(Context context, String string) {
 		AssetManager assetManager = context.getAssets();
-		InputStream is;
+		try {
+			return fromInputStream(assetManager.open(string));
+		} catch (IOException e) {
+		}
+
+		return null;
+	}
+	
+	public static ICompanyContactsList fromServer() {
+		try {
+			URL url = new URL(CONTACTS_ENDPOINT);
+			return fromInputStream(url.openStream());
+		} catch (IOException e) {
+		}
+		
+		return null;
+	}
+
+	private static ICompanyContactsList fromInputStream(InputStream is) {
 		String jsString = "";
 		try {
-			is = assetManager.open(string);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is)); 
 			String line = null;
 			while((line = reader.readLine()) != null){
@@ -61,7 +80,6 @@ public class CompanyContactsList extends ArrayList<ICompany> implements ICompany
 			reader.close();
 		}
 		catch (IOException e) {
-			Log.d(TAG, "ioe");
 		}
 
 		try {
