@@ -1,9 +1,11 @@
 package com.vt.vthacks;
 
+import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
-import android.app.Activity;
+
 
 // -------------------------------------------------------------------------
 /**
@@ -13,7 +15,7 @@ import android.app.Activity;
  * @version Mar 10, 2014
  */
 public class MainMenuActivity
-    extends Activity
+    extends ActionBarActivity
 {
 
     // Creates ImageView variables that will hold the imageViews on the page
@@ -24,12 +26,19 @@ public class MainMenuActivity
     private View mAwardsImage;
     private View mContactsImage;
     private View mSocialImage;
+    private android.app.ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+
+
+//        actionBar = getSupportActionBar();
+//        actionBar.hide();
+
 
         //gets the chat button and sets the on click listener
         mChatImage = findViewById(R.id.chat_button);
@@ -117,18 +126,8 @@ public class MainMenuActivity
 
 
 
-
-
-
-
-
     }
 
-    // TODO Will this be needed?
-    /**
-     * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
-     *           menu; this adds items to the action bar if it is present.
-     *           getMenuInflater().inflate(R.menu.main, menu); return true; }
-     */
+
 
 }
