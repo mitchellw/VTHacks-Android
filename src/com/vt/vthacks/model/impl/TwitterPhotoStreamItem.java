@@ -2,7 +2,6 @@ package com.vt.vthacks.model.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.ref.SoftReference;
 import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,6 +40,10 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 
 	@Override
 	public Bitmap getImage() {
+		if (imageURL == null) {
+			return null;
+		}
+
 		Bitmap bitmap = cache.get(imageURL.toString());
 
 		if (bitmap == null) {

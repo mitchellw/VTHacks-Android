@@ -8,6 +8,7 @@ import com.vt.vthacks.model.IPhotoStreamItem;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 		else {
 			photoStreamViewHolder = (PhotoStreamItemViewHolder)convertView.getTag();
 		}
-		
+
 		LoadBitmapTask task = new LoadBitmapTask(photoStreamViewHolder, item);
 		if (photoStreamViewHolder.getTask() != null) {
 			photoStreamViewHolder.getTask().cancel(true);
@@ -54,12 +55,15 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 		photoStreamViewHolder.setTask(task);
 		task.execute();
 		photoStreamViewHolder.textView.setText(item.getText());
-		
+
 		photoStreamViewHolder.rootView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				clickListener.onImageClicked(item.getImage());
+				if (photoStreamViewHolder.imageView.getDrawable() instanceof BitmapDrawable) {
+					clickListener.onImageClicked(
+							((BitmapDrawable)photoStreamViewHolder.imageView.getDrawable()).getBitmap());
+				}
 			}
 		});
 
@@ -80,11 +84,11 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 			this.imageView = imageView;
 			this.progressBar = progressBar;
 		}
-		
+
 		public LoadBitmapTask getTask() {
 			return task;
 		}
-		
+
 		public void setTask(LoadBitmapTask task) {
 			this.task = task;
 		}
@@ -106,11 +110,11 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 			this.viewHolderRef = new WeakReference<PhotoStreamItemViewHolder>(viewHolder);
 			this.item = item;
 		}
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			
+
 			if (viewHolderRef != null) {
 				PhotoStreamItemViewHolder viewHolder = viewHolderRef.get();
 				if (viewHolder != null) {
