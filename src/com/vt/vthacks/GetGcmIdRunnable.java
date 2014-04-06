@@ -12,7 +12,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 public class GetGcmIdRunnable implements Runnable {
     private static final String TAG = "GetGcmIdRunnable";
     private static final long MAX_RETRY_TIME = 1024000;
-    private static final String PROJECT_NUMBER = "";
+    private static final String PROJECT_NUMBER = "75742017094";
 
     private Context context;
     private long retryTime;
@@ -48,7 +48,7 @@ public class GetGcmIdRunnable implements Runnable {
         editor.putString(Constants.PREFS_GCM_ID, gcmID);
         editor.commit();
         
-        new Thread(new RegisterGcmIdRunnable(context, retryTime)).start();
+        new GetAWSCredentialsRunnable(context, retryTime).run();
     }
 
     private void retryGcm() {
