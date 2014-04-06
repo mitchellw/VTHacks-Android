@@ -6,5 +6,6 @@ public interface IAward {
 	public String getDescription();
 	public String getPrize();
 	public String getUrl();
+	public String getCompany();
 
 }

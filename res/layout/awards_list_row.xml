@@ -12,12 +12,30 @@
         android:layout_alignParentRight="true"
         android:text="@string/EmptyTextView" />
 
+    <LinearLayout
+        android:id="@+id/award_company_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_underline"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/award_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Company title" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/award_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/award_company_layout"
         android:text="@string/EmptyTextView" />
 
     <TextView
@@ -26,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/award_title"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="26dp"
         android:text="@string/EmptyTextView" />
 
 </RelativeLayout>

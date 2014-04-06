@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="VTMainTheme" parent ="@style/Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+    
+    
+    <style name="MyActionBar" parent="android:style/Widget.Holo.Light.ActionBar">   
+        <item name="android:background">#800000</item>
+        </style>
+</resources>
