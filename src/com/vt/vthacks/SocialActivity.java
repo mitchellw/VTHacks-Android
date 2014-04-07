@@ -38,6 +38,7 @@ extends Activity
 	private static final String TAG = "SocialActivity";
 	private static final String QUERY = "filter:images +exclude:retweets #ratchet";
 	private ListView listView;
+	private PhotoStreamAdapter adapter;
 	private Twitter twitter;
 	private View previewHolder;
 	private ImageView imageView;
@@ -65,7 +66,30 @@ extends Activity
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		twitter = tf.getInstance();
 
+		adapter = new PhotoStreamAdapter(SocialActivity.this, new ArrayList<IPhotoStreamItem>(),
+				new OnImageClickListener() {
+
+			@Override
+			public void onImageClicked(Bitmap bitmap) {
+				imageView.setImageBitmap(bitmap);
+				previewHolder.setVisibility(View.VISIBLE);
+				imageView.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						previewHolder.setVisibility(View.GONE);
+					}
+				});
+			}
+		});
+		listView.setAdapter(adapter);
+
 		new TwitterTask().execute();
+	}
+	
+	private void resetList() {
+		adapter.clear();
+		adapter.notifyDataSetChanged();
+		lastResult = null;
 	}
 
 	private class TwitterTask extends AsyncTask<Void, Void, List<IPhotoStreamItem>> {
@@ -105,20 +129,8 @@ extends Activity
 		protected void onPostExecute(List<IPhotoStreamItem> photoStream) {
 			super.onPostExecute(photoStream);
 
-			listView.setAdapter(new PhotoStreamAdapter(SocialActivity.this, photoStream, new OnImageClickListener() {
-
-				@Override
-				public void onImageClicked(Bitmap bitmap) {
-					imageView.setImageBitmap(bitmap);
-					previewHolder.setVisibility(View.VISIBLE);
-					imageView.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							previewHolder.setVisibility(View.GONE);
-						}
-					});
-				}
-			}));
+			adapter.addAll(photoStream);
+			adapter.notifyDataSetChanged();
 		}
 	}
 }
