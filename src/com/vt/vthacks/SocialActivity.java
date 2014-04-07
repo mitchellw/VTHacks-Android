@@ -61,20 +61,14 @@ extends Activity
 
 		listView = (PullToRefreshListView) findViewById(R.id.listView);
 		listView.setOnRefreshListener(new OnRefreshListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				resetList();
 				new TwitterTask().execute();
 			}
 		});
-		listView.setOnScrollToBottomListener(new OnScrollToBottomListener() {
-			
-			@Override
-			public void onScrollToBottom() {
-				new TwitterTask().execute();
-			}
-		});
+
 		previewHolder = findViewById(R.id.previewBox);
 		imageView = (ImageView) findViewById(R.id.fullImageView);
 
@@ -102,9 +96,10 @@ extends Activity
 
 		new TwitterTask().execute();
 	}
-	
+
 	private void resetList() {
 		lastResult = null;
+		listView.setOnScrollToBottomListener(null);
 		adapter.clear();
 		adapter.notifyDataSetChanged();
 	}
@@ -152,6 +147,14 @@ extends Activity
 			String message = "Refreshed at " + System.currentTimeMillis();
 			listView.onRefreshComplete(message);
 			listView.onScrollToBottomComplete(message);
+
+			listView.setOnScrollToBottomListener(new OnScrollToBottomListener() {
+
+				@Override
+				public void onScrollToBottom() {
+					new TwitterTask().execute();
+				}
+			});
 		}
 	}
 }
