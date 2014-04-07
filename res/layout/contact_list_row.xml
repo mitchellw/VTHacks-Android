@@ -17,16 +17,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/contact_name"
-        android:orientation="horizontal" >
+        android:background="@drawable/test_rectangle"
+        android:orientation="horizontal"
+        android:showDividers="none|middle" >
+
+        <TextView
+            android:id="@+id/contact_skills"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:text="@string/EmptyTextView" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/contact_skills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/contact_linear_layout"
-        android:text="@string/EmptyTextView" />
 
 </RelativeLayout>

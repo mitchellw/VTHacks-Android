@@ -9,8 +9,7 @@
     <ListView
         android:id="@+id/awards_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="50dp" >
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>

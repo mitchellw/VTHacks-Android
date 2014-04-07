@@ -1,7 +1,7 @@
 package com.vt.vthacks.view;
 
+import android.graphics.Typeface;
 import android.widget.ImageButton;
-
 import com.vt.vthacks.R;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import java.util.List;
-
 import com.vt.vthacks.model.ICompany;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +69,14 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
             TextView cName = (TextView)ref.findViewById(R.id.contact_name);
             cName.setText(contact.getName());
+            cName.setTypeface(null , Typeface.BOLD);
+
             TextView cSkills = (TextView)ref.findViewById(R.id.contact_skills);
-            cSkills.setText(contact.getSkills().toString());
+            String skills = contact.getSkills().toString();
+            skills = skills.replace("[", " ");
+            skills = skills.replace("]", " ");
+            cSkills.setText(skills);
+
             LinearLayout cLay = (LinearLayout)ref.findViewById(R.id.contact_linear_layout);
 
             for(IContactMethod method : contact.getContactMethods())

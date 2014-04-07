@@ -1,14 +1,14 @@
 package com.vt.vthacks.view;
 
+import java.util.Locale;
+import android.graphics.Typeface;
 import android.widget.RelativeLayout;
 import android.view.LayoutInflater;
 import java.util.List;
-
 import com.vt.vthacks.R;
 import com.vt.vthacks.R.id;
 import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IAward;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ import android.widget.TextView;
  *  @version Mar 22, 2014
  */
 public class AwardAdapter extends ArrayAdapter<IAward> {
+    //TODO GET COMPANY NAMES IN HERE
 
 	private Context context;
 	private LayoutInflater mInflater;
@@ -57,9 +58,12 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
         {
             holder = (AwardItemViewHolder)convertView.getTag();
         }
+
+
         holder.titleTextView.setText(item.getTitle());
         holder.descripTextView.setText(item.getDescription());
         holder.prizeTextView.setText(item.getPrize());
+        holder.prizeTextView.setTypeface(null , Typeface.BOLD);
 
 
 		return holder.rootView;
