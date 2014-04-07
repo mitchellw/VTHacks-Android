@@ -40,7 +40,7 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 
 		final PhotoStreamItemViewHolder photoStreamViewHolder;
 		if (convertView == null) {
-			RelativeLayout rootView = (RelativeLayout)mInflater.inflate(R.layout.photo_stream_row, parent, false);
+			ViewGroup rootView = (ViewGroup)mInflater.inflate(R.layout.photo_stream_row, parent, false);
 			photoStreamViewHolder = PhotoStreamItemViewHolder.create(rootView);
 			rootView.setTag(photoStreamViewHolder);
 		}
@@ -54,6 +54,7 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 		}
 		photoStreamViewHolder.setTask(task);
 		task.execute();
+		photoStreamViewHolder.userTextView.setText(item.getUser());
 		photoStreamViewHolder.textView.setText(item.getText());
 
 		photoStreamViewHolder.rootView.setOnClickListener(new OnClickListener() {
@@ -71,15 +72,20 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 	}
 
 	private static class PhotoStreamItemViewHolder {
-		public final RelativeLayout rootView;
+		public final ViewGroup rootView;
+		public final TextView userTextView;
+		public final ImageView userImageView;
 		public final TextView textView;
 		public final ImageView imageView;
 		public final ProgressBar progressBar;
 
 		private LoadBitmapTask task;
 
-		private PhotoStreamItemViewHolder(RelativeLayout rootView, TextView textView, ImageView imageView, ProgressBar progressBar) {
+		private PhotoStreamItemViewHolder(ViewGroup rootView, TextView userTextView, ImageView userImageView,
+				TextView textView, ImageView imageView, ProgressBar progressBar) {
 			this.rootView = rootView;
+			this.userTextView = userTextView;
+			this.userImageView = userImageView;
 			this.textView = textView;
 			this.imageView = imageView;
 			this.progressBar = progressBar;
@@ -93,15 +99,18 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 			this.task = task;
 		}
 
-		public static PhotoStreamItemViewHolder create(RelativeLayout rootView) {
+		public static PhotoStreamItemViewHolder create(ViewGroup rootView) {
+			TextView userTextView = (TextView)rootView.findViewById(R.id.userTextView);
+			ImageView userImageView = (ImageView)rootView.findViewById(R.id.userImageView);
 			TextView textView = (TextView)rootView.findViewById(R.id.textView);
 			ImageView imageView = (ImageView)rootView.findViewById(R.id.imageView);
 			ProgressBar progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
-			return new PhotoStreamItemViewHolder(rootView, textView, imageView, progressBar);
+			return new PhotoStreamItemViewHolder(rootView, userTextView, userImageView,
+					textView, imageView, progressBar);
 		}
 	}
 
-	private class LoadBitmapTask extends AsyncTask<Void, Void, Bitmap> {
+	private class LoadBitmapTask extends AsyncTask<Void, Void, Bitmap[]> {
 
 		private WeakReference<PhotoStreamItemViewHolder> viewHolderRef;
 		private IPhotoStreamItem item;
@@ -119,34 +128,30 @@ public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 				PhotoStreamItemViewHolder viewHolder = viewHolderRef.get();
 				if (viewHolder != null) {
 					viewHolder.progressBar.setVisibility(View.VISIBLE);
+					viewHolder.userImageView.setImageBitmap(null);
 					viewHolder.imageView.setImageBitmap(null);
-					LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-					layoutParams.addRule(RelativeLayout.BELOW, viewHolder.progressBar.getId());
-					viewHolder.textView.setLayoutParams(layoutParams);
 				}
 			}
 		}
 
 		@Override
-		protected Bitmap doInBackground(Void... params) {
+		protected Bitmap[] doInBackground(Void... params) {
 			if (item == null) {
 				return null;
 			}
 
-			return item.getImage();
+			return new Bitmap[] {item.getUserImage(), item.getImage()};
 		}
 
-		protected void onPostExecute(Bitmap bitmap) {
-			super.onPostExecute(bitmap);
+		protected void onPostExecute(Bitmap[] bitmaps) {
+			super.onPostExecute(bitmaps);
 
 			if (viewHolderRef != null && !isCancelled()) {
 				PhotoStreamItemViewHolder viewHolder = viewHolderRef.get();
 				if (viewHolder != null) {
 					viewHolder.progressBar.setVisibility(View.GONE);
-					viewHolder.imageView.setImageBitmap(bitmap);
-					LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-					layoutParams.addRule(RelativeLayout.BELOW, viewHolder.imageView.getId());
-					viewHolder.textView.setLayoutParams(layoutParams);
+					viewHolder.userImageView.setImageBitmap(bitmaps[0]);
+					viewHolder.imageView.setImageBitmap(bitmaps[1]);
 				}
 			}
 		}

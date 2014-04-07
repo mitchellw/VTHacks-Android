@@ -9,18 +9,27 @@ import twitter4j.MediaEntity;
 import twitter4j.Status;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 
 public class TwitterPhotoStreamItem implements IPhotoStreamItem {
+	private String username;
+	private URL userImageURL;
 	private String text;
 	private URL imageURL;
 	private ConcurrentHashMap<String, Bitmap> cache;
 
 	public TwitterPhotoStreamItem(Status status) {
-		this.text = "@" + status.getUser().getScreenName() + ": " + status.getText();
 		this.cache = new ConcurrentHashMap<String, Bitmap>();
+		
+		this.username = "@" + status.getUser().getScreenName();
+
+		try {
+			userImageURL = new URL(status.getUser().getBiggerProfileImageURL());
+		} catch (IOException e) {
+		}
+
+		this.text = status.getText();
 
 		MediaEntity[] mediaEntities = status.getMediaEntities();
 		for (int i = 0; i < mediaEntities.length; i++) {
@@ -28,7 +37,6 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 				imageURL = new URL(mediaEntities[i].getMediaURL());
 				break;
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -47,20 +55,29 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 		Bitmap bitmap = cache.get(imageURL.toString());
 
 		if (bitmap == null) {
-			Log.d("stuff", "stuff");
-			bitmap = getBitmapFromURL();
+			bitmap = getBitmapFromURL(imageURL);
 			cache.put(imageURL.toString(), bitmap);
 		}
 
 		return bitmap;
 	}
 
-	private Bitmap getBitmapFromURL() {
-		Bitmap bitmap = null;
-		try {
-			InputStream is = imageURL.openStream();
-			bitmap = BitmapFactory.decodeStream(is);
-		} catch (IOException e) {
+	@Override
+	public String getUser() {
+		return username;
+	}
+
+	@Override
+	public Bitmap getUserImage() {
+		if (userImageURL == null) {
+			return null;
+		}
+
+		Bitmap bitmap = cache.get(userImageURL.toString());
+
+		if (bitmap == null) {
+			bitmap = getBitmapFromURL(userImageURL);
+			cache.put(userImageURL.toString(), bitmap);
 		}
 
 		return bitmap;
@@ -69,5 +86,16 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 	@Override
 	public String toString() {
 		return text;
+	}
+
+	private Bitmap getBitmapFromURL(URL url) {
+		Bitmap bitmap = null;
+		try {
+			InputStream is = url.openStream();
+			bitmap = BitmapFactory.decodeStream(is);
+		} catch (IOException e) {
+		}
+
+		return bitmap;
 	}
 }

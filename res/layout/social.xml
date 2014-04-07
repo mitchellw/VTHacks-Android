@@ -7,9 +7,8 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" >
-    </ListView>
+        android:divider="@color/title"
+        android:dividerHeight="1dp" />
 
     <FrameLayout
         android:id="@+id/previewBox"
