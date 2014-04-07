@@ -7,6 +7,9 @@ import com.vt.vthacks.model.IPhotoStreamItem;
 import com.vt.vthacks.model.impl.TwitterPhotoStreamItem;
 import com.vt.vthacks.view.OnImageClickListener;
 import com.vt.vthacks.view.PhotoStreamAdapter;
+import com.vt.vthacks.view.PullToRefreshListView;
+import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
+import com.vt.vthacks.view.PullToRefreshListView.OnScrollToBottomListener;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -22,7 +25,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 // -------------------------------------------------------------------------
 /**
@@ -37,7 +39,7 @@ extends Activity
 
 	private static final String TAG = "SocialActivity";
 	private static final String QUERY = "filter:images +exclude:retweets #ratchet";
-	private ListView listView;
+	private PullToRefreshListView listView;
 	private PhotoStreamAdapter adapter;
 	private Twitter twitter;
 	private View previewHolder;
@@ -57,7 +59,22 @@ extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.social);
 
-		listView = (ListView) findViewById(R.id.listView);
+		listView = (PullToRefreshListView) findViewById(R.id.listView);
+		listView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				resetList();
+				new TwitterTask().execute();
+			}
+		});
+		listView.setOnScrollToBottomListener(new OnScrollToBottomListener() {
+			
+			@Override
+			public void onScrollToBottom() {
+				new TwitterTask().execute();
+			}
+		});
 		previewHolder = findViewById(R.id.previewBox);
 		imageView = (ImageView) findViewById(R.id.fullImageView);
 
@@ -87,9 +104,9 @@ extends Activity
 	}
 	
 	private void resetList() {
+		lastResult = null;
 		adapter.clear();
 		adapter.notifyDataSetChanged();
-		lastResult = null;
 	}
 
 	private class TwitterTask extends AsyncTask<Void, Void, List<IPhotoStreamItem>> {
@@ -131,6 +148,10 @@ extends Activity
 
 			adapter.addAll(photoStream);
 			adapter.notifyDataSetChanged();
+
+			String message = "Refreshed at " + System.currentTimeMillis();
+			listView.onRefreshComplete(message);
+			listView.onScrollToBottomComplete(message);
 		}
 	}
 }

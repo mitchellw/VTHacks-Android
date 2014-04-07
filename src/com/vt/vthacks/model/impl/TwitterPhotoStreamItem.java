@@ -3,25 +3,33 @@ package com.vt.vthacks.model.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.concurrent.ConcurrentHashMap;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.util.LruCache;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 
 public class TwitterPhotoStreamItem implements IPhotoStreamItem {
+	private static LruCache<String, Bitmap> cache =
+			new LruCache<String, Bitmap>((int)Runtime.getRuntime().maxMemory() / 1024 / 2) {
+		@Override
+		protected int sizeOf(String key, Bitmap value) {
+			if (value == null) {
+				return 0;
+			}
+			return value.getRowBytes() * value.getHeight() / 1024;
+		}
+	};
+
 	private String username;
 	private URL userImageURL;
 	private String text;
 	private URL imageURL;
-	private ConcurrentHashMap<String, Bitmap> cache;
 
 	public TwitterPhotoStreamItem(Status status) {
-		this.cache = new ConcurrentHashMap<String, Bitmap>();
-		
 		this.username = "@" + status.getUser().getScreenName();
 
 		try {
@@ -52,11 +60,14 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 			return null;
 		}
 
-		Bitmap bitmap = cache.get(imageURL.toString());
+		Bitmap bitmap = null;
+		synchronized (cache) {
+			bitmap = cache.get(imageURL.toString());
 
-		if (bitmap == null) {
-			bitmap = getBitmapFromURL(imageURL);
-			cache.put(imageURL.toString(), bitmap);
+			if (bitmap == null) {
+				bitmap = getBitmapFromURL(imageURL);
+				cache.put(imageURL.toString(), bitmap);
+			}
 		}
 
 		return bitmap;
@@ -73,11 +84,14 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 			return null;
 		}
 
-		Bitmap bitmap = cache.get(userImageURL.toString());
+		Bitmap bitmap = null;
+		synchronized (cache) {
+			bitmap = cache.get(userImageURL.toString());
 
-		if (bitmap == null) {
-			bitmap = getBitmapFromURL(userImageURL);
-			cache.put(userImageURL.toString(), bitmap);
+			if (bitmap == null) {
+				bitmap = getBitmapFromURL(userImageURL);
+				cache.put(userImageURL.toString(), bitmap);
+			}
 		}
 
 		return bitmap;
