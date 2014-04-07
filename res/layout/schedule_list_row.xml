@@ -18,9 +18,10 @@
             android:id="@+id/listview_item_row_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="@string/EmptyTextView"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/title"
             android:textStyle="bold" />
 
@@ -28,9 +29,11 @@
             android:id="@+id/listview_item_row_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:text="@string/EmptyTextView"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/title"
             android:textStyle="bold" />
 
@@ -42,7 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/relativeLayout2"
         android:layout_below="@+id/relativeLayout2"
-        android:text="@string/EmptyTextView" />
+        android:text="@string/EmptyTextView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/listview_item_row_description"

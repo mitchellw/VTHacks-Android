@@ -6,9 +6,10 @@ import android.os.Bundle;
 import com.vt.vthacks.model.IAwardList;
 import com.vt.vthacks.model.impl.AwardList;
 import com.vt.vthacks.view.AwardAdapter;
+import com.vt.vthacks.view.PullToRefreshListView;
+import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
 import android.app.Activity;
-import android.widget.ListView;
 
 // -------------------------------------------------------------------------
 /**
@@ -22,7 +23,7 @@ public class AwardsActivity
 {
 
 	private IAwardList awardList;
-	private ListView listView;
+	private PullToRefreshListView listView;
 
     // ----------------------------------------------------------
     /**
@@ -37,7 +38,14 @@ public class AwardsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.awards);
 
-		listView = (ListView) findViewById(R.id.awards_list_view);
+		listView = (PullToRefreshListView) findViewById(R.id.awards_list_view);
+		listView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				new AwardsTask().execute();
+			}
+		});
 		
 		new AwardsTask().execute();
     }
@@ -55,6 +63,7 @@ public class AwardsActivity
 			super.onPostExecute(result);
 			
 			listView.setAdapter(new AwardAdapter(AwardsActivity.this, awardList));
+			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 		
 	}

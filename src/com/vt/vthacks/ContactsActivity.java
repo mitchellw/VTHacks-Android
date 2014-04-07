@@ -4,8 +4,9 @@ package com.vt.vthacks;
 import com.vt.vthacks.model.ICompanyContactsList;
 import com.vt.vthacks.model.impl.CompanyContactsList;
 import com.vt.vthacks.view.CompanyContactsAdapter;
+import com.vt.vthacks.view.PullToRefreshListView;
+import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
-import android.widget.ListView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,7 +23,7 @@ extends Activity
 {
 
 	private ICompanyContactsList companyContactsList;
-	private ListView listView;
+	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
 	/**
@@ -37,7 +38,14 @@ extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contacts);
 
-		listView = (ListView) findViewById(R.id.contacts_list_view);
+		listView = (PullToRefreshListView) findViewById(R.id.contacts_list_view);
+		listView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				new ContactsTask().execute();
+			}
+		});
 		
 		new ContactsTask().execute();
 	}
@@ -55,6 +63,7 @@ extends Activity
 			super.onPostExecute(result);
 
 			listView.setAdapter(new CompanyContactsAdapter(ContactsActivity.this, companyContactsList));
+			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 
 	}

@@ -1,13 +1,9 @@
 package com.vt.vthacks.view;
 
-import java.util.Locale;
-import android.graphics.Typeface;
 import android.widget.RelativeLayout;
 import android.view.LayoutInflater;
 import java.util.List;
 import com.vt.vthacks.R;
-import com.vt.vthacks.R.id;
-import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IAward;
 import android.content.Context;
 import android.view.View;
@@ -63,7 +59,7 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
         holder.titleTextView.setText(item.getTitle());
         holder.descripTextView.setText(item.getDescription());
         holder.prizeTextView.setText(item.getPrize());
-        holder.prizeTextView.setTypeface(null , Typeface.BOLD);
+        holder.companyTextView.setText(item.getCompany());
 
 
 		return holder.rootView;
@@ -84,6 +80,7 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
         public final TextView titleTextView;
         public final TextView descripTextView;
         public final TextView prizeTextView;
+        public final TextView companyTextView;
 
 
         /**
@@ -96,11 +93,12 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
          */
         private AwardItemViewHolder(RelativeLayout rootView,
             TextView titleTextView, TextView descripTextView ,
-            TextView prizeTextView) {
+            TextView prizeTextView, TextView companyTextView) {
             this.rootView = rootView;
             this.titleTextView = titleTextView;
             this.descripTextView = descripTextView;
             this.prizeTextView = prizeTextView;
+            this.companyTextView = companyTextView;
         }
 
         /**
@@ -114,7 +112,8 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
             TextView titleTextView = (TextView)rootView.findViewById(R.id.award_title);
             TextView prizeTextView = (TextView)rootView.findViewById(R.id.award_prize);
             TextView descripTextView = (TextView)rootView.findViewById(R.id.award_description);
-            return new AwardItemViewHolder(rootView, titleTextView, prizeTextView, descripTextView);
+            TextView companyTextView = (TextView)rootView.findViewById(R.id.award_company);
+            return new AwardItemViewHolder(rootView, titleTextView, descripTextView, prizeTextView, companyTextView);
         }
     }
 }
