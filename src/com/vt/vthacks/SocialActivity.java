@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -35,10 +36,12 @@ extends Activity
 {
 
 	private static final String TAG = "SocialActivity";
+	private static final String QUERY = "filter:images +exclude:retweets #ratchet";
 	private ListView listView;
 	private Twitter twitter;
 	private View previewHolder;
 	private ImageView imageView;
+	private QueryResult lastResult;
 
 	// ----------------------------------------------------------
 	/**
@@ -56,7 +59,7 @@ extends Activity
 		listView = (ListView) findViewById(R.id.listView);
 		previewHolder = findViewById(R.id.previewBox);
 		imageView = (ImageView) findViewById(R.id.fullImageView);
-		
+
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true);
 		TwitterFactory tf = new TwitterFactory(cb.build());
@@ -69,19 +72,29 @@ extends Activity
 
 		@Override
 		protected List<IPhotoStreamItem> doInBackground(Void... arg0) {
-			Query query = new Query("filter:images +exclude:retweets #ratchet");
-			QueryResult result = null;
+			Query query = null;
+			if (lastResult == null) {
+				query = new Query(QUERY);
+			}
+			else {
+				query = lastResult.nextQuery();
+			}
+
+			List<IPhotoStreamItem> photoStream = new ArrayList<IPhotoStreamItem>();
 			try {
-				result = twitter.search(query);
+				lastResult = twitter.search(query);
 			}
 			catch (TwitterException e) {
-				e.printStackTrace();
+				Log.d(TAG, "Problem searching for tweets.");
+				return photoStream;
 			}
-			
-			List<IPhotoStreamItem> photoStream = new ArrayList<IPhotoStreamItem>();
-			if (result != null) {
-				for (twitter4j.Status status : result.getTweets()) {
-					photoStream.add(new TwitterPhotoStreamItem(status));
+
+			if (lastResult != null) {
+				List<twitter4j.Status> statuses = lastResult.getTweets();
+				if (statuses != null) {
+					for (twitter4j.Status status : statuses) {
+						photoStream.add(new TwitterPhotoStreamItem(status));
+					}
 				}
 			}
 
@@ -93,7 +106,7 @@ extends Activity
 			super.onPostExecute(photoStream);
 
 			listView.setAdapter(new PhotoStreamAdapter(SocialActivity.this, photoStream, new OnImageClickListener() {
-				
+
 				@Override
 				public void onImageClicked(Bitmap bitmap) {
 					imageView.setImageBitmap(bitmap);
