@@ -1,12 +1,9 @@
 package com.vt.vthacks.view;
 
-import android.graphics.Typeface;
 import android.widget.RelativeLayout;
 import android.view.LayoutInflater;
 import java.util.List;
 import com.vt.vthacks.R;
-import com.vt.vthacks.R.id;
-import com.vt.vthacks.R.layout;
 import com.vt.vthacks.model.IScheduleItem;
 import android.content.Context;
 import android.view.View;
@@ -57,7 +54,6 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
             holder = (ScheduleItemViewHolder)convertView.getTag();
         }
         holder.titleTextView.setText(item.getTitle());
-        holder.titleTextView.setTypeface(null , Typeface.BOLD);
         holder.dayTextView.setText(item.getDay());
         holder.timeTextView.setText(item.getTime());
         holder.descripTextview.setText(item.getDescription());

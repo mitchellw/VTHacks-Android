@@ -200,10 +200,9 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 			mRefreshState = RefreshState.TAP_TO_REFRESH;
 
 			resetHeaderPadding();
-
-			// Clear the full rotation animation
-			refreshAnimationDrawable.stop();
 		}
+
+		refreshAnimationDrawable.stop();
 	}
 
 	@Override

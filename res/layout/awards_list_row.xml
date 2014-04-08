@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="10dp" >
 
-    <LinearLayout
-        android:id="@+id/award_company_layout"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/award_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/title_underline"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/award_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/EmptyTextView" />
-
-    </LinearLayout>
+        android:text="@string/EmptyTextView"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/title"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/award_prize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/award_company_layout"
-        android:text="@string/EmptyTextView" />
+        android:layout_below="@+id/award_title"
+        android:text="@string/EmptyTextView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/award_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/award_prize"
-        android:layout_alignBottom="@+id/award_prize"
         android:layout_alignParentRight="true"
-        android:text="Company title" />
+        android:layout_below="@+id/award_title"
+        android:text="@string/EmptyTextView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/award_description"

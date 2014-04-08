@@ -1,11 +1,10 @@
 package com.vt.vthacks.view;
 
-import android.graphics.Typeface;
-import android.widget.ImageButton;
 import com.vt.vthacks.R;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import java.util.List;
@@ -69,19 +68,18 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
             TextView cName = (TextView)ref.findViewById(R.id.contact_name);
             cName.setText(contact.getName());
-            cName.setTypeface(null , Typeface.BOLD);
 
             TextView cSkills = (TextView)ref.findViewById(R.id.contact_skills);
             String skills = contact.getSkills().toString();
-            skills = skills.replace("[", " ");
-            skills = skills.replace("]", " ");
+            skills = skills.replace("[", "");
+            skills = skills.replace("]", "");
             cSkills.setText(skills);
 
             LinearLayout cLay = (LinearLayout)ref.findViewById(R.id.contact_linear_layout);
 
             for(IContactMethod method : contact.getContactMethods())
             {
-                ImageButton button = new ImageButton(context);
+                ImageView button = new ImageView(context);
 
                 switch(method.getType()) {
                     case EMAIL:

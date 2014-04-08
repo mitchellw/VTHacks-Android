@@ -1,13 +1,13 @@
 package com.vt.vthacks;
 
-
 import android.util.Log;
-import android.widget.ListView;
 
 import com.vt.vthacks.model.IAnnouncement;
 import com.vt.vthacks.model.IAnnouncementList;
 import com.vt.vthacks.model.impl.Announcement;
 import com.vt.vthacks.model.impl.AnnouncementList;
+import com.vt.vthacks.view.PullToRefreshListView;
+import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
 import android.widget.ArrayAdapter;
 import android.app.Activity;
@@ -36,7 +36,7 @@ extends Activity
 	/**
 	 * Holds the List View in the announcement activity
 	 */
-	private ListView listView;
+	private PullToRefreshListView listView;
 	private ArrayAdapter<IAnnouncement> adapter;
 	private IAnnouncementList announcementList;
 	private ServiceConnection serviceConnection;
@@ -56,7 +56,14 @@ extends Activity
 
 
 		//tests a basic ArrayAdaptor
-		listView = (ListView) findViewById(R.id.announce_list);
+		listView = (PullToRefreshListView) findViewById(R.id.announce_list);
+		listView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				new GetAnnouncementsTask().execute();
+			}
+		});
 
 		new Thread(new GetGcmIdRunnable(this, 1024)).start();
 		serviceConnection = new PushNotificationServiceConnection();
@@ -93,6 +100,7 @@ extends Activity
 			super.onPostExecute(result);
 			adapter = new ArrayAdapter<IAnnouncement>(AnnouncementsActivity.this, android.R.layout.simple_list_item_1, announcementList);
 			listView.setAdapter(adapter);
+			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 	}
 

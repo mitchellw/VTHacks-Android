@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
+    <com.vt.vthacks.view.PullToRefreshListView
         android:id="@+id/announce_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ListView>
+    </com.vt.vthacks.view.PullToRefreshListView>
 
 </LinearLayout>

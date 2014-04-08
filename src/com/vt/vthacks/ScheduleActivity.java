@@ -1,20 +1,14 @@
 package com.vt.vthacks;
 
-
-import java.io.IOException;
-import org.json.JSONException;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import com.vt.vthacks.model.IScheduleList;
 import com.vt.vthacks.model.impl.ScheduleList;
+import com.vt.vthacks.view.PullToRefreshListView;
+import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 import com.vt.vthacks.view.ScheduleAdapter;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 // -------------------------------------------------------------------------
 /**
@@ -28,7 +22,7 @@ extends Activity
 {
 
 	private IScheduleList scheduleList;
-	private ListView listView;
+	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
 	/**
@@ -43,7 +37,14 @@ extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.schedule);
 
-		listView = (ListView) findViewById(R.id.schedule_list_view);
+		listView = (PullToRefreshListView) findViewById(R.id.schedule_list_view);
+		listView.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				new ScheduleTask().execute();
+			}
+		});
 		
 		new ScheduleTask().execute();
 	}
@@ -61,6 +62,7 @@ extends Activity
 			super.onPostExecute(result);
 
 			listView.setAdapter(new ScheduleAdapter(ScheduleActivity.this, scheduleList));
+			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 
 	}
