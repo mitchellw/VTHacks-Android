@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/calender_res"
+            android:drawableTop="@drawable/calendar_res"
             android:gravity="center_horizontal"
             android:text="@string/label_schedule" />
 
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/chat_res"
+            android:drawableTop="@drawable/group_res"
             android:gravity="center_horizontal"
             android:text="@string/label_chat" />
     </LinearLayout>
@@ -97,7 +97,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/social_res"
+            android:drawableTop="@drawable/images_res"
             android:gravity="center_horizontal"
             android:text="@string/label_photos" />
 
