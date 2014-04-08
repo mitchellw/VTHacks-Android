@@ -73,11 +73,7 @@ extends Activity
 		imageView = (ImageView) findViewById(R.id.fullImageView);
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true)
-			.setOAuthAccessToken("2223874693-SzghHa5z89Z7OsRVzlH5UU81S3iUeDiYVc97nI2")
-			.setOAuthAccessTokenSecret("3655dLayv0P3O3nuv4mbDW5gCcKgB88idjE7bsHRzAR1k")
-			.setOAuthConsumerKey("x67fmNt2gU10LsONiwfPz5iXD")
-			.setOAuthConsumerSecret("2Fc48Sl5UwHfWNQx2liCXiE9T0QTswtBG5iTP6JbCwOuCs8e59");
+		cb.setDebugEnabled(true);
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		twitter = tf.getInstance();
 
