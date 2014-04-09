@@ -1,5 +1,6 @@
 package com.vt.vthacks.view;
 
+import android.content.Intent;
 import com.vt.vthacks.R;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
@@ -75,13 +76,26 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
             LinearLayout cLay = (LinearLayout)ref.findViewById(R.id.contact_linear_layout);
 
-            for(IContactMethod method : contact.getContactMethods())
+            for(final IContactMethod method : contact.getContactMethods())
             {
                 ImageView button = new ImageView(getContext());
 
                 switch(method.getType()) {
                     case EMAIL:
                         button.setImageResource(R.drawable.email_res);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0)
+                            {
+                                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                                emailIntent.setType("plain/text");
+                                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{method.getName()});
+                                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "VTHacks help needed!");
+                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hello ,\n\n\t");
+                                getContext().startActivity(Intent.createChooser(emailIntent, "Send Email with.."));
+
+                            }
+                        });
                         break;
                     case PHONE:
                         button.setImageResource(R.drawable.message_res);
