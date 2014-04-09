@@ -99,6 +99,18 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
                         break;
                     case PHONE:
                         button.setImageResource(R.drawable.message_res);
+                        button.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v)
+                            {
+                                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                                smsIntent.setType("vnd.android-dir/mms-sms");
+                                smsIntent.putExtra("address", method.getName());
+                                getContext().startActivity(smsIntent);
+
+                            }
+                        });
                         break;
                     case TWITTER:
                         button.setImageResource(R.drawable.tweet_res);
