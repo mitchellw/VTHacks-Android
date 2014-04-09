@@ -19,52 +19,58 @@ import android.app.Activity;
  * @version Mar 10, 2014
  */
 public class AwardsActivity
-    extends Activity
+extends Activity
 {
 
-	private IAwardList awardList;
+	private AwardAdapter adapter;
 	private PullToRefreshListView listView;
 
-    // ----------------------------------------------------------
-    /**
-     * Sets up the awards page
-     *
-     * @param savedInstanceState
-     *            is data that was most recently supplied
-     */
+	// ----------------------------------------------------------
+	/**
+	 * Sets up the awards page
+	 *
+	 * @param savedInstanceState
+	 *            is data that was most recently supplied
+	 */
 	@Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.awards);
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.awards);
 
 		listView = (PullToRefreshListView) findViewById(R.id.awards_list_view);
 		listView.setOnRefreshListener(new OnRefreshListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				new AwardsTask().execute();
 			}
 		});
-		
-		new AwardsTask().execute();
-    }
-	
-	private class AwardsTask extends AsyncTask<Void, Void, Void> {
+		adapter = new AwardAdapter(this, new AwardList(null));
+		listView.setAdapter(adapter);
+
+		listView.onRefresh();
+	}
+
+	private class AwardsTask extends AsyncTask<Void, Void, IAwardList> {
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
-			awardList = AwardList.fromServer();
-			return null;
+		protected IAwardList doInBackground(Void... arg0) {
+			return AwardList.fromServer();
 		}
-		
+
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(IAwardList result) {
 			super.onPostExecute(result);
-			
-			listView.setAdapter(new AwardAdapter(AwardsActivity.this, awardList));
+
+			if (result != null) {
+				adapter.clear();
+				adapter.addAll(result);
+				adapter.notifyDataSetChanged();
+			}
+
 			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
-		
+
 	}
 }

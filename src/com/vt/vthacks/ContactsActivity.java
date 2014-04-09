@@ -22,7 +22,7 @@ public class ContactsActivity
 extends Activity
 {
 
-	private ICompanyContactsList companyContactsList;
+	private CompanyContactsAdapter adapter;
 	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
@@ -46,23 +46,29 @@ extends Activity
 				new ContactsTask().execute();
 			}
 		});
+		adapter = new CompanyContactsAdapter(this, new CompanyContactsList(null));
+		listView.setAdapter(adapter);
 		
-		new ContactsTask().execute();
+		listView.onRefresh();
 	}
 
-	private class ContactsTask extends AsyncTask<Void, Void, Void> {
+	private class ContactsTask extends AsyncTask<Void, Void, ICompanyContactsList> {
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
-			companyContactsList = CompanyContactsList.fromServer();
-			return null;
+		protected ICompanyContactsList doInBackground(Void... arg0) {
+			return CompanyContactsList.fromServer();
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(ICompanyContactsList result) {
 			super.onPostExecute(result);
 
-			listView.setAdapter(new CompanyContactsAdapter(ContactsActivity.this, companyContactsList));
+			if (result != null) {
+				adapter.clear();
+				adapter.addAll(result);
+				adapter.notifyDataSetChanged();
+			}
+
 			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 

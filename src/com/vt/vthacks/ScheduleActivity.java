@@ -21,7 +21,7 @@ public class ScheduleActivity
 extends Activity
 {
 
-	private IScheduleList scheduleList;
+	private ScheduleAdapter adapter;
 	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
@@ -45,23 +45,29 @@ extends Activity
 				new ScheduleTask().execute();
 			}
 		});
+		adapter = new ScheduleAdapter(this, new ScheduleList(null));
+		listView.setAdapter(adapter);
 		
-		new ScheduleTask().execute();
+		listView.onRefresh();
 	}
 
-	private class ScheduleTask extends AsyncTask<Void, Void, Void> {
+	private class ScheduleTask extends AsyncTask<Void, Void, IScheduleList> {
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
-			scheduleList = ScheduleList.fromServer();
-			return null;
+		protected IScheduleList doInBackground(Void... arg0) {
+			return ScheduleList.fromServer();
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(IScheduleList result) {
 			super.onPostExecute(result);
 
-			listView.setAdapter(new ScheduleAdapter(ScheduleActivity.this, scheduleList));
+			if (result != null) {
+				adapter.clear();
+				adapter.addAll(result);
+				adapter.notifyDataSetChanged();
+			}
+
 			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 

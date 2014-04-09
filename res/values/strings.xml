@@ -21,5 +21,9 @@
 <string android:id="@+id/social_descrip" android:layout_width="wrap_content" android:layout_height="wrap_content" name="social_desciption">When clicked, the social activity will begin </string>
 <string android:id="@+id/string1" android:layout_width="wrap_content" android:layout_height="wrap_content" name="EmptyTextView">EmptyTextView</string>
 <string name="refreshed_at">Refreshed at</string>
+<string name="tap_to_refresh">Tap to Refresh</string>
+<string name="pull_to_refresh">Pull to Refresh</string>
+<string name="release_to_refresh">Release to Refresh</string>
+<string name="refreshing">Refreshing...</string>
 
 </resources>

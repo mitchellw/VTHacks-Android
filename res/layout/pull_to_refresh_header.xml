@@ -13,19 +13,31 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:adjustViewBounds="true"
-        android:src="@drawable/hokiehorse_0" />
+        android:src="@drawable/hokiehorse_0"
+        android:background="@color/background" />
 
     <TextView
         android:id="@+id/pull_to_refresh_updated_at"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dip"
-        android:layout_below="@+id/pull_to_refresh_image"
+        android:layout_below="@+id/pull_to_refresh_label"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/refreshed_at"
-        android:textColor="@color/title"
+        android:textColor="@color/title" />
+
+    <TextView
+        android:id="@+id/pull_to_refresh_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dip"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_below="@+id/pull_to_refresh_image"
+        android:text="@string/tap_to_refresh"
         android:textStyle="bold" />
 
 </RelativeLayout>
