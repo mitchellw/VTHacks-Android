@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.view.View;
 import java.util.List;
 import android.view.LayoutInflater;
-import java.util.ArrayList;
 import android.content.Context;
 import com.vt.vthacks.model.IAnnouncement;
 import android.widget.ArrayAdapter;
@@ -24,26 +23,18 @@ import android.widget.ArrayAdapter;
 public class AnnouncementAdapter extends ArrayAdapter<IAnnouncement>
 {
 
-    private Context mContext;
     private LayoutInflater mInflater;
-
-
 
     // ----------------------------------------------------------
     /**
      * Create a new AnnouncementAdapter object.
      * @param context
-     * @param resource
      * @param objects
      */
-    public AnnouncementAdapter(
-        Context context,
-        int resource,
-        List<IAnnouncement> objects)
+    public AnnouncementAdapter(Context context, List<IAnnouncement> objects)
     {
-        super(context, resource, objects);
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(this.mContext);
+        super(context, 0, objects);
+        this.mInflater = LayoutInflater.from(context);
     }
 
 

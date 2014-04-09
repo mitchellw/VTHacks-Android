@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 public class NavigationAdapter extends ArrayAdapter<TextView>
 {
 
-    private Context context;
     private LayoutInflater mInflater;
 
 
@@ -33,8 +32,7 @@ public class NavigationAdapter extends ArrayAdapter<TextView>
     public NavigationAdapter(Context context , List<TextView> listItems)
     {
         super(context, 0, listItems);
-        this.context = context;
-        this.mInflater = LayoutInflater.from(this.context);
+        this.mInflater = LayoutInflater.from(context);
     }
 
 

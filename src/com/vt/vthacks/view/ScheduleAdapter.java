@@ -21,8 +21,8 @@ import android.widget.TextView;
  */
 public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 
-	private Context context;
 	private LayoutInflater mInflater;
+
 	// ----------------------------------------------------------
 	/**
 	 * Create a new ScheduleAdapter object.
@@ -31,8 +31,7 @@ public class ScheduleAdapter extends ArrayAdapter<IScheduleItem> {
 	 */
 	public ScheduleAdapter(Context context, List<IScheduleItem> listItems) {
 		super(context, 0, listItems);
-		this.context = context;
-		this.mInflater = LayoutInflater.from(this.context);
+		this.mInflater = LayoutInflater.from(context);
 	}
 
 

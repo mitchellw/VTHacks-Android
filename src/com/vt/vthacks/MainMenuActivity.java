@@ -1,7 +1,6 @@
 package com.vt.vthacks;
 
 import android.support.v7.app.ActionBarActivity;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
@@ -26,7 +25,6 @@ public class MainMenuActivity
     private View mAwardsImage;
     private View mContactsImage;
     private View mSocialImage;
-    private android.app.ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

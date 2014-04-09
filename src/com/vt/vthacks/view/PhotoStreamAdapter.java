@@ -21,13 +21,11 @@ import android.widget.TextView;
 
 public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
 
-	private Context context;
 	private LayoutInflater mInflater;
 	private OnImageClickListener clickListener;
 
 	public PhotoStreamAdapter(Context context, List<IPhotoStreamItem> listItems, OnImageClickListener clickListener) {
 		super(context, 0, listItems);
-		this.context = context;
 		this.clickListener = clickListener;
 		mInflater = LayoutInflater.from(context);
 	}

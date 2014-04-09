@@ -26,7 +26,6 @@ import android.widget.TextView;
  */
 public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
-	private Context context;
 	private LayoutInflater mInflater;
 
 	// ----------------------------------------------------------
@@ -37,7 +36,6 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 	 */
 	public CompanyContactsAdapter(Context context, List<ICompany> listItems) {
 		super(context, 0, listItems);
-		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 	}
 
@@ -79,7 +77,7 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 
             for(IContactMethod method : contact.getContactMethods())
             {
-                ImageView button = new ImageView(context);
+                ImageView button = new ImageView(getContext());
 
                 switch(method.getType()) {
                     case EMAIL:

@@ -55,5 +55,4 @@ public class AnnouncementList extends ArrayList<IAnnouncement> implements IAnnou
 
 		return list;
 	}
-
 }

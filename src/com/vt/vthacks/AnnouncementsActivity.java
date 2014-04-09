@@ -62,7 +62,7 @@ extends Activity
 				new GetAnnouncementsTask().execute();
 			}
 		});
-		adapter = new AnnouncementAdapter(this, android.R.layout.simple_list_item_1, new AnnouncementList());
+		adapter = new AnnouncementAdapter(this, new AnnouncementList());
 		listView.setAdapter(adapter);
 
 		new Thread(new GetGcmIdRunnable(this, 1024)).start();

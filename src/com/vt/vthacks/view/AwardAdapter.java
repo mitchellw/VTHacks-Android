@@ -20,7 +20,6 @@ import android.widget.TextView;
  */
 public class AwardAdapter extends ArrayAdapter<IAward> {
 
-	private Context context;
 	private LayoutInflater mInflater;
 
 	// ----------------------------------------------------------
@@ -31,8 +30,7 @@ public class AwardAdapter extends ArrayAdapter<IAward> {
 	 */
 	public AwardAdapter(Context context, List<IAward> listItems) {
 		super(context, 0, listItems);
-		this.context = context;
-		this.mInflater = LayoutInflater.from(this.context);
+		this.mInflater = LayoutInflater.from(context);
 	}
 
     @Override
