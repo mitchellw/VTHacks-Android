@@ -55,4 +55,24 @@ public class AnnouncementList extends ArrayList<IAnnouncement> implements IAnnou
 
 		return list;
 	}
+
+
+
+	public static IAnnouncementList getTempList()
+	{
+	    IAnnouncementList list = new AnnouncementList();
+	    Announcement test1 = new Announcement("Announcement One" , "DescripOne", "5:15");
+	    Announcement test2 = new Announcement("Announcement Two" , "DescripTwo", "5:30");
+	    Announcement test3 = new Announcement("Announcement Three" , "DescripThree", "5:45");
+	    Announcement test4 = new Announcement("Announcement Four" , "DescripFour", "6:00");
+	    Announcement test5 = new Announcement("Announcement Five" , "DescripFive", "6:15");
+
+	    list.add(test1);
+	    list.add(test2);
+	    list.add(test3);
+	    list.add(test4);
+	    list.add(test5);
+        return list;
+
+	}
 }

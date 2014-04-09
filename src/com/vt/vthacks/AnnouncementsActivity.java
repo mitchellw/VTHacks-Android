@@ -58,7 +58,7 @@ extends Activity
 		//tests a basic ArrayAdaptor
 		listView = (PullToRefreshListView) findViewById(R.id.announce_list);
 		listView.setOnRefreshListener(new OnRefreshListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				new GetAnnouncementsTask().execute();
@@ -91,7 +91,8 @@ extends Activity
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			announcementList = AnnouncementList.fromSQS(AnnouncementsActivity.this);
+//			announcementList = AnnouncementList.fromSQS(AnnouncementsActivity.this);
+		    announcementList = AnnouncementList.getTempList();
 			return null;
 		}
 
