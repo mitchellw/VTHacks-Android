@@ -91,8 +91,7 @@ extends Activity
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
-//			announcementList = AnnouncementList.fromSQS(AnnouncementsActivity.this);
-		    announcementList = AnnouncementList.getTempList();
+			announcementList = AnnouncementList.fromSQS(AnnouncementsActivity.this);
 			return null;
 		}
 

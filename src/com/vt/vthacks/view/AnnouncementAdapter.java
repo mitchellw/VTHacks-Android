@@ -91,7 +91,7 @@ public class AnnouncementAdapter extends ArrayAdapter<IAnnouncement>
 
 
         /**
-         *
+         * Creates an AnnouncementItemViewHolder object
          */
         private AnnouncementItemViewHolder(RelativeLayout rootView,
             TextView titleTextView, TextView descripTextView ,
@@ -103,8 +103,11 @@ public class AnnouncementAdapter extends ArrayAdapter<IAnnouncement>
         }
 
         /**
+         *  Returns  a new AnnouncementItemViewHolder
+         *
          * @param rootView
-         * @return
+         *
+         * @return new AnnouncementItemViewHolder object
          *
          */
         public static AnnouncementItemViewHolder create(RelativeLayout rootView) {
