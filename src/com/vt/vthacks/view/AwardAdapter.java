@@ -19,7 +19,6 @@ import android.widget.TextView;
  *  @version Mar 22, 2014
  */
 public class AwardAdapter extends ArrayAdapter<IAward> {
-    //TODO GET COMPANY NAMES IN HERE
 
 	private Context context;
 	private LayoutInflater mInflater;

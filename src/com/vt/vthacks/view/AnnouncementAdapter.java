@@ -1,5 +1,6 @@
 package com.vt.vthacks.view;
 
+import android.view.LayoutInflater;
 import java.util.ArrayList;
 import android.content.Context;
 import com.vt.vthacks.model.IAnnouncement;
@@ -17,10 +18,9 @@ import android.widget.ArrayAdapter;
 public class AnnouncementAdapter extends ArrayAdapter<IAnnouncement>
 {
 
-    //Holds the current context
-    Context mContext;
-    //Holds the data for the current Adapter
-    ArrayList <IAnnouncement> mDataList;
+    private Context mContext;
+    private LayoutInflater mInflater;
+
 
 
     // ----------------------------------------------------------
@@ -37,7 +37,6 @@ public class AnnouncementAdapter extends ArrayAdapter<IAnnouncement>
     {
         super(context, resource, objects);
         this.mContext = context;
-        this.mDataList = objects;
         // TODO Auto-generated constructor stub
     }
 
