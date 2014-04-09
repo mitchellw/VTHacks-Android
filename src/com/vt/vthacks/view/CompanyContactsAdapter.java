@@ -1,5 +1,6 @@
 package com.vt.vthacks.view;
 
+import android.net.Uri;
 import android.content.Intent;
 import com.vt.vthacks.R;
 import com.vt.vthacks.model.IContactMethod;
@@ -114,6 +115,17 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
                         break;
                     case TWITTER:
                         button.setImageResource(R.drawable.tweet_res);
+                        button.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v)
+                            {
+                                Intent tweetIntent = new Intent(Intent.ACTION_VIEW);
+                                tweetIntent.setData(Uri.parse("https://twitter.com/intent/tweet?source=webclient&text="
+                                + Uri.encode(method.getName())));
+                                getContext().startActivity(tweetIntent);
+                            }
+                        });
                         break;
                     default:
                         break;
