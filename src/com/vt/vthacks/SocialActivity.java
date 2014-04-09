@@ -94,7 +94,7 @@ extends Activity
 		});
 		listView.setAdapter(adapter);
 
-		new TwitterTask().execute();
+		listView.onRefresh();
 	}
 
 	private void resetList() {

@@ -2,14 +2,13 @@ package com.vt.vthacks;
 
 import android.util.Log;
 
-import com.vt.vthacks.model.IAnnouncement;
 import com.vt.vthacks.model.IAnnouncementList;
 import com.vt.vthacks.model.impl.Announcement;
 import com.vt.vthacks.model.impl.AnnouncementList;
+import com.vt.vthacks.view.AnnouncementAdapter;
 import com.vt.vthacks.view.PullToRefreshListView;
 import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
-import android.widget.ArrayAdapter;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,8 +36,7 @@ extends Activity
 	 * Holds the List View in the announcement activity
 	 */
 	private PullToRefreshListView listView;
-	private ArrayAdapter<IAnnouncement> adapter;
-	private IAnnouncementList announcementList;
+	private AnnouncementAdapter adapter;
 	private ServiceConnection serviceConnection;
 
 
@@ -64,11 +62,13 @@ extends Activity
 				new GetAnnouncementsTask().execute();
 			}
 		});
+		adapter = new AnnouncementAdapter(this, android.R.layout.simple_list_item_1, new AnnouncementList());
+		listView.setAdapter(adapter);
 
 		new Thread(new GetGcmIdRunnable(this, 1024)).start();
 		serviceConnection = new PushNotificationServiceConnection();
 
-		new GetAnnouncementsTask().execute();
+		listView.onRefresh();
 	}
 
 	@Override
@@ -87,19 +87,22 @@ extends Activity
 		unbindService(serviceConnection);
 	}
 
-	private class GetAnnouncementsTask extends AsyncTask<Void, Void, Void> {
+	private class GetAnnouncementsTask extends AsyncTask<Void, Void, IAnnouncementList> {
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
-			announcementList = AnnouncementList.fromSQS(AnnouncementsActivity.this);
-			return null;
+		protected IAnnouncementList doInBackground(Void... arg0) {
+			return AnnouncementList.fromSQS(AnnouncementsActivity.this);
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(IAnnouncementList result) {
 			super.onPostExecute(result);
-			adapter = new ArrayAdapter<IAnnouncement>(AnnouncementsActivity.this, android.R.layout.simple_list_item_1, announcementList);
-			listView.setAdapter(adapter);
+			if (result != null) {
+				adapter.clear();
+				adapter.addAll(result);
+				adapter.notifyDataSetChanged();
+			}
+
 			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
 		}
 	}

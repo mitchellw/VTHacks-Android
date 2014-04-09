@@ -45,6 +45,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 	private RelativeLayout mRefreshView;
 	private ImageView mRefreshViewImage;
 	private TextView mRefreshViewLastUpdated;
+	private TextView mRefreshViewLabel;
 	private AnimationDrawable refreshAnimationDrawable;
 
 	private int mCurrentScrollState;
@@ -81,6 +82,8 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 				(ImageView) mRefreshView.findViewById(R.id.pull_to_refresh_image);
 		mRefreshViewLastUpdated =
 				(TextView) mRefreshView.findViewById(R.id.pull_to_refresh_updated_at);
+		mRefreshViewLabel =
+				(TextView) mRefreshView.findViewById(R.id.pull_to_refresh_label);
 
 		mRefreshViewImage.setImageResource(R.drawable.list_refresh_anim);
 		refreshAnimationDrawable = (AnimationDrawable) mRefreshViewImage.getDrawable();
@@ -88,7 +91,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 		mRefreshView.setOnClickListener(new OnClickRefreshListener());
 		mRefreshOriginalTopPadding = mRefreshView.getPaddingTop();
 
-		mRefreshState = RefreshState.TAP_TO_REFRESH;
+		setRefreshState(RefreshState.TAP_TO_REFRESH);
 		scrollToBottomState = ScrollToBottomState.SCROLL_TO_ACTIVATE;
 
 		addHeaderView(mRefreshView);
@@ -158,8 +161,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 				if ((mRefreshView.getTop() >= 0)
 						&& mRefreshState == RefreshState.RELEASE_TO_REFRESH) {
 					// Initiate the refresh
-					mRefreshState = RefreshState.REFRESHING;
-					prepareForRefresh();
+					setRefreshState(RefreshState.REFRESHING);
 					onRefresh();
 				} else if (mRefreshView.getTop() <= 0) {
 					// Abort refresh and scroll down below the refresh view
@@ -197,12 +199,33 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 	 */
 	private void resetHeader() {
 		if (mRefreshState != RefreshState.TAP_TO_REFRESH) {
-			mRefreshState = RefreshState.TAP_TO_REFRESH;
+			setRefreshState(RefreshState.TAP_TO_REFRESH);
 
 			resetHeaderPadding();
 		}
 
 		refreshAnimationDrawable.stop();
+	}
+	
+	private void setRefreshState(RefreshState state) {
+		mRefreshState = state;
+
+		switch (state) {
+		case PULL_TO_REFRESH:
+			mRefreshViewLabel.setText(R.string.pull_to_refresh);
+			break;
+		case REFRESHING:
+			mRefreshViewLabel.setText(R.string.refreshing);
+			break;
+		case RELEASE_TO_REFRESH:
+			mRefreshViewLabel.setText(R.string.release_to_refresh);
+			break;
+		case TAP_TO_REFRESH:
+			mRefreshViewLabel.setText(R.string.tap_to_refresh);
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -216,13 +239,13 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 				if ((mRefreshView.getTop() >= 0)
 						&& mRefreshState != RefreshState.RELEASE_TO_REFRESH) {
 					refreshAnimationDrawable.start();
-					mRefreshState = RefreshState.RELEASE_TO_REFRESH;
+					setRefreshState(RefreshState.RELEASE_TO_REFRESH);
 				} else if (mRefreshView.getTop() < 0
 						&& mRefreshState != RefreshState.PULL_TO_REFRESH) {
 					if (mRefreshState != RefreshState.TAP_TO_REFRESH) {
 						refreshAnimationDrawable.stop();
 					}
-					mRefreshState = RefreshState.PULL_TO_REFRESH;
+					setRefreshState(RefreshState.PULL_TO_REFRESH);
 				}
 			} else {
 				resetHeader();
@@ -263,16 +286,16 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 		}
 	}
 
-	public void prepareForRefresh() {
+	private void prepareForRefresh() {
 		resetHeaderPadding();
 
 		refreshAnimationDrawable.start();
 
-		mRefreshState = RefreshState.REFRESHING;
+		setRefreshState(RefreshState.REFRESHING);
 	}
 
 	public void onRefresh() {
-		Log.d(TAG, "onRefresh");
+		prepareForRefresh();
 
 		if (mOnRefreshListener != null) {
 			mOnRefreshListener.onRefresh();
@@ -325,7 +348,6 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 		@Override
 		public void onClick(View v) {
 			if (mRefreshState != RefreshState.REFRESHING) {
-				prepareForRefresh();
 				onRefresh();
 			}
 		}
