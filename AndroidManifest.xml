@@ -34,9 +34,11 @@
         android:label="@string/app_name"
         android:theme="@style/VTTheme" >
         <activity
-            android:name="com.vt.vthacks.MainMenuActivity"
+            android:name=".SplashScreenActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:noHistory="true"
+            android:theme="@style/SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,6 +59,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ContactsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainMenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
