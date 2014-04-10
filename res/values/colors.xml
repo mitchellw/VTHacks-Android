@@ -3,4 +3,5 @@
     <color name="background">#990134</color>
     <color name="title">#990134</color>
     <color name="accent">#FE9900</color>
+    <color name="faded">#999999</color>
 </resources>

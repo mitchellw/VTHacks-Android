@@ -34,7 +34,7 @@
         android:label="@string/app_name"
         android:theme="@style/VTTheme" >
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.vt.vthacks.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:noHistory="true"

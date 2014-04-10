@@ -1,12 +1,42 @@
 package com.vt.vthacks.model.impl;
 
+import org.json.JSONObject;
+
 import com.vt.vthacks.model.IAnnouncement;
 
 public class Announcement implements IAnnouncement {
+	private static final String DESCRIPTION = "Message";
+	private static final String TITLE = "Subject";
+	private static final String TIME = "Timestamp";
 	
 	private String title;
 	private String description;
 	private String time;
+	
+	public Announcement(JSONObject root) {
+		if (root == null) {
+			return;
+		}
+		// Set the schedule item's description or fail if it doesn't exist.
+		description = root.optString(DESCRIPTION, null);
+		if (description == null) {
+			return;
+		}
+
+
+		// Set the schedule item's title or fail if it doesn't exist.
+		title = root.optString(TITLE, null);
+		if (title == null) {
+			return;
+		}
+
+
+		// Set the schedule item's prize or fail if it doesn't exist.
+		time = root.optString(TIME, null);
+		if (time == null) {
+			return;
+		}
+	}
 	
 	public Announcement(String title, String description, String time) {
 		this.title = title;

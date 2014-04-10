@@ -3,6 +3,9 @@ package com.vt.vthacks.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -49,7 +52,11 @@ public class AnnouncementList extends ArrayList<IAnnouncement> implements IAnnou
 		while ((receiveMessageResult = client.receiveMessage(receiveMessageRequest)) != null && receiveMessageResult.getMessages().size() > 0) {
 			List<Message> messages = receiveMessageResult.getMessages();
 			for (Message message : messages) {
-				list.add(new Announcement(message.getBody(), message.getBody(), message.getAttributes().get("SentTimestamp")));
+				try {
+					JSONObject obj = new JSONObject(message.getBody());
+					list.add(new Announcement(obj));
+				} catch (JSONException e) {
+				}
 			}
 		}
 
