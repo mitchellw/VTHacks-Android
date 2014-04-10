@@ -65,7 +65,6 @@ extends Activity
 		adapter = new AnnouncementAdapter(this, new AnnouncementList());
 		listView.setAdapter(adapter);
 
-		new Thread(new GetGcmIdRunnable(this, 1024)).start();
 		serviceConnection = new PushNotificationServiceConnection();
 
 		listView.onRefresh();

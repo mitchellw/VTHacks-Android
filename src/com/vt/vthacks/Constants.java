@@ -11,6 +11,7 @@ public class Constants {
 	public static final String PREFS_AWS_SECURITY_TOKEN = "securityToken";
 	public static final String PREFS_AWS_EXPIRATION = "expiration";
 	public static final String PREFS_AWS_ACCESS_KEY_ID = "accessKeyID";
+	public static final String PREFS_AWS_REGISTERED = "registered";
 	
 	/**
 	 * AWS stuff.

@@ -35,26 +35,44 @@ public class GetAWSCredentialsRunnable implements Runnable {
 		this.retryTime = retryTime;
 	}
 
+	/**
+	 * Gets temporary AWS credentials from our server.
+	 * 
+	 * Success: AWS credentials for this device are stored in shared prefs.
+	 */
 	@Override
 	public void run() {
-		// Get AWS credentials from server.
-		HttpClient client = new DefaultHttpClient();
-		HttpHost httpHost = new HttpHost(HOST_NAME, PORT, SCHEME);
+		SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
+		String secretAccessKey = sharedPreferences.getString(Constants.PREFS_AWS_SECRET_ACCESS_KEY, null);
+		String securityToken = sharedPreferences.getString(Constants.PREFS_AWS_SECURITY_TOKEN, null);
+		String expiration = sharedPreferences.getString(Constants.PREFS_AWS_EXPIRATION, null);
+		String accessKeyID = sharedPreferences.getString(Constants.PREFS_AWS_ACCESS_KEY_ID, null);
 
-		HttpGet httpRequest = new HttpGet();
-		httpRequest.setURI(URI.create("/get_credentials"));
+		if (secretAccessKey == null || securityToken == null || expiration == null || accessKeyID == null
+				|| GetAWSCredentialsRunnable.areCredentialsExpired(expiration)) {
+			// Get AWS credentials from server.
+			HttpClient client = new DefaultHttpClient();
+			HttpHost httpHost = new HttpHost(HOST_NAME, PORT, SCHEME);
 
-		HttpResponse response = null;
-        try {
-			response = client.execute(httpHost, httpRequest);
-        }
-        catch (IOException e) {
-			Log.d(TAG, "IOException executing request: " + e.toString());
-            retryAWS();
-            return;
-        }
+			HttpGet httpRequest = new HttpGet();
+			httpRequest.setURI(URI.create("/get_credentials"));
 
-		if(response != null) {
+			HttpResponse response = null;
+			try {
+				response = client.execute(httpHost, httpRequest);
+			}
+			catch (IOException e) {
+				Log.d(TAG, "IOException executing request: " + e.toString());
+				retryAWS();
+				return;
+			}
+
+			if (response == null) {
+				Log.d(TAG, "Response was null.");
+				retryAWS();
+				return;
+			}
+
 			try {
 				BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
@@ -66,42 +84,48 @@ public class GetAWSCredentialsRunnable implements Runnable {
 
 				String jsonString = result.toString();
 				int responseCode = response.getStatusLine().getStatusCode();
-				
+
 				if (jsonString == null || responseCode != HttpStatus.SC_OK) {
 					Log.d(TAG, "Problem with response." + jsonString + responseCode);
+					rd = null;
+					result = null;
+					line = null;
 					retryAWS();
 					return;
 				}
-				
+
 				JSONObject root;
 				try {
 					root = new JSONObject(jsonString);
 				} catch (JSONException e) {
 					Log.d(TAG, "Problem parsing JSON response.");
+					rd = null;
+					result = null;
+					line = null;
 					retryAWS();
 					return;
 				}
 
-				String secretAccessKey = root.optString("secretAccessKey", null);
-				String securityToken = root.optString("securityToken", null);
-				String expiration = root.optString("expiration", null);
-				String accessKeyID = root.optString("accessKeyID", null);
-				
+				secretAccessKey = root.optString("secretAccessKey", null);
+				securityToken = root.optString("securityToken", null);
+				expiration = root.optString("expiration", null);
+				accessKeyID = root.optString("accessKeyID", null);
+
 				if (secretAccessKey == null || securityToken == null || expiration == null || accessKeyID == null) {
 					Log.d(TAG, "Problem getting AWS credentials.");
+					rd = null;
+					result = null;
+					line = null;
 					retryAWS();
 					return;
 				}
-				
-				SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
+
 				Editor editor = sharedPreferences.edit();
 				editor.putString(Constants.PREFS_AWS_SECRET_ACCESS_KEY, secretAccessKey);
 				editor.putString(Constants.PREFS_AWS_SECURITY_TOKEN, securityToken);
 				editor.putString(Constants.PREFS_AWS_EXPIRATION, expiration);
 				editor.putString(Constants.PREFS_AWS_ACCESS_KEY_ID, accessKeyID);
 				editor.commit();
-				
-				new RegisterWithSNSRunnable(context, retryTime).run();
 			}
 			catch (IOException ioException) {
 				Log.d(TAG, "Problem parsing HttpResponse: " + ioException.toString() + ioException.getMessage());
@@ -111,7 +135,11 @@ public class GetAWSCredentialsRunnable implements Runnable {
 		}
 	}
 
-	public void retryAWS() {
+	public static boolean areCredentialsExpired(String expiration) {
+		return false;
+	}
+
+	private void retryAWS() {
 		if (retryTime > MAX_RETRY_TIME) {
 			return;
 		}
@@ -121,6 +149,7 @@ public class GetAWSCredentialsRunnable implements Runnable {
 		} catch (InterruptedException e) {
 			// You win some, you lose some.
 		}
-		new Thread(new GetAWSCredentialsRunnable(context, retryTime * 2)).start();
+		retryTime *= 2;
+		run();
 	}
 }
