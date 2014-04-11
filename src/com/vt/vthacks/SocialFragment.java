@@ -17,12 +17,14 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
@@ -33,12 +35,11 @@ import android.widget.ImageView;
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class SocialActivity
-extends Activity
-{
+public class SocialFragment extends Fragment {
 
 	private static final String TAG = "SocialActivity";
 	private static final String QUERY = "filter:images +exclude:retweets #ratchet";
+
 	private PullToRefreshListView listView;
 	private PhotoStreamAdapter adapter;
 	private Twitter twitter;
@@ -54,12 +55,21 @@ extends Activity
 	 *            is data that was most recently supplied
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.social);
 
-		listView = (PullToRefreshListView) findViewById(R.id.listView);
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true);
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		twitter = tf.getInstance();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.social, container, false);
+
+		listView = (PullToRefreshListView) view.findViewById(R.id.listView);
 		listView.setOnRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -69,15 +79,10 @@ extends Activity
 			}
 		});
 
-		previewHolder = findViewById(R.id.previewBox);
-		imageView = (ImageView) findViewById(R.id.fullImageView);
+		previewHolder = view.findViewById(R.id.previewBox);
+		imageView = (ImageView) view.findViewById(R.id.fullImageView);
 
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true);
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		twitter = tf.getInstance();
-
-		adapter = new PhotoStreamAdapter(SocialActivity.this, new ArrayList<IPhotoStreamItem>(),
+		adapter = new PhotoStreamAdapter(getActivity(), new ArrayList<IPhotoStreamItem>(),
 				new OnImageClickListener() {
 
 			@Override
@@ -95,6 +100,8 @@ extends Activity
 		listView.setAdapter(adapter);
 
 		listView.onRefresh();
+
+		return view;
 	}
 
 	private void resetList() {

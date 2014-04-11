@@ -2,13 +2,16 @@ package com.vt.vthacks;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.vt.vthacks.model.IScheduleList;
 import com.vt.vthacks.model.impl.ScheduleList;
 import com.vt.vthacks.view.PullToRefreshListView;
 import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 import com.vt.vthacks.view.ScheduleAdapter;
-
-import android.app.Activity;
 
 // -------------------------------------------------------------------------
 /**
@@ -17,38 +20,30 @@ import android.app.Activity;
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class ScheduleActivity
-extends Activity
-{
+public class ScheduleFragment extends Fragment {
 
 	private ScheduleAdapter adapter;
 	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
-	/**
-	 * Sets up the Schedule page
-	 *
-	 * @param savedInstanceState
-	 *            is data that was most recently supplied
-	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.schedule);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.schedule, container, false);
 
-		listView = (PullToRefreshListView) findViewById(R.id.schedule_list_view);
+		listView = (PullToRefreshListView) view.findViewById(R.id.schedule_list_view);
 		listView.setOnRefreshListener(new OnRefreshListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				new ScheduleTask().execute();
 			}
 		});
-		adapter = new ScheduleAdapter(this, new ScheduleList(null));
+		adapter = new ScheduleAdapter(getActivity(), new ScheduleList(null));
 		listView.setAdapter(adapter);
-		
+
 		listView.onRefresh();
+		return view;
 	}
 
 	private class ScheduleTask extends AsyncTask<Void, Void, IScheduleList> {

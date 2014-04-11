@@ -67,11 +67,11 @@ public class GcmIntentService extends IntentService {
 			}
 			else { // TODO: Do something useful for errors or deleted categories
 				if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-					Intent activityIntent = new Intent(this, AnnouncementsActivity.class);
+					Intent activityIntent = new Intent(this, MainActivity.class);
 					sendNotification(this, "Send error: " + extras.toString(), activityIntent);
 				}
 				else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-					Intent activityIntent = new Intent(this, AnnouncementsActivity.class);
+					Intent activityIntent = new Intent(this, MainActivity.class);
 					sendNotification(this, "Deleted messages on server: " + extras.toString(), activityIntent);
 				}
 				else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
@@ -84,7 +84,7 @@ public class GcmIntentService extends IntentService {
 	}
 
 	public static void sendMessageNotification(Context context, Bundle bundle) {
-		Intent activityIntent = new Intent(context, AnnouncementsActivity.class);
+		Intent activityIntent = new Intent(context, MainActivity.class);
 
 		Log.d(TAG, bundle.toString());
 		String title = bundle.getString("title");

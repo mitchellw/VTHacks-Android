@@ -15,9 +15,7 @@ import android.content.SharedPreferences;
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class SplashScreenActivity
-extends Activity
-{
+public class SplashScreenActivity extends Activity {
 
 	// ----------------------------------------------------------
 	/**
@@ -74,7 +72,7 @@ extends Activity
 						"Problem registering with push notification services. Announcements may not work properly.",
 						Toast.LENGTH_LONG).show();
 			}
-			startActivity(new Intent(SplashScreenActivity.this, MainMenuActivity.class));
+			startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
 		}
 		
 	}

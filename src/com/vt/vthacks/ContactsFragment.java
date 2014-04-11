@@ -9,7 +9,10 @@ import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 // -------------------------------------------------------------------------
 /**
@@ -18,27 +21,18 @@ import android.app.Activity;
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class ContactsActivity
-extends Activity
-{
+public class ContactsFragment extends Fragment {
 
 	private CompanyContactsAdapter adapter;
 	private PullToRefreshListView listView;
 
 	// ----------------------------------------------------------
-	/**
-	 * Sets up the chat page
-	 *
-	 * @param savedInstanceState
-	 *            is data that was most recently supplied
-	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.contacts);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.contacts, container, false);
 
-		listView = (PullToRefreshListView) findViewById(R.id.contacts_list_view);
+		listView = (PullToRefreshListView) view.findViewById(R.id.contacts_list_view);
 		listView.setOnRefreshListener(new OnRefreshListener() {
 			
 			@Override
@@ -46,10 +40,11 @@ extends Activity
 				new ContactsTask().execute();
 			}
 		});
-		adapter = new CompanyContactsAdapter(this, new CompanyContactsList(null));
+		adapter = new CompanyContactsAdapter(getActivity(), new CompanyContactsList(null));
 		listView.setAdapter(adapter);
 		
 		listView.onRefresh();
+		return view;
 	}
 
 	private class ContactsTask extends AsyncTask<Void, Void, ICompanyContactsList> {

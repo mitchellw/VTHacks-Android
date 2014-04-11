@@ -3,13 +3,16 @@ package com.vt.vthacks;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.vt.vthacks.model.IAwardList;
 import com.vt.vthacks.model.impl.AwardList;
 import com.vt.vthacks.view.AwardAdapter;
 import com.vt.vthacks.view.PullToRefreshListView;
 import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
-
-import android.app.Activity;
 
 // -------------------------------------------------------------------------
 /**
@@ -18,27 +21,16 @@ import android.app.Activity;
  * @author Brandon Potts
  * @version Mar 10, 2014
  */
-public class AwardsActivity
-extends Activity
-{
-
+public class AwardsFragment extends Fragment {
 	private AwardAdapter adapter;
 	private PullToRefreshListView listView;
 
-	// ----------------------------------------------------------
-	/**
-	 * Sets up the awards page
-	 *
-	 * @param savedInstanceState
-	 *            is data that was most recently supplied
-	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.awards);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.awards, container, false);
 
-		listView = (PullToRefreshListView) findViewById(R.id.awards_list_view);
+		listView = (PullToRefreshListView) view.findViewById(R.id.awards_list_view);
 		listView.setOnRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -46,10 +38,12 @@ extends Activity
 				new AwardsTask().execute();
 			}
 		});
-		adapter = new AwardAdapter(this, new AwardList(null));
+		adapter = new AwardAdapter(getActivity(), new AwardList(null));
 		listView.setAdapter(adapter);
 
 		listView.onRefresh();
+
+		return view;
 	}
 
 	private class AwardsTask extends AsyncTask<Void, Void, IAwardList> {
