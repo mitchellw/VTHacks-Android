@@ -64,7 +64,7 @@
         <service android:name=".GcmIntentService" />
 
         <meta-data
-            android:name="com.google.android.maps.v2.AIzaSyCl99Zu291n2x5SToqscrHU7lshmgD5NaQ"
+            android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCl99Zu291n2x5SToqscrHU7lshmgD5NaQ" />
         <meta-data
             android:name="com.google.android.gms.version"
