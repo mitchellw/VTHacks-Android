@@ -240,22 +240,26 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 						&& mRefreshState != RefreshState.RELEASE_TO_REFRESH) {
 					refreshAnimationDrawable.start();
 					setRefreshState(RefreshState.RELEASE_TO_REFRESH);
-				} else if (mRefreshView.getTop() < 0
+				}
+				else if (mRefreshView.getTop() < 0
 						&& mRefreshState != RefreshState.PULL_TO_REFRESH) {
 					if (mRefreshState != RefreshState.TAP_TO_REFRESH) {
 						refreshAnimationDrawable.stop();
 					}
 					setRefreshState(RefreshState.PULL_TO_REFRESH);
 				}
-			} else {
+			}
+			else {
 				resetHeader();
 			}
-		} else if (mCurrentScrollState == SCROLL_STATE_FLING
+		}
+		else if (mCurrentScrollState == SCROLL_STATE_FLING
 				&& firstVisibleItem == 0
 				&& mRefreshState != RefreshState.REFRESHING) {
 			setSelection(1);
 			mBounceHack = true;
-		} else if (mBounceHack && mCurrentScrollState == SCROLL_STATE_FLING) {
+		}
+		else if (mBounceHack && mCurrentScrollState == SCROLL_STATE_FLING) {
 			setSelection(1);
 		}
 

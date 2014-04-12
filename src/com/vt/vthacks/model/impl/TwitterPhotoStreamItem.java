@@ -9,10 +9,13 @@ import twitter4j.Status;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 
 public class TwitterPhotoStreamItem implements IPhotoStreamItem {
+	private static final String TAG = "TwitterPhotoStreamItem";
+
 	private static LruCache<String, Bitmap> cache =
 			new LruCache<String, Bitmap>((int)Runtime.getRuntime().maxMemory() / 1024 / 2) {
 		@Override
@@ -21,6 +24,11 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 				return 0;
 			}
 			return value.getRowBytes() * value.getHeight() / 1024;
+		}
+		
+		protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
+			super.entryRemoved(evicted, key, oldValue, newValue);
+			oldValue.recycle();
 		}
 	};
 
@@ -66,7 +74,9 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 
 			if (bitmap == null) {
 				bitmap = getBitmapFromURL(imageURL);
-				cache.put(imageURL.toString(), bitmap);
+				if (bitmap != null) {
+					cache.put(imageURL.toString(), bitmap);
+				}
 			}
 		}
 
@@ -90,7 +100,9 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 
 			if (bitmap == null) {
 				bitmap = getBitmapFromURL(userImageURL);
-				cache.put(userImageURL.toString(), bitmap);
+				if (bitmap != null) {
+					cache.put(userImageURL.toString(), bitmap);
+				}
 			}
 		}
 
@@ -101,6 +113,10 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 	public String toString() {
 		return text;
 	}
+	
+	public static void clearCache() {
+		cache.evictAll();
+	}
 
 	private Bitmap getBitmapFromURL(URL url) {
 		Bitmap bitmap = null;
@@ -108,6 +124,9 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 			InputStream is = url.openStream();
 			bitmap = BitmapFactory.decodeStream(is);
 		} catch (IOException e) {
+		}
+		catch (OutOfMemoryError e) {
+			Log.d(TAG, "oom");
 		}
 
 		return bitmap;

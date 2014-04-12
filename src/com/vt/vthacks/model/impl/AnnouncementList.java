@@ -17,6 +17,7 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.vt.vthacks.Constants;
+import com.vt.vthacks.GetAWSCredentialsRunnable;
 import com.vt.vthacks.model.IAnnouncement;
 import com.vt.vthacks.model.IAnnouncementList;
 
@@ -39,13 +40,21 @@ public class AnnouncementList extends ArrayList<IAnnouncement> implements IAnnou
 			Log.d(TAG, "Not all credentials are available.");
 			return null;
 		}
+		
+		if (GetAWSCredentialsRunnable.areCredentialsExpired(expiration)) {
+			new GetAWSCredentialsRunnable(context, 1024).run();
+		}
+		expiration = sharedPreferences.getString(Constants.PREFS_AWS_EXPIRATION, null);
+		if (expiration == null) {
+			return null;
+		}
 
 		AWSCredentials credentials = new BasicSessionCredentials(accessKeyID, secretAccessKey, securityToken);
 		AmazonSQSClient client = new AmazonSQSClient(credentials);
 
 		ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(Constants.AWS_QUEUE_URL);
 		receiveMessageRequest.setMaxNumberOfMessages(10);
-		receiveMessageRequest.setVisibilityTimeout(10);
+		receiveMessageRequest.setVisibilityTimeout(2);
 
 		IAnnouncementList list = new AnnouncementList();
 		ReceiveMessageResult receiveMessageResult = null;

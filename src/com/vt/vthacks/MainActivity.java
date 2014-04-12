@@ -1,5 +1,6 @@
 package com.vt.vthacks;
 
+import com.google.android.gms.maps.SupportMapFragment;
 import com.vt.vthacks.model.INavigationItem;
 import com.vt.vthacks.model.impl.NavigationItem;
 import com.vt.vthacks.view.NavigationAdapter;
@@ -8,6 +9,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -33,19 +35,19 @@ public class MainActivity extends ActionBarActivity {
 		navigationItems = new INavigationItem[]
 				{
 				  new NavigationItem(R.drawable.announcements_res,
-						R.string.label_announcements, new AnnouncementsFragment()),
+						R.string.label_announcements),
 				  new NavigationItem(R.drawable.calendar_res,
-						  R.string.label_schedule, new ScheduleFragment()),
+						  R.string.label_schedule),
 				  new NavigationItem(R.drawable.map_res,
-						  R.string.label_map, new MapFragment()),
+						  R.string.label_map),
 				  new NavigationItem(R.drawable.awards_res,
-						  R.string.label_awards, new AwardsFragment()),
+						  R.string.label_awards),
 				  new NavigationItem(R.drawable.contacts_res,
-						  R.string.label_contacts, new ContactsFragment()),
+						  R.string.label_contacts),
 				  new NavigationItem(R.drawable.group_res,
-						  R.string.label_chat, new GroupFinderFragment()),
+						  R.string.label_chat),
 				  new NavigationItem(R.drawable.images_res,
-						  R.string.label_photos, new SocialFragment())
+						  R.string.label_photos)
 				};
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -82,12 +84,11 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         
         // Set the first item to be visible
-        INavigationItem item = navigationItems[0];
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-			.replace(R.id.content_frame, item.getFragment())
+			.replace(R.id.content_frame, new AnnouncementsFragment())
 			.commit();
-		mDrawerList.setItemChecked(0, true);
+		mDrawerList.setSelection(0);
 		setTitle(navigationItems[0].getTitleRes());
 	}
 
@@ -101,16 +102,41 @@ public class MainActivity extends ActionBarActivity {
 	/** Swaps fragments in the main content view */
 	private void selectItem(int position) {
 		INavigationItem item = navigationItems[position];
+		
+		Fragment fragment = null;
+		switch (position) {
+		case 0:
+			fragment = new AnnouncementsFragment();
+			break;
+		case 1:
+			fragment = new ScheduleFragment();
+			break;
+		case 2:
+			fragment = new SupportMapFragment();
+			break;
+		case 3:
+			fragment = new AwardsFragment();
+			break;
+		case 4:
+			fragment = new ContactsFragment();
+			break;
+		case 5:
+			fragment = new GroupFinderFragment();
+			break;
+		case 6:
+			fragment = new SocialFragment();
+			break;
+		}
 
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-			.replace(R.id.content_frame, item.getFragment())
+			.replace(R.id.content_frame, fragment)
 			.commit();
 
 		// Highlight the selected item, update the title, and close the drawer
-		mDrawerList.setItemChecked(position, true);
-		setTitle(navigationItems[position].getTitleRes());
+		mDrawerList.setSelection(position);
+		setTitle(item.getTitleRes());
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}
 

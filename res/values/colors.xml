@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="drawer_background">#990134</color>
+    <color name="drawer_selected">#019986</color>
     <color name="background">#990134</color>
     <color name="title">#990134</color>
     <color name="accent">#FE9900</color>

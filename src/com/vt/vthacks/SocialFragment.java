@@ -103,6 +103,12 @@ public class SocialFragment extends Fragment {
 
 		return view;
 	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		TwitterPhotoStreamItem.clearCache();
+	}
 
 	private void resetList() {
 		lastResult = null;
