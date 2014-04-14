@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -14,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -22,6 +26,8 @@ import android.util.Log;
 public class GetAWSCredentialsRunnable implements Runnable {
 	private static final String TAG = "GetAWSCredentialsRunnable";
 	private static final long MAX_RETRY_TIME = 1024000;
+    @SuppressLint("SimpleDateFormat")
+	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
 	public static String HOST_NAME = "vthacks-env-pmkrjpmqpu.elasticbeanstalk.com";
 	public static int PORT = 80;
@@ -136,7 +142,21 @@ public class GetAWSCredentialsRunnable implements Runnable {
 	}
 
 	public static boolean areCredentialsExpired(String expiration) {
-		return false;
+		if (expiration == null) {
+			return true;
+		}
+
+		Date date = null;
+		try {
+			date = dateFormatter.parse(expiration);
+		} catch (ParseException e) {
+		}
+		if (date == null) {
+			return true;
+		}
+
+		// Check 15 minutes (900000) from now being expired
+		return new Date(System.currentTimeMillis() + 900000).after(date);
 	}
 
 	private void retryAWS() {

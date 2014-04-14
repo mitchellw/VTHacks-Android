@@ -1,5 +1,6 @@
 package com.vt.vthacks;
 
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.GoogleMap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,11 +17,15 @@ import android.view.ViewGroup;
  */
 public class MapFragment extends Fragment {
 
+    MapView mapView;
+    GoogleMap googleMap;
+
     // ----------------------------------------------------------
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.map, container, false);
+
 		return view;
 	}
 }
