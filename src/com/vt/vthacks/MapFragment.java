@@ -17,19 +17,6 @@ public class MapFragment extends SupportMapFragment
 {
 
     private GoogleMap mMap;
-    private LayoutInflater inflater;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
-
-
-
 
     @Override
     public void onResume()
@@ -52,7 +39,7 @@ public class MapFragment extends SupportMapFragment
 
         //Sets information about War Memorial
         String warSnippet = "War Memorial Hall houses a recreational gym and academic classrooms. " +
-        "This is where hackers will be able to take showers.";
+        "Hackers will be able to use this space to take showers.";
         mWarMemorial.position(new LatLng(37.22629 , -80.42059));
         mWarMemorial.title("War Memorial");
         mWarMemorial.snippet(warSnippet);
