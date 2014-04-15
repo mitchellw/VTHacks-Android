@@ -17,7 +17,7 @@ public class TwitterPhotoStreamItem implements IPhotoStreamItem {
 	private static final String TAG = "TwitterPhotoStreamItem";
 
 	private static LruCache<String, Bitmap> cache =
-			new LruCache<String, Bitmap>((int)Runtime.getRuntime().maxMemory() / 1024 / 2) {
+			new LruCache<String, Bitmap>((int)Runtime.getRuntime().maxMemory() / 1024 / 3) {
 		@Override
 		protected int sizeOf(String key, Bitmap value) {
 			if (value == null) {

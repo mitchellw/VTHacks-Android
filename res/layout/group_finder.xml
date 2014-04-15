@@ -5,4 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <com.vt.vthacks.view.PullToRefreshListView
+        android:id="@+id/groups_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent" >
+    </com.vt.vthacks.view.PullToRefreshListView>
+
 </LinearLayout>

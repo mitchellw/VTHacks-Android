@@ -1,6 +1,7 @@
 package com.vt.vthacks;
 
 import com.google.android.gms.maps.SupportMapFragment;
+import com.vt.vthacks.GroupFinderFragment.GroupFinderListener;
 import com.vt.vthacks.model.INavigationItem;
 import com.vt.vthacks.model.impl.NavigationItem;
 import com.vt.vthacks.view.NavigationAdapter;
@@ -19,7 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements GroupFinderListener {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -34,20 +35,20 @@ public class MainActivity extends ActionBarActivity {
 
 		navigationItems = new INavigationItem[]
 				{
-				  new NavigationItem(R.drawable.announcements_res,
+				new NavigationItem(R.drawable.announcements_res,
 						R.string.label_announcements),
-				  new NavigationItem(R.drawable.calendar_res,
-						  R.string.label_schedule),
-				  new NavigationItem(R.drawable.map_res,
-						  R.string.label_map),
-				  new NavigationItem(R.drawable.awards_res,
-						  R.string.label_awards),
-				  new NavigationItem(R.drawable.contacts_res,
-						  R.string.label_contacts),
-				  new NavigationItem(R.drawable.group_res,
-						  R.string.label_chat),
-				  new NavigationItem(R.drawable.images_res,
-						  R.string.label_photos)
+						new NavigationItem(R.drawable.calendar_res,
+								R.string.label_schedule),
+								new NavigationItem(R.drawable.map_res,
+										R.string.label_map),
+										new NavigationItem(R.drawable.awards_res,
+												R.string.label_awards),
+												new NavigationItem(R.drawable.contacts_res,
+														R.string.label_contacts),
+														new NavigationItem(R.drawable.group_res,
+																R.string.label_groups),
+																new NavigationItem(R.drawable.images_res,
+																		R.string.label_photos)
 				};
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -79,15 +80,15 @@ public class MainActivity extends ActionBarActivity {
 
 		// Set the drawer toggle as the DrawerListener
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        
-        // Set the first item to be visible
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
+
+		// Set the first item to be visible
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-			.replace(R.id.content_frame, new AnnouncementsFragment())
-			.commit();
+		.replace(R.id.content_frame, new AnnouncementsFragment())
+		.commit();
 		mDrawerList.setSelection(0);
 		setTitle(navigationItems[0].getTitleRes());
 	}
@@ -102,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
 	/** Swaps fragments in the main content view */
 	private void selectItem(int position) {
 		INavigationItem item = navigationItems[position];
-		
+
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
@@ -131,8 +132,8 @@ public class MainActivity extends ActionBarActivity {
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-			.replace(R.id.content_frame, fragment)
-			.commit();
+		.replace(R.id.content_frame, fragment)
+		.commit();
 
 		// Highlight the selected item, update the title, and close the drawer
 		mDrawerList.setSelection(position);
@@ -145,39 +146,47 @@ public class MainActivity extends ActionBarActivity {
 		mTitle = title;
 		getSupportActionBar().setTitle(mTitle);
 	}
-	
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-    
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
 
 	/* Called whenever we call invalidateOptionsMenu() */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// If the nav drawer is open, hide action items related to the content view
-//		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//		menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+		//		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		//		menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-          return true;
-        }
-        // Handle your other action bar items...
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Pass the event to ActionBarDrawerToggle, if it returns
+		// true, then it has handled the app icon touch event
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		// Handle your other action bar items...
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onAddGroupClicked() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().addToBackStack(null)
+		.replace(R.id.content_frame, new AddGroupFragment())
+		.commit();
+	}
 
 }
