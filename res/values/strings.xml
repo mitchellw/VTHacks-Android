@@ -48,5 +48,6 @@
     <string name="http_group_not_found">Group not found. Try refreshing.</string>
     <string name="delete_group_success">Group deleted.</string>
     <string name="incorrect_password">Incorrect password.</string>
+    <string name="error_getting_markers">Trouble getting map markers from server.</string>
 
 </resources>

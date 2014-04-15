@@ -1,0 +1,22 @@
+{
+  "markers": [
+    {
+      "title": "Cassell Coliseum",
+      "snippet": "Cassell Coliseum is the basketball arena that is home to the Virginia Tech Hokies. This is also the location where all the hacking, tech talks, and food serving will be held.",
+      "latitude": 37.222962,
+      "longitude": -80.419473
+    },
+    {
+      "title": "War Memorial",
+      "snippet": "War Memorial Hall houses a recreational gym and academic classrooms. Hackers will be able to use this space to take showers.",
+      "latitude": 37.22629,
+      "longitude": -80.42059
+    },
+    {
+      "title": "TechPad",
+      "snippet": "Tech Pad is a local hackerspace for entrepreneurs and hackers to come and work on their ideas. Hackers can use this place to get some undisturbed sleep.",
+      "latitude": 37.231734,
+      "longitude": -80.415997
+    }
+  ]
+}

@@ -60,7 +60,6 @@ public class SocialFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true);
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		twitter = tf.getInstance();
 	}
