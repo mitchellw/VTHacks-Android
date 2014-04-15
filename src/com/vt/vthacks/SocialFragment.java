@@ -39,7 +39,7 @@ import android.widget.ImageView;
 public class SocialFragment extends Fragment {
 
 	private static final String TAG = "SocialActivity";
-	private static final String QUERY = "filter:images +exclude:retweets #ratchet";
+	private static final String QUERY = "filter:images +exclude:retweets #vthacks";
 
 	private PullToRefreshListView listView;
 	private PhotoStreamAdapter adapter;
@@ -103,7 +103,7 @@ public class SocialFragment extends Fragment {
 
 		return view;
 	}
-	
+
 	@Override
 	public void onStop() {
 		super.onStop();
@@ -127,6 +127,9 @@ public class SocialFragment extends Fragment {
 				query = new Query(QUERY);
 			}
 			else {
+				if (!lastResult.hasNext()) {
+					return null;
+				}
 				query = lastResult.nextQuery();
 			}
 
@@ -155,20 +158,22 @@ public class SocialFragment extends Fragment {
 		protected void onPostExecute(List<IPhotoStreamItem> photoStream) {
 			super.onPostExecute(photoStream);
 
-			adapter.addAll(photoStream);
-			adapter.notifyDataSetChanged();
+			if (photoStream != null) {
+				adapter.addAll(photoStream);
+				adapter.notifyDataSetChanged();
 
-			String message = "Refreshed at " + new Date(System.currentTimeMillis());
-			listView.onRefreshComplete(message);
-			listView.onScrollToBottomComplete(message);
+				String message = "Refreshed at " + new Date(System.currentTimeMillis());
+				listView.onRefreshComplete(message);
+				listView.onScrollToBottomComplete(message);
 
-			listView.setOnScrollToBottomListener(new OnScrollToBottomListener() {
+				listView.setOnScrollToBottomListener(new OnScrollToBottomListener() {
 
-				@Override
-				public void onScrollToBottom() {
-					new TwitterTask().execute();
-				}
-			});
+					@Override
+					public void onScrollToBottom() {
+						new TwitterTask().execute();
+					}
+				});
+			}
 		}
 	}
 }
