@@ -116,7 +116,7 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new ScheduleFragment();
 			break;
 		case 2:
-			fragment = getVTHacksMap();
+			fragment = new MapFragment();
 			break;
 		case 3:
 			fragment = new AwardsFragment();
@@ -183,49 +183,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    private SupportMapFragment getVTHacksMap()
-    {
-        //Creates markers that will be used to set locations of interest
-        MarkerOptions mCassellMark = new MarkerOptions();
-//        MarkerOptions mDrillField = new MarkerOptions();
-        MarkerOptions mWarMemorial = new MarkerOptions();
-        MarkerOptions mTechPad = new MarkerOptions();
-
-
-        //Sets the information about Cassell
-        String cassellSnippet = "Cassell Coliseum is the basketball area that is home to the Virginia Tech Hokies\n" +
-        "This is also the location where all the hacking, tech talks, and food serving will be held";
-        mCassellMark.position(new LatLng(37.222962  , -80.419473));
-        mCassellMark.title("Cassell Coliseum");
-        mCassellMark.snippet(cassellSnippet);
-
-
-        String warSnippet = "War Memorial Hall houses a recreational gym and academic classrooms. \n" +
-        "This is where hackers will be able to take showers";
-        mWarMemorial.position(new LatLng(37.22629 , -80.42059));
-        mWarMemorial.title("War Memorial");
-
-        GoogleMapOptions  options = new GoogleMapOptions ();
-        LatLng position = new LatLng(37.222962 , -80.419473);
-        CameraPosition camera = new CameraPosition(position , 25 , 0 , 90);
-
-        options.mapType(GoogleMap.MAP_TYPE_HYBRID);
-        options.camera(camera);
-
-        SupportMapFragment mapFragment = SupportMapFragment.newInstance(options);
-
-        GoogleMap googleMap = mapFragment.getMap();
-        googleMap.addMarker(mCassellMark);
-        googleMap.addMarker(mTechPad);
-        googleMap.addMarker(mWarMemorial);
-//        googleMap.addMarker(mDrillField);
-
-
-
-         return mapFragment;
-
-    }
-
 }
