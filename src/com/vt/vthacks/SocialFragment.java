@@ -108,6 +108,7 @@ public class SocialFragment extends Fragment {
 	public void onStop() {
 		super.onStop();
 		TwitterPhotoStreamItem.clearCache();
+		System.gc();
 	}
 
 	private void resetList() {

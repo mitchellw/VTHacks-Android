@@ -92,7 +92,7 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
                                 emailIntent.setType("plain/text");
                                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{method.getName()});
                                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "VTHacks help needed!");
-                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hello ,\n\n\t");
+                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hello,\n\n\t");
                                 getContext().startActivity(emailIntent);
 
                             }
