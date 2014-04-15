@@ -26,6 +26,19 @@ public class MapFragment extends SupportMapFragment
 {
 
     private GoogleMap mMap;
+    private LayoutInflater inflater;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+
+
+
 
     @Override
     public void onResume()
@@ -40,22 +53,22 @@ public class MapFragment extends SupportMapFragment
 
 
         //Sets the information about Cassell
-        String cassellSnippet = "Cassell Coliseum is the basketball area that is home to the Virginia Tech Hokies\n" +
-        "This is also the location where all the hacking, tech talks, and food serving will be held";
+        String cassellSnippet = "Cassell Coliseum is the basketball arena that is home to the Virginia Tech Hokies. " +
+        "This is also the location where all the hacking, tech talks, and food serving will be held.";
         mCassellMark.position(new LatLng(37.222962  , -80.419473));
         mCassellMark.title("Cassell Coliseum");
         mCassellMark.snippet(cassellSnippet);
 
         //Sets information about War Memorial
-        String warSnippet = "War Memorial Hall houses a recreational gym and academic classrooms.\n" +
-        "This is where hackers will be able to take showers";
+        String warSnippet = "War Memorial Hall houses a recreational gym and academic classrooms. " +
+        "This is where hackers will be able to take showers.";
         mWarMemorial.position(new LatLng(37.22629 , -80.42059));
         mWarMemorial.title("War Memorial");
         mWarMemorial.snippet(warSnippet);
 
         //Sets information about TechPad
-        String techPadSnippet = "Tech Pad is a local hackerspace for entrepreneurs and hackers "
-            + "to come and work on their ideas Hackers can use this place to get some undisturbed sleep.";
+        String techPadSnippet = "Tech Pad is a local hackerspace for entrepreneurs and hackers"
+            + "to come and work on their ideas. Hackers can use this place to get some undisturbed sleep.";
         mTechPad.position(new LatLng(37.231734 , -80.415997));
         mTechPad.title("TechPad");
         mTechPad.snippet(techPadSnippet);
@@ -70,6 +83,10 @@ public class MapFragment extends SupportMapFragment
         mMap.addMarker(mCassellMark);
         mMap.addMarker(mTechPad);
         mMap.addMarker(mWarMemorial);
+
+        //Gets the window adapter that will be used for the map
+        MapWindowAdapter windowAdapter = new MapWindowAdapter(getActivity());
+        mMap.setInfoWindowAdapter(windowAdapter);
 
 
     }
