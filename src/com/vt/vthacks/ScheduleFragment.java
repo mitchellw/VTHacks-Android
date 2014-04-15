@@ -1,5 +1,7 @@
 package com.vt.vthacks;
 
+import java.util.Date;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,7 +65,7 @@ public class ScheduleFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
+			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
 		}
 
 	}

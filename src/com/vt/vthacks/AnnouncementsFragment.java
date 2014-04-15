@@ -1,5 +1,7 @@
 package com.vt.vthacks;
 
+import java.util.Date;
+
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -122,7 +124,7 @@ public class AnnouncementsFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
+			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
 		}
 	}
 

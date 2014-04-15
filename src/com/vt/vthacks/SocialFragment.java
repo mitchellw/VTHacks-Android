@@ -1,6 +1,7 @@
 package com.vt.vthacks;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
@@ -158,7 +159,7 @@ public class SocialFragment extends Fragment {
 			adapter.addAll(photoStream);
 			adapter.notifyDataSetChanged();
 
-			String message = "Refreshed at " + System.currentTimeMillis();
+			String message = "Refreshed at " + new Date(System.currentTimeMillis());
 			listView.onRefreshComplete(message);
 			listView.onScrollToBottomComplete(message);
 

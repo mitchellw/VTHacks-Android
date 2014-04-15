@@ -1,6 +1,8 @@
 package com.vt.vthacks;
 
 
+import java.util.Date;
+
 import com.vt.vthacks.model.ICompanyContactsList;
 import com.vt.vthacks.model.impl.CompanyContactsList;
 import com.vt.vthacks.view.CompanyContactsAdapter;
@@ -64,7 +66,7 @@ public class ContactsFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
+			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
 		}
 
 	}

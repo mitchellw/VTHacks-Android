@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpHost;
@@ -156,7 +157,7 @@ public class GroupFinderFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + System.currentTimeMillis());
+			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
 		}
 	}
 
