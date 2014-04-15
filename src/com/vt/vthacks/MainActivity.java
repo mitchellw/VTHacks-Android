@@ -1,11 +1,9 @@
 package com.vt.vthacks;
 
-import com.google.android.gms.maps.SupportMapFragment;
 import com.vt.vthacks.GroupFinderFragment.GroupFinderListener;
 import com.vt.vthacks.model.INavigationItem;
 import com.vt.vthacks.model.impl.NavigationItem;
 import com.vt.vthacks.view.NavigationAdapter;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -113,7 +111,7 @@ public class MainActivity extends ActionBarActivity implements GroupFinderListen
 			fragment = new ScheduleFragment();
 			break;
 		case 2:
-			fragment = new SupportMapFragment();
+			fragment = new MapFragment();
 			break;
 		case 3:
 			fragment = new AwardsFragment();
@@ -147,18 +145,18 @@ public class MainActivity extends ActionBarActivity implements GroupFinderListen
 		getSupportActionBar().setTitle(mTitle);
 	}
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
-		mDrawerToggle.syncState();
-	}
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
 
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		mDrawerToggle.onConfigurationChanged(newConfig);
-	}
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
 	/* Called whenever we call invalidateOptionsMenu() */
 	@Override
@@ -188,5 +186,4 @@ public class MainActivity extends ActionBarActivity implements GroupFinderListen
 		.replace(R.id.content_frame, new AddGroupFragment())
 		.commit();
 	}
-
 }
