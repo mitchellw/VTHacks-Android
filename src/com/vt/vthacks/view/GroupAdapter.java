@@ -9,8 +9,10 @@ import com.vt.vthacks.model.IGroup;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -54,7 +56,7 @@ public class GroupAdapter extends ArrayAdapter<IGroup> {
 			switch(method.getType()) {
 			case EMAIL:
 				button.setImageResource(R.drawable.email_res);
-				button.setOnClickListener(new View.OnClickListener() {
+				button.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0)
 					{
@@ -70,22 +72,36 @@ public class GroupAdapter extends ArrayAdapter<IGroup> {
 				break;
 			case PHONE:
 				button.setImageResource(R.drawable.message_res);
-				button.setOnClickListener(new View.OnClickListener() {
+				if (Build.VERSION.SDK_INT < 19) {
+					button.setOnClickListener(new OnClickListener() {
 
-					@Override
-					public void onClick(View v)
-					{
-						Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-						smsIntent.setType("vnd.android-dir/mms-sms");
-						smsIntent.putExtra("address", method.getName());
-						getContext().startActivity(smsIntent);
+						@Override
+						public void onClick(View v)
+						{
+							Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+							smsIntent.setType("vnd.android-dir/mms-sms");
+							smsIntent.putExtra("address", method.getName());
+							getContext().startActivity(smsIntent);
 
-					}
-				});
+						}
+					});
+				}
+				else {
+					button.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(Intent.ACTION_SENDTO);
+							intent.setData(Uri.parse("smsto:" + Uri.encode(method.getName())));
+							getContext().startActivity(intent);
+
+						}
+					});
+				}
 				break;
 			case TWITTER:
 				button.setImageResource(R.drawable.tweet_res);
-				button.setOnClickListener(new View.OnClickListener() {
+				button.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v)

@@ -1,5 +1,6 @@
 package com.vt.vthacks;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import android.support.v4.app.Fragment;
@@ -19,7 +20,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,7 +72,7 @@ public class AnnouncementsFragment extends Fragment {
 				new GetAnnouncementsTask().execute();
 			}
 		});
-		adapter = new AnnouncementAdapter(getActivity(), new AnnouncementList());
+		adapter = new AnnouncementAdapter(getActivity(), new AnnouncementList(null));
 		listView.setAdapter(adapter);
 
 		listView.onRefresh();
@@ -100,19 +100,7 @@ public class AnnouncementsFragment extends Fragment {
 
 		@Override
 		protected IAnnouncementList doInBackground(Void... arg0) {
-			Context context = AnnouncementsFragment.this.getActivity();
-			SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
-			String accessKeyID = sharedPreferences.getString(Constants.PREFS_AWS_ACCESS_KEY_ID, null);
-			String secretAccessKey = sharedPreferences.getString(Constants.PREFS_AWS_SECRET_ACCESS_KEY, null);
-			String securityToken = sharedPreferences.getString(Constants.PREFS_AWS_SECURITY_TOKEN, null);
-			String expiration = sharedPreferences.getString(Constants.PREFS_AWS_EXPIRATION, null);
-
-			if (accessKeyID == null || secretAccessKey == null || securityToken == null || expiration == null
-					|| GetAWSCredentialsRunnable.areCredentialsExpired(expiration)) {
-				new GetAWSCredentialsRunnable(context, 1024).run();
-			}
-
-			return AnnouncementList.fromSQS(getActivity());
+			return AnnouncementList.fromServer();
 		}
 
 		@Override
@@ -120,11 +108,15 @@ public class AnnouncementsFragment extends Fragment {
 			super.onPostExecute(result);
 			if (result != null) {
 				adapter.clear();
-				adapter.addAll(result);
+				for (int i = result.size() - 1; i >= 0; i--) {
+					adapter.add(result.get(i));
+				}
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
+			Date date = new Date(System.currentTimeMillis());
+			
+			listView.onRefreshComplete("Last updated at " + DateFormat.getDateTimeInstance().format(date));
 		}
 	}
 
@@ -145,9 +137,11 @@ public class AnnouncementsFragment extends Fragment {
 			if (resultCode == Constants.PUSH_NOTIFICATION_RECEIVED) {
 				String title = resultData.getString("title");
 				String message = resultData.getString("message");
+				long timestamp = resultData.getLong("timestamp", System.currentTimeMillis());
 
 				if (title != null && message != null) {
-					adapter.add(new Announcement(title, message, String.valueOf(System.currentTimeMillis())));
+					Date date = new Date(timestamp);
+					adapter.insert(new Announcement(title, message, DateFormat.getDateTimeInstance().format(date)), 0);
 					adapter.notifyDataSetChanged();
 				}
 				else {

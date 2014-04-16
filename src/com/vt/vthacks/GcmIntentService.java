@@ -109,6 +109,7 @@ public class GcmIntentService extends IntentService {
 
 		Notification notification = mBuilder.build();
 		notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
+		notification.defaults = notification.defaults | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 
 		mNotificationManager.notify(ANNOUNCEMENT_NOTIFICATION_ID, notification);
 	}

@@ -8,6 +8,7 @@
         android:id="@+id/award_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/title_underline"
         android:text="@string/EmptyTextView"
         android:textAllCaps="true"

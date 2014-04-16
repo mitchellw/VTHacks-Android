@@ -4,6 +4,10 @@ import com.vt.vthacks.GroupFinderFragment.GroupFinderListener;
 import com.vt.vthacks.model.INavigationItem;
 import com.vt.vthacks.model.impl.NavigationItem;
 import com.vt.vthacks.view.NavigationAdapter;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -89,6 +93,15 @@ public class MainActivity extends ActionBarActivity implements GroupFinderListen
 		.commit();
 		mDrawerList.setSelection(0);
 		setTitle(navigationItems[0].getTitleRes());
+
+		SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
+		boolean firstLaunch = sharedPreferences.getBoolean(Constants.PREFS_FIRST_LAUNCH, true);
+		if (firstLaunch) {
+			mDrawerLayout.openDrawer(mDrawerList);
+			Editor editor = sharedPreferences.edit();
+			editor.putBoolean(Constants.PREFS_FIRST_LAUNCH, false);
+			editor.commit();
+		}
 	}
 
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -145,18 +158,18 @@ public class MainActivity extends ActionBarActivity implements GroupFinderListen
 		getSupportActionBar().setTitle(mTitle);
 	}
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
 
 	/* Called whenever we call invalidateOptionsMenu() */
 	@Override

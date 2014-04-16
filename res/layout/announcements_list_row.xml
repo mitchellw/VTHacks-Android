@@ -9,6 +9,7 @@
         android:id="@+id/announcement_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/title_underline"
         android:text="@string/EmptyTextView"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -28,8 +29,7 @@
         android:id="@+id/announcement_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/announcement_description"
         android:text="@string/EmptyTextView"
         android:textColor="@color/faded" />

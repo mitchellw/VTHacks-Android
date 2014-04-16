@@ -3,6 +3,7 @@ package com.vt.vthacks;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +37,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class GroupFinderFragment extends Fragment {
@@ -70,10 +71,10 @@ public class GroupFinderFragment extends Fragment {
 		});
 		adapter = new GroupAdapter(getActivity(), new GroupList(null));
 		listView.setAdapter(adapter);
-		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public boolean onItemLongClick(AdapterView<?> adapter, View v,
+			public void onItemClick(AdapterView<?> adapter, View v,
 					int pos, long id) {
 				IGroup group = (IGroup) adapter.getAdapter().getItem(pos);
 				DialogFragment dialog = GroupDialogFragment.newInstance(new GroupDialogListener() {
@@ -105,7 +106,6 @@ public class GroupFinderFragment extends Fragment {
 				}, group.getID());
 
 				dialog.show(GroupFinderFragment.this.getFragmentManager(), "groupFinderDialog");
-				return true;
 			}
 		});
 
@@ -157,7 +157,9 @@ public class GroupFinderFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 			}
 
-			listView.onRefreshComplete("Last updated at " + new Date(System.currentTimeMillis()));
+			Date date = new Date(System.currentTimeMillis());
+			
+			listView.onRefreshComplete("Last updated at " + DateFormat.getDateTimeInstance().format(date));
 		}
 	}
 

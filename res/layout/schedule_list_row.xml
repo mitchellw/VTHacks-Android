@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/title_underline" >
 
         <TextView
@@ -35,7 +36,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/title"
             android:textStyle="bold" />
-
     </RelativeLayout>
 
     <TextView

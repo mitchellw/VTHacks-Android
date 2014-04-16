@@ -5,6 +5,7 @@ public class Constants {
 	 * Shared preferences stuff.
 	 */
 	public static final String PREFS = "VTHacks";
+	public static final String PREFS_FIRST_LAUNCH = "firstLaunch";
 	public static final String PREFS_GCM_ID = "gcmID";
 	public static final String PREFS_SNS_ARN = "snsARN";
 	public static final String PREFS_AWS_SECRET_ACCESS_KEY = "secretAccessKey";

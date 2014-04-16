@@ -1,5 +1,8 @@
 package com.vt.vthacks.model.impl;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import org.json.JSONObject;
 
 import com.vt.vthacks.model.IAnnouncement;
@@ -32,7 +35,8 @@ public class Announcement implements IAnnouncement {
 
 
 		// Set the schedule item's prize or fail if it doesn't exist.
-		time = root.optString(TIME, null);
+		long timeMillis = root.optLong(TIME, System.currentTimeMillis());
+		time = DateFormat.getDateTimeInstance().format(new Date(timeMillis));
 		if (time == null) {
 			return;
 		}

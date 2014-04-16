@@ -1,5 +1,6 @@
 package com.vt.vthacks;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -162,7 +163,9 @@ public class SocialFragment extends Fragment {
 				adapter.addAll(photoStream);
 				adapter.notifyDataSetChanged();
 
-				String message = "Refreshed at " + new Date(System.currentTimeMillis());
+				Date date = new Date(System.currentTimeMillis());
+
+				String message = "Last updated at " + DateFormat.getDateTimeInstance().format(date);
 				listView.onRefreshComplete(message);
 				listView.onScrollToBottomComplete(message);
 
