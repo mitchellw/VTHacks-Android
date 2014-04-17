@@ -1,22 +1,6 @@
 {
     "companies": [
         {
-            "name": "Opower",
-            "contacts": [
-                {
-                    "name": "Karthik Kumar",
-                    "skills": [
-                        "Java",
-                        "MySQL",
-                        "Ruby",
-                        "HBase",
-                        "git"
-                    ],
-                    "email": "kkumar9844@gmail.com"
-                }
-            ]
-        },
-        {
             "name": "Bloomberg L.P.",
             "contacts": [
                 {
@@ -145,20 +129,6 @@
                         "JavaScript"
                     ],
                     "email": "dhensgen@customink.com"
-                }
-            ]
-        },
-        {
-            "name": "VT ECE",
-            "contacts": [
-                {
-                    "name": "Dave  McPherson",
-                    "skills": [
-                        "Ruby",
-                        "Rails",
-                        "SQL databases"
-                    ],
-                    "email": "dmcphers@vt.edu"
                 }
             ]
         },
@@ -321,6 +291,22 @@
             ]
         },
         {
+            "name": "Opower",
+            "contacts": [
+                {
+                    "name": "Karthik Kumar",
+                    "skills": [
+                        "Java",
+                        "MySQL",
+                        "Ruby",
+                        "HBase",
+                        "git"
+                    ],
+                    "email": "kkumar9844@gmail.com"
+                }
+            ]
+        },
+        {
             "name": "Rackspace",
             "contacts": [
                 {
@@ -353,6 +339,34 @@
                     ],
                     "email": "sready@salesforce.com",
                     "twitter": "@samantha_ready"
+                }
+            ]
+        },
+                {
+            "name": "VT ECE",
+            "contacts": [
+                {
+                    "name": "Dave  McPherson",
+                    "skills": [
+                        "C++",
+                        "Java",
+                        "XML", 
+                        "XLST",
+                        "PHP",
+                        "ASP",
+                        "ASP.NET",
+                        "C#",
+                        "HTML",
+                        "PEARL",
+                        "Python",
+                        "Vb",
+                        "VBA",
+                        "C",
+                        "FORTRAN",
+                        "JavaScript",
+                        "AJAX"                     
+                    ],
+                    "email": "dmcphers@vt.edu"
                 }
             ]
         }
