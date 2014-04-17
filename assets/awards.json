@@ -1,28 +1,60 @@
 {
-  "awards" : [
-    {
-      "title" : "Award1",
-      "description" : "Description1",
-      "prize" : "Prize1",
-      "url" : "Url1"
-    },
-    {
-      "title" : "Award2",
-      "description" : "Description2",
-      "prize" : "Prize2",
-      "url" : "Url2"
-    },
-    {
-      "title" : "Award3",
-      "description" : "Description3",
-      "prize" : "Prize3",
-      "url" : "Url3"
-    },
-    {
-      "title" : "Award4",
-      "description" : "Description4",
-      "prize" : "Prize4",
-      "url" : "Url4"
-    }
-  ]
+    "awards": [
+        {
+            "url": "",
+            "company": "Intel Corporation",
+            "prize": "Galaxy Tablet",
+            "description": "Intel's judges will choose the one that interests them the most",
+            "title": "Intel's Choice"
+        },
+        {
+            "url": "",
+            "company": "BookHolders",
+            "prize": "1 Bitcoin",
+            "description": "Program using internet sourced data",
+            "title": "Best Web App"
+        },
+        {
+            "url": "",
+            "company": "BookHolders",
+            "prize": "Free RPi or OpenWRT Device",
+            "description": "Make your own stack Ex. raspberrylinuxnginxpostgrepythonpyramid",
+            "title": "Best Combo or Open Source Tech "
+        },
+        {
+            "url": "",
+            "company": "BookHolders",
+            "prize": "Free RPi or OpenWRT Device",
+            "description": "Build something cool Raspberry Pi or OpenWRT Device",
+            "title": "Coolest use of Raspberry Pi or OpenWRT Device"
+        },
+        {
+            "url": "",
+            "company": "Salesforce.com",
+            "prize": "MacBook Pro",
+            "description": "Use Salesforce as a back end to fuel live data. Access data using any of the various Salesforce APIs. Bonus points will go to the app with a real world application and original business use case.",
+            "title": "Best use of Salesforce as a back end"
+        },
+        {
+            "url": "",
+            "company": "IBM",
+            "prize": "IBM Goodies",
+            "description": "Solve a real world problem with your project. IBM Goodies include: A sling backpack, mp3 speaker, 8gb thumb drive, rectangle phone charger, and an IBM key chain",
+            "title": "Best solution to real-world problem"
+        },
+        {
+            "url": "",
+            "company": "TechPad",
+            "prize": "$500",
+            "description": "What will you do with a gig Internet?",
+            "title": "Best app to demonstrate value of low latency and/or high capacity fiber"
+        },
+        {
+            "url": "",
+            "company": "Fitnet",
+            "prize": " First Place: $250 , Second Place: $100",
+            "description": "Fitnet, fit.net, is a mobile fitness app.The app must include a scheduler and alerts. Most creative app which incorporates multiple motivators wins the prize.",
+            "title": "Build an app that will keep the user committed to workout days"
+        }
+    ]
 }
