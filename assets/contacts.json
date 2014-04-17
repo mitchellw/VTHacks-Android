@@ -1,93 +1,360 @@
 {
-  "companies" : [
-    {
-      "name" : "Company1",
-      "contacts" : [
+    "companies": [
         {
-          "name" : "Name1",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter",
-          "email" : "Email@test.com",
-          "phone" : "555-555-5555"
+            "name": "Opower",
+            "contacts": [
+                {
+                    "name": "Karthik Kumar",
+                    "skills": [
+                        "Java",
+                        "MySQL",
+                        "Ruby",
+                        "HBase",
+                        "git"
+                    ],
+                    "email": "kkumar9844@gmail.com"
+                }
+            ]
         },
         {
-          "name" : "Name2",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter"
+            "name": "Bloomberg L.P.",
+            "contacts": [
+                {
+                    "name": "Dave Kurtzberg",
+                    "skills": [
+                        "C",
+                        "C++",
+                        "JavaScript",
+                        "Bloomberg API",
+                        "Python",
+                        "Java",
+                        "Lisp",
+                        "Linux"
+                    ],
+                    "twitter": "@davekurtzberg",
+                    "email": "dkurtzberg@bloomberg.net"
+                },
+                {
+                    "name": "John Ruffer",
+                    "skills": [
+                        "C",
+                        "C++",
+                        "Python",
+                        "SQL"
+                    ],
+                    "email": "jruffer1@bloomberg.net"
+                }
+            ]
         },
         {
-          "name" : "Name3",
-          "skills" : ["Skill4", "Skill5", "Skill6"],
-          "email" : "Email@test.com",
-          "phone" : "555-555-5555"
+            "name": "BookHolders.com",
+            "contacts": [
+                {
+                    "name": "Jesse Fowler-Marques",
+                    "skills": [
+                        "Windows",
+                        "CentOS",
+                        "Ubuntu",
+                        "Wireless networking with OpenWRT",
+                        "VoIP with Asterisk",
+                        "Raspberry Pi"
+                    ],
+                    "email": "jessefm@bookholders.com"
+                }
+            ]
+        },
+        {
+            "name": "CapTech Consulting",
+            "contacts": [
+                {
+                    "name": "John Nein",
+                    "skills": [
+                        ".Net",
+                        "C#",
+                        "Java",
+                        "ASP.Net MVC",
+                        "ASP.Net Web API",
+                        "RESTful web services"
+                    ],
+                    "email": "jnein@captechconsulting.com"
+                },
+                {
+                    "name": "Tam Ayers",
+                    "skills": [
+                        "Mobile Dev",
+                        "Project Management"
+                    ],
+                    "email": "tayers@captechconsulting.com"
+                },
+                {
+                    "name": "Daniel Malito",
+                    "skills": [
+                        "Java",
+                        "C#",
+                        "HTML5",
+                        "JavaScript",
+                        "CSS",
+                        "Go",
+                        "Objective-C",
+                        "Android",
+                        "Google Glass"
+                    ],
+                    "email": "dmalito@captechconsulting.com"
+                }
+            ]
+        },
+        {
+            "name": "CustomInk",
+            "contacts": [
+                {
+                    "name": "Andrew Willis",
+                    "skills": [
+                        "Ruby",
+                        "Rails",
+                        "SQL databases"
+                    ],
+                    "email": "awillis@customink.com"
+                },
+                {
+                    "name": "Justin Molineaux",
+                    "skills": [
+                        "Ruby",
+                        "Rails",
+                        "Java",
+                        "Spring Framework",
+                        "Play Framework",
+                        "Amazon Web Services",
+                        "Heroku",
+                        "Object Oriented JavaScript",
+                        "CSS3",
+                        "Sass",
+                        "Less",
+                        "Less",
+                        "Twitter Bootstrap",
+                        "Susy",
+                        "HTML5"
+                    ],
+                    "email": "jmolineaux@customink.com",
+                    "twitter": "@hello_justin"
+                },
+                {
+                    "name": "Dan Hensgen",
+                    "skills": [
+                        "Ruby",
+                        "Rails",
+                        "JavaScript"
+                    ],
+                    "email": "dhensgen@customink.com"
+                }
+            ]
+        },
+        {
+            "name": "VT ECE",
+            "contacts": [
+                {
+                    "name": "Dave  McPherson",
+                    "skills": [
+                        "Ruby",
+                        "Rails",
+                        "SQL databases"
+                    ],
+                    "email": "dmcphers@vt.edu"
+                }
+            ]
+        },
+        {
+            "name": "Fitnet",
+            "contacts": [
+                {
+                    "name": "Bob Summers",
+                    "skills": [
+                        "C#",
+                        "C",
+                        "C++",
+                        "SQL",
+                        "HTML",
+                        "SQL",
+                        "HTML",
+                        "Java",
+                        "Client/Server Architectures",
+                        "App Design",
+                        "Marketing",
+                        "Business Development",
+                        "Startups",
+                        "Fund Raising"
+                    ],
+                    "email": "bob@fit.net"
+                },
+                {
+                    "name": "Daniel Burgess",
+                    "skills": [
+                        "Objective-C",
+                        "JavaScript",
+                        "HTML",
+                        "CSS",
+                        "JSON/XML",
+                        "PHP",
+                        "Java",
+                        "SQL",
+                        "C",
+                        "C++",
+                        "OpenGL ES",
+                        "Bash",
+                        "Lua",
+                        "ActionScript",
+                        "MySQL",
+                        "MongoDB",
+                        "Redis",
+                        "Rackspace",
+                        "Amazon Web Services",
+                        "Vuforia",
+                        "OpenCV",
+                        "iOS",
+                        "Android",
+                        "Corona",
+                        "jQuery",
+                        "Bootstrap",
+                        "Video Encoding",
+                        "3D rendering"
+                    ],
+                    "email": "daniel@fit.net",
+                    "twitter": "@dbburgess"
+                }
+            ]
+        },
+        {
+            "name": "Gannett Digital",
+            "contacts": [
+                {
+                    "name": "Stan Wilson Jr",
+                    "skills": [
+                        "JavaScript",
+                        "HTML",
+                        "CSS",
+                        "Node JS",
+                        "MVC",
+                        "Git"
+                    ],
+                    "email": "stwilson@gannett.com"
+                }
+            ]
+        },
+        {
+            "name": "IBM",
+            "contacts": [
+                {
+                    "name": "Jaime Garcia Ramirez",
+                    "skills": [
+                        "AngularJS",
+                        "jQuery",
+                        "CSS",
+                        "HTML5",
+                        "Spring Framework",
+                        "Struts 2.x",
+                        "Java Spring Framework",
+                        "IBM Worklight"
+                    ],
+                    "email": "jgarciar@us.ibm.com"
+                }
+            ]
+        },
+        {
+            "name": "Lookout, Inc.",
+            "contacts": [
+                {
+                    "name": "Stephanie Shupe",
+                    "skills": [
+                        "Objective-C",
+                        "iOS apps"
+                    ],
+                    "email": "steph@lookout.com",
+                    "twitter": "@steph_shupe"
+                }
+            ]
+        },
+        {
+            "name": "Microsoft",
+            "contacts": [
+                {
+                    "name": "Shahed Chowdhuri",
+                    "skills": [
+                        "C#",
+                        "Unity",
+                        "XNA"
+                    ],
+                    "email": "shchowd@microsoft.com"
+                },
+                {
+                    "name": "David Crook",
+                    "skills": [
+                        "C#",
+                        "JavaScript",
+                        "Web Development",
+                        "Microsoft Platform",
+                        "Windows",
+                        "Cloud",
+                        "High Performance Computing",
+                        "Infrastructure",
+                        "Game Development",
+                        "Application Lifcycle",
+                        "Database",
+                        "Moible Platforms",
+                        "Cross  Platform",
+                        "Coding Standards"
+                    ],
+                    "email": "dacrook@microsoft.com",
+                    "twitter": "@davidcrook1988"
+                }
+            ]
+        },
+        {
+            "name": "NetApp",
+            "contacts": [
+                {
+                    "name": "Kaslin Fields",
+                    "skills": [
+                        "Pearl",
+                        "Java"
+                    ],
+                    "email": "kaslin@netapp.com"
+                }
+            ]
+        },
+        {
+            "name": "Rackspace",
+            "contacts": [
+                {
+                    "name": "Samuel Toriel",
+                    "skills": [
+                        "Python",
+                        "Chef",
+                        "JavaScript",
+                        "Linux",
+                        "Infrastructure",
+                        "Rackspace Cloud Products"
+                    ],
+                    "email": "samuel.toriel@rackspace.com",
+                    "twitter": "@rilt"
+                }
+            ]
+        },
+        {
+            "name": "Salesforce.com",
+            "contacts": [
+                {
+                    "name": "Samantha Ready",
+                    "skills": [
+                        "HTML5",
+                        "CSS",
+                        "JavaScript",
+                        "Apex",
+                        "Visualforce",
+                        "Photoshop"
+                    ],
+                    "email": "sready@salesforce.com",
+                    "twitter": "@samantha_ready"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name" : "Company2",
-      "contacts" : [
-        {
-          "name" : "Name1",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter",
-          "email" : "Email@test.com"
-        },
-        {
-          "name" : "Name2",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter",
-          "phone" : "555-555-5555"
-        },
-        {
-          "name" : "Name3",
-          "skills" : ["Skill4", "Skill5", "Skill6"],
-          "email" : "Email@test.com"
-        }
-      ]
-    },
-    {
-      "name" : "Company3",
-      "contacts" : [
-        {
-          "name" : "Name1",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter",
-          "email" : "Email@test.com"
-        },
-        {
-          "name" : "Name2",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter"
-        },
-        {
-          "name" : "Name3",
-          "skills" : ["Skill4", "Skill5", "Skill6"],
-          "email" : "Email@test.com",
-          "phone" : "555-555-5555"
-        }
-      ]
-    },
-    {
-      "name" : "Company4",
-      "contacts" : [
-        {
-          "name" : "Name1",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter"
-        },
-        {
-          "name" : "Name2",
-          "skills" : ["Skill1", "Skill2", "Skill3"],
-          "twitter" : "@Twitter",
-          "email" : "Email@test.com"
-        },
-        {
-          "name" : "Name3",
-          "skills" : ["Skill4", "Skill5", "Skill6"],
-          "email" : "Email@test.com",
-          "phone" : "555-555-5555"
-        }
-      ]
-    }
-  ]
+    ]
 }
