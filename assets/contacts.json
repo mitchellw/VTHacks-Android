@@ -348,9 +348,23 @@
                 {
                     "name": "Dave  McPherson",
                     "skills": [
-                        "Ruby",
-                        "Rails",
-                        "SQL databases"
+                        "C++",
+                        "Java",
+                        "XML", 
+                        "XLST",
+                        "PHP",
+                        "ASP",
+                        "ASP.NET",
+                        "C#",
+                        "HTML",
+                        "PEARL",
+                        "Python",
+                        "Vb",
+                        "VBA",
+                        "C",
+                        "FORTRAN",
+                        "JavaScript",
+                        "AJAX"                     
                     ],
                     "email": "dmcphers@vt.edu"
                 }
