@@ -1,68 +1,128 @@
 {
-  "Sunday": [
-    {
-      "timestamp": "3:30pm",
-      "description": "Description1",
-      "title": "First Event"
-    },
-    {
-      "timestamp": "3:45pm",
-      "description": "Description2",
-      "title": "Second Event"
-    },
-    {
-      "timestamp": "4:15pm",
-      "description": "Description3",
-      "title": "Third Event"
-    },
-    {
-      "timestamp": "5:30pm",
-      "description": "Description4",
-      "title": "Fourth Event"
-    }
-  ],
-  "Friday": [
-    {
-      "timestamp": "3:30pm",
-      "description": "Description1",
-      "title": "First Event"
-    },
-    {
-      "timestamp": "3:45pm",
-      "description": "Description2",
-      "title": "Second Event"
-    },
-    {
-      "timestamp": "4:15pm",
-      "description": "Description3",
-      "title": "Third Event"
-    },
-    {
-      "timestamp": "5:30pm",
-      "description": "Description4",
-      "title": "Fourth Event"
-    }
-  ],
-  "Saturday": [
-    {
-      "timestamp": "3:30pm",
-      "description": "Description1",
-      "title": "First Event"
-    },
-    {
-      "timestamp": "3:45pm",
-      "description": "Description2",
-      "title": "Second Event"
-    },
-    {
-      "timestamp": "4:15pm",
-      "description": "Description3",
-      "title": "Third Event"
-    },
-    {
-      "timestamp": "5:30pm",
-      "description": "Description4",
-      "title": "Fourth Event"
-    }
-  ]
+    "Friday": [
+        {
+            "timestamp": "4:00 PM",
+            "description": "Check in and get situated before the event begins!",
+            "title": "General Check-in Opens"
+        },
+        {
+            "timestamp": "6:00 PM",
+            "description": "Dinner will be served.",
+            "title": "Dinner"
+        },
+        {
+            "timestamp": "7:00 PM",
+            "description": "Information session about the event and a word from our sponsors.",
+            "title": "Opening Ceremony"
+        },
+        {
+            "timestamp": "8:30 PM",
+            "description": "Find a team or meet other like minded hackers!",
+            "title": "Team Formation & Socializing"
+        },
+        {
+            "timestamp": "9:00 PM",
+            "description": "Begin building. Happy Hacking!",
+            "title": "Hacking Starts"
+        },
+        {
+            "timestamp": "9:30 PM",
+            "description": "CapTech will be hosting a Tech talk.",
+            "title": "CapTech Tech talk"
+        },
+        {
+            "timestamp": "10:00 PM",
+            "description": "Tech Pad will be giving a Tech talk.",
+            "title": "Tech Pad Tech talk"
+        }
+    ],
+    "Saturday": [
+        {
+            "timestamp": "12:00 AM",
+            "description": "Enjoy some free food",
+            "title": "Midnight Snack"
+        },
+        {
+            "timestamp": "12:30 AM",
+            "description": "Come listen to InterGraph's Tech talk.",
+            "title": "InterGraph Tech talk"
+        },
+        {
+            "timestamp": "1:00 AM",
+            "description": "Salesforce will be hosting a Tech talk.",
+            "title": "Salesforce Tech talk"
+        },
+        {
+            "timestamp": "2:00 AM",
+            "description": "Take a break and enjoy a Nerf War!",
+            "title": "Nerf War"
+        },
+        {
+            "timestamp": "7:00 AM",
+            "description": "Breakfast will now be served.",
+            "title": "Breakfast"
+        },
+        {
+            "timestamp": "10:00 AM",
+            "description": "Rackspace will be hosting a tech talk.",
+            "title": "Rackspace Tech talk"
+        },
+        {
+            "timestamp": "1:00 PM",
+            "description": "You can now grab some lunch.",
+            "title": "Lunch"
+        },
+        {
+            "timestamp": "2:30 PM",
+            "description": "Come listen to TORC Robotic's Tech Talk",
+            "title": "TORC Robotics Tech talk"
+        },
+        {
+            "timestamp": "3:00 PM",
+            "description": "Come listen to Bloomberg's Tech talk",
+            "title": "Bloomberg Tech talk"
+        },
+        {
+            "timestamp": "6:00 PM",
+            "description": "Dinner will now be served",
+            "title": "Dinner"
+        },
+        {
+            "timestamp": "8:30 PM",
+            "description": "Microsoft will be hosting a tech talk.",
+            "title": "Microsoft Tech talk"
+        }
+    ],
+    "Sunday": [
+        {
+            "timestamp": "12:00am",
+            "description": "Take a bring and enjoy a midnight snack!",
+            "title": "Midnight Snack"
+        },
+        {
+            "timestamp": "7:00 AM",
+            "description": "Start your morning going right some some coffee.",
+            "title": "Coffee"
+        },
+        {
+            "timestamp": "9:00 AM",
+            "description": "Hacking ends with a nice fresh breakfast",
+            "title": "Hacking Ends at 9am and Breakfast"
+        },
+        {
+            "timestamp": "10:00 AM",
+            "description": "Show off what you accomplished over the weekend!",
+            "title": "Expo"
+        },
+        {
+            "timestamp": "12:00 PM",
+            "description": "Eat lunch before the winners are announced.",
+            "title": "Lunch"
+        },
+        {
+            "timestamp": "12:30 PM",
+            "description": "Prizes, closing talks, and last minute mingling",
+            "title": "Closing Ceremony"
+        }
+    ]
 }
