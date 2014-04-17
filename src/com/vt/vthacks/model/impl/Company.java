@@ -10,7 +10,11 @@ import com.vt.vthacks.model.ICompany;
 import com.vt.vthacks.model.IContact;
 
 public class Company implements ICompany {
-	
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = 1308811314119563944L;
+
 	private static final String NAME = "name";
 	private static final String CONTACTS = "contacts";
 	

@@ -11,6 +11,11 @@ import com.vt.vthacks.model.IGroup;
 
 public class Group implements IGroup {
 
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = -1720859797792399483L;
+
 	private static final String ID = "_id";
 	private static final String OID = "$oid";
 	private static final String MEMBERS = "members";

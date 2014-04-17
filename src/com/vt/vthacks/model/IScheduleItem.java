@@ -1,6 +1,8 @@
 package com.vt.vthacks.model;
 
-public interface IScheduleItem {
+import java.io.Serializable;
+
+public interface IScheduleItem extends Serializable {
 
 	public String getTitle();
 	public String getDescription();

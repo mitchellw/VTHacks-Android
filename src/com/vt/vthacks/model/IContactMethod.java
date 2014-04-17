@@ -1,7 +1,9 @@
 package com.vt.vthacks.model;
 
-public interface IContactMethod {
-	public enum ContactMethodType {
+import java.io.Serializable;
+
+public interface IContactMethod extends Serializable {
+	public enum ContactMethodType implements Serializable {
 		EMAIL, TWITTER, PHONE
 	}
 

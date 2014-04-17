@@ -23,6 +23,8 @@
     <string name="label_email">Email:</string>
     <string name="label_twitter">Twitter:</string>
     <string name="label_phone">Phone:</string>
+    <string name="label_name">Name</string>
+    <string name="label_skills">Skills</string>
     <string name="label_ideas">Ideas and/or Skills</string>
     <string name="label_contact_info">Contact Info\n(1 required)</string>
     <string name="btn_add_group">Add Group</string>
@@ -43,6 +45,7 @@
     <string name="fill_password_to_delete">Enter password to delete group</string>
     <string name="delete_group">Delete group</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="group_not_deleted">Group not deleted.</string>
     <string name="group_id_not_found">Group does not have an id.</string>
     <string name="http_group_not_found">Group not found. Try refreshing.</string>

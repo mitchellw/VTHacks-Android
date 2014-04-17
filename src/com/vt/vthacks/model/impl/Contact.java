@@ -11,6 +11,10 @@ import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContactMethod.ContactMethodType;
 
 public class Contact implements IContact {
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = 3165490891538030624L;
 
 	private static final String NAME = "name";
 	private static final String EMAIL = "email";

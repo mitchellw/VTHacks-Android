@@ -20,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PhotoStreamAdapter extends ArrayAdapter<IPhotoStreamItem> {
+	public interface OnImageClickListener {
+		public void onImageClicked(Bitmap bitmap);
+	}
 
 	private LayoutInflater mInflater;
 	private OnImageClickListener clickListener;

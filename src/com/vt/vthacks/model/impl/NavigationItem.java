@@ -3,6 +3,11 @@ package com.vt.vthacks.model.impl;
 import com.vt.vthacks.model.INavigationItem;
 
 public class NavigationItem implements INavigationItem {
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = -1253778170029750547L;
+
 	private int iconRes;
 	private int titleRes;
 

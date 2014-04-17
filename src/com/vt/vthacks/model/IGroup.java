@@ -1,8 +1,9 @@
 package com.vt.vthacks.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IGroup {
+public interface IGroup extends Serializable {
 
 	public String getID();
 	public String getMembers();

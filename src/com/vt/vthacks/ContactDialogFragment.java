@@ -1,10 +1,9 @@
 package com.vt.vthacks;
 
-import java.io.Serializable;
+import java.util.List;
 
+import com.vt.vthacks.model.IContact;
 import com.vt.vthacks.model.IContactMethod;
-import com.vt.vthacks.model.IGroup;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -13,31 +12,23 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class GroupDialogFragment extends DialogFragment {
-	private static final String GROUP_DIALOG_LISTENER = "groupDialogListener";
-	private static final String GROUP = "group";
+public class ContactDialogFragment extends DialogFragment {
+	private static final String CONTACT = "contact";
 
-	private GroupDialogListener listener;
-	private IGroup group;
+	private IContact contact;
 
-	public interface GroupDialogListener extends Serializable {
-		public void onPasswordEntered(String groupID, String password);
-		public void onCancelClicked();
-	}
-
-	public static GroupDialogFragment newInstance(GroupDialogListener listener, IGroup group) {
-		GroupDialogFragment fragment = new GroupDialogFragment();
+	public static ContactDialogFragment newInstance(IContact contact) {
+		ContactDialogFragment fragment = new ContactDialogFragment();
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(GROUP_DIALOG_LISTENER, listener);
-		bundle.putSerializable(GROUP, group);
+		bundle.putSerializable(CONTACT, contact);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -47,24 +38,38 @@ public class GroupDialogFragment extends DialogFragment {
 		super.onCreate(savedInstanceState);
 
 		if (getArguments() != null) {
-			listener = (GroupDialogListener)getArguments().getSerializable(GROUP_DIALOG_LISTENER);
-			group = (IGroup)getArguments().getSerializable(GROUP);
+			contact = (IContact)getArguments().getSerializable(CONTACT);
 		}
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		final View dialogView = inflater.inflate(R.layout.group_dialog, null);
+		final View dialogView = inflater.inflate(R.layout.contact_dialog, null);
 
-		TextView membersTextView = (TextView) dialogView.findViewById(R.id.membersTextView);
-		membersTextView.setText(group.getMembers());
+		TextView nameTextView = (TextView) dialogView.findViewById(R.id.nameTextView);
+		nameTextView.setText(contact.getName());
 
-		TextView ideasTextView = (TextView) dialogView.findViewById(R.id.ideasTextView);
-		ideasTextView.setText(group.getIdeas());
+		LinearLayout column1 = (LinearLayout) dialogView.findViewById(R.id.skillColumn1);
+		LinearLayout column2 = (LinearLayout) dialogView.findViewById(R.id.skillColumn2);
+
+		List<String> skills = contact.getSkills();
+		int halfway = skills.size() / 2 + skills.size() % 2;
+		for (int i = 0; i < halfway; i++) {
+			TextView skillTextView = new TextView(getActivity());
+			skillTextView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+			skillTextView.setText(Html.fromHtml("&#8226; " + skills.get(i)));
+			column1.addView(skillTextView);
+		}
+		for (int i = halfway; i < skills.size(); i++) {
+			TextView skillTextView = new TextView(getActivity());
+			skillTextView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+			skillTextView.setText(Html.fromHtml("&#8226; " + skills.get(i)));
+			column2.addView(skillTextView);
+		}
 
 		LinearLayout contactMethodsLayout = (LinearLayout) dialogView.findViewById(R.id.contact_linear_layout);
-		for(final IContactMethod method : group.getContactMethods())
+		for(final IContactMethod method : contact.getContactMethods())
 		{
 			ImageView button = new ImageView(getActivity());
 
@@ -78,7 +83,7 @@ public class GroupDialogFragment extends DialogFragment {
 						final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 						emailIntent.setType("plain/text");
 						emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{method.getName()});
-						emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Looking For Group");
+						emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "VTHacks help needed!");
 						emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hello,\n\n\t");
 						getActivity().startActivity(emailIntent);
 					}
@@ -134,23 +139,9 @@ public class GroupDialogFragment extends DialogFragment {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setView(dialogView)
-		.setPositiveButton(R.string.delete_group, new DialogInterface.OnClickListener() {
-			@Override
+		.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String password = ((EditText) dialogView.findViewById(R.id.passwordEditText)).getText().toString();
-
-				if (listener != null) {
-					listener.onPasswordEntered(group.getID(), password);
-				}
-				GroupDialogFragment.this.getDialog().cancel();
-			}
-		})
-		.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				if (listener != null) {
-					listener.onCancelClicked();
-				}
-				GroupDialogFragment.this.getDialog().cancel();
+				ContactDialogFragment.this.getDialog().cancel();
 			}
 		});
 		return builder.create();
@@ -159,8 +150,8 @@ public class GroupDialogFragment extends DialogFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (GroupDialogFragment.this.getDialog() != null) {
-			GroupDialogFragment.this.getDialog().cancel();
+		if (ContactDialogFragment.this.getDialog() != null) {
+			ContactDialogFragment.this.getDialog().cancel();
 		}
 	}
 }

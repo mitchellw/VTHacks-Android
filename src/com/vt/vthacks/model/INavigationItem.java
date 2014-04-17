@@ -1,6 +1,8 @@
 package com.vt.vthacks.model;
 
-public interface INavigationItem {
+import java.io.Serializable;
+
+public interface INavigationItem extends Serializable {
 	
 	public int getIconRes();
 	public int getTitleRes();

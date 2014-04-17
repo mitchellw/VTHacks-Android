@@ -8,6 +8,11 @@ import org.json.JSONObject;
 import com.vt.vthacks.model.IAnnouncement;
 
 public class Announcement implements IAnnouncement {
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = 3462957572285762305L;
+
 	private static final String DESCRIPTION = "Message";
 	private static final String TITLE = "Subject";
 	private static final String TIME = "Timestamp";

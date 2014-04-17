@@ -1,6 +1,8 @@
 package com.vt.vthacks.model;
 
-public interface IAward {
+import java.io.Serializable;
+
+public interface IAward extends Serializable {
 
 	public String getTitle();
 	public String getDescription();

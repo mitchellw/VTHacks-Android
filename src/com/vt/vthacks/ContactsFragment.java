@@ -5,13 +5,16 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import com.vt.vthacks.model.ICompanyContactsList;
+import com.vt.vthacks.model.IContact;
 import com.vt.vthacks.model.impl.CompanyContactsList;
 import com.vt.vthacks.view.CompanyContactsAdapter;
+import com.vt.vthacks.view.CompanyContactsAdapter.OnContactClickListener;
 import com.vt.vthacks.view.PullToRefreshListView;
 import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +46,15 @@ public class ContactsFragment extends Fragment {
 				new ContactsTask().execute();
 			}
 		});
-		adapter = new CompanyContactsAdapter(getActivity(), new CompanyContactsList(null));
+		adapter = new CompanyContactsAdapter(getActivity(), new CompanyContactsList(null),
+				new OnContactClickListener() {
+			
+			@Override
+			public void onContactClicked(IContact contact) {
+				DialogFragment dialog = ContactDialogFragment.newInstance(contact);
+				dialog.show(ContactsFragment.this.getFragmentManager(), "contactDialogFragment");
+			}
+		});
 		listView.setAdapter(adapter);
 		
 		listView.onRefresh();

@@ -5,7 +5,11 @@ import org.json.JSONObject;
 import com.vt.vthacks.model.IScheduleItem;
 
 public class ScheduleItem implements IScheduleItem {
-	
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = 6946804917571687271L;
+
 	private static final String DESCRIPTION = "description";
 	private static final String TITLE = "title";
 	private static final String TIME = "timestamp";

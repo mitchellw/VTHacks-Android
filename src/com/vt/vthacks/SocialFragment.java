@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.vt.vthacks.model.IPhotoStreamItem;
 import com.vt.vthacks.model.impl.TwitterPhotoStreamItem;
-import com.vt.vthacks.view.OnImageClickListener;
 import com.vt.vthacks.view.PhotoStreamAdapter;
+import com.vt.vthacks.view.PhotoStreamAdapter.OnImageClickListener;
 import com.vt.vthacks.view.PullToRefreshListView;
 import com.vt.vthacks.view.PullToRefreshListView.OnRefreshListener;
 import com.vt.vthacks.view.PullToRefreshListView.OnScrollToBottomListener;

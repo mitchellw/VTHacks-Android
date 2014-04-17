@@ -1,6 +1,8 @@
 package com.vt.vthacks.model;
 
-public interface IAnnouncement {
+import java.io.Serializable;
+
+public interface IAnnouncement extends Serializable {
 
 	public String getTitle();
 	public String getDescription();

@@ -3,6 +3,7 @@ package com.vt.vthacks.view;
 import android.net.Uri;
 import android.os.Build;
 import android.content.Intent;
+
 import com.vt.vthacks.R;
 import com.vt.vthacks.model.IContactMethod;
 import com.vt.vthacks.model.IContact;
@@ -29,8 +30,12 @@ import android.widget.TextView;
  *  @version Mar 28, 2014
  */
 public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
+	public interface OnContactClickListener {
+		public void onContactClicked(IContact contact);
+	}
 
 	private LayoutInflater mInflater;
+	private OnContactClickListener clickListener;
 
 	// ----------------------------------------------------------
 	/**
@@ -38,8 +43,9 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 	 * @param context
 	 * @param listItems
 	 */
-	public CompanyContactsAdapter(Context context, List<ICompany> listItems) {
+	public CompanyContactsAdapter(Context context, List<ICompany> listItems, OnContactClickListener clickListener) {
 		super(context, 0, listItems);
+		this.clickListener = clickListener;
 		this.mInflater = LayoutInflater.from(context);
 	}
 
@@ -63,19 +69,28 @@ public class CompanyContactsAdapter extends ArrayAdapter<ICompany> {
 		if (holder.rootView.getChildCount() > 1) {
 			holder.rootView.removeViews(1, holder.rootView.getChildCount() - 1);
 		}
-		for(IContact contact : item.getContacts()) {
+		for(final IContact contact : item.getContacts()) {
 			RelativeLayout ref = (RelativeLayout)mInflater.inflate(
 					R.layout.contact_list_row, holder.rootView , false);
+			ref.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					clickListener.onContactClicked(contact);
+				}
+			});
 
 
 			TextView cName = (TextView)ref.findViewById(R.id.contact_name);
 			cName.setText(contact.getName());
 
 			TextView cSkills = (TextView)ref.findViewById(R.id.contact_skills);
-			String skills = contact.getSkills().toString();
-			skills = skills.replace("[", "");
-			skills = skills.replace("]", "");
-			cSkills.setText(skills);
+			StringBuilder builder = new StringBuilder();
+			for (String skill : contact.getSkills()) {
+				builder.append(skill).append(", ");
+			}
+			builder.setLength(builder.length()-2);
+			cSkills.setText(builder.toString());
 
 			LinearLayout cLay = (LinearLayout)ref.findViewById(R.id.contact_linear_layout);
 

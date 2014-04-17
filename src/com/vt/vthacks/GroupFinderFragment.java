@@ -101,9 +101,8 @@ public class GroupFinderFragment extends Fragment {
 
 					@Override
 					public void onCancelClicked() {
-						Toast.makeText(getActivity(), R.string.group_not_deleted, Toast.LENGTH_SHORT).show();
 					}
-				}, group.getID());
+				}, group);
 
 				dialog.show(GroupFinderFragment.this.getFragmentManager(), "groupFinderDialog");
 			}

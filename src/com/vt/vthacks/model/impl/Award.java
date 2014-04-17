@@ -5,6 +5,10 @@ import org.json.JSONObject;
 import com.vt.vthacks.model.IAward;
 
 public class Award implements IAward {
+	/**
+	 * For serialization.
+	 */
+	private static final long serialVersionUID = 6048611164726411790L;
 
 	private static final String DESCRIPTION = "description";
 	private static final String TITLE = "title";
