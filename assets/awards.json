@@ -2,6 +2,13 @@
     "awards": [
         {
             "url": "",
+            "company": "VTHacks",
+            "prize": "First Place: $1024  Second Place: $512  Third Place:$256",
+            "description": "Judges will determine the top three apps.",
+            "title": "Best Overall App"
+        },      
+        {
+            "url": "",
             "company": "Intel Corporation",
             "prize": "Galaxy Tablet",
             "description": "Intel's judges will choose the one that interests them the most",
