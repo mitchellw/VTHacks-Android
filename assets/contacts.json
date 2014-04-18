@@ -1,6 +1,19 @@
 {
     "companies": [
         {
+            "name": "VTHacks Volunteers",
+            "contacts": [
+                {
+                    "name": "Daniel Al-Abdrabbuh",
+                    "skills": [
+                        "Tap me to contact an event volunteer!"
+                    ],
+                    "phone": "8322838825",
+                    "email": "dvatn@vt.edu"
+                }
+            ]
+        },
+        {
             "name": "Bloomberg L.P.",
             "contacts": [
                 {
